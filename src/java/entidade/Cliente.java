@@ -20,6 +20,14 @@ public class Cliente {
     private String email;
     private Date dataNascimento;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
