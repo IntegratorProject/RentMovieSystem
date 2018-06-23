@@ -2,9 +2,17 @@
 package entidade;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Locacao {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
     private Date dataLocacao;
     private boolean reserva;
@@ -14,7 +22,9 @@ public class Locacao {
     private Date dataPagamento;
     private String descricaoMulta;
     private double valorMulta;
+    @ManyToOne
     private Funcionario funcionario;
+    @ManyToOne
     private Dependente dependente;
 
     public long getId() {
