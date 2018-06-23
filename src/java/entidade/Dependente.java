@@ -2,13 +2,23 @@
 package entidade;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Dependente {
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     private String nome;
     private Date dataNascimento;
+    @ManyToOne
     private Cliente cliente;
+    
     
     public long getId() {
         return id;
