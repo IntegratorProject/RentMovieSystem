@@ -2,10 +2,13 @@
 package entidade;
 
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Cliente {
@@ -13,11 +16,24 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @Column(unique = true, nullable = false)
     private String cpf;
+    
+    @Column(nullable = false)
     private String telefone;
+    
+    @Column(nullable = false)
     private String endereco;
+    
+    @Column(nullable = true)
     private String email;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date dataNascimento;
 
     public long getId() {

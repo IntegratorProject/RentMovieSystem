@@ -79,6 +79,6 @@ public class DaoClienteTest {
         GenericDao<Locacao> dao4 = new GenericDao<>(Locacao.class);
         dao4.salvar(l);
         
-    }
+        }
     
 }

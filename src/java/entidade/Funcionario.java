@@ -1,6 +1,7 @@
 
 package entidade;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,11 +13,23 @@ public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    
+    @Column(nullable = false)
     private String nome;
+    
+    @Column(nullable = false, unique = true)
     private String cpf;
+    
+    @Column(nullable = false)
     private String login;
+    
+    @Column(nullable = false)
     private String senha;
+    
+    @Column(nullable = false)
     private String cargo;
+    
+    @Column(nullable = false)
     private int nivelAcesso;
 
     public long getId() {

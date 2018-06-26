@@ -1,6 +1,7 @@
 
 package entidade;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,9 +14,15 @@ public class Midia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    
+    @Column(nullable = false)
     private String tipo;
+    
+    @Column(nullable = false)
     private double preco_locacao;
+    
     @ManyToOne
+    @Column(nullable = false)
     private Acervo acervo;
 
     public long getId() {
