@@ -5,15 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
 public class ItensLocacao {
 
-    @Id
-    @ManyToOne
     private Locacao locacao;
     
-    @Id
-    @ManyToOne
     private Midia midia;
 
     public Locacao getLocacao() {

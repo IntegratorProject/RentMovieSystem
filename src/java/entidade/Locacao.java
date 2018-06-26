@@ -46,11 +46,9 @@ public class Locacao {
     private double valorMulta;
     
     @ManyToOne
-    @Column(nullable = false)
     private Funcionario funcionario;
     
     @ManyToOne
-    @Column(nullable = false)
     private Dependente dependente;
 
     public long getId() {

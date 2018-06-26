@@ -26,7 +26,6 @@ public class Dependente {
     private Date dataNascimento;
     
     @ManyToOne
-    @Column(nullable = false)
     private Cliente cliente;
     
     

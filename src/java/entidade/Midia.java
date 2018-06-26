@@ -22,7 +22,6 @@ public class Midia {
     private double preco_locacao;
     
     @ManyToOne
-    @Column(nullable = false)
     private Acervo acervo;
 
     public long getId() {
