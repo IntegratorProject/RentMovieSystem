@@ -25,9 +25,6 @@ public class Acervo {
     
     @Column(nullable = false)
     private String classificacaoEtaria;
-    
-    @Column(nullable = false)
-    private String tipo;
 
     public long getId() {
         return id;
@@ -67,14 +64,6 @@ public class Acervo {
 
     public void setClassificacaoEtaria(String classificacaoEtaria) {
         this.classificacaoEtaria = classificacaoEtaria;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
     
 }
