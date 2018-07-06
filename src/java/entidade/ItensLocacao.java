@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import org.hibernate.annotations.Columns;
 
 @Entity
 public class ItensLocacao {
@@ -22,6 +21,9 @@ public class ItensLocacao {
     @ManyToOne
     private Midia midia;
 
+    @Column(nullable = false)
+    private Double preco;
+    
     public long getId() {
         return id;
     }
@@ -44,6 +46,14 @@ public class ItensLocacao {
 
     public void setMidia(Midia midia) {
         this.midia = midia;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
     
 }
