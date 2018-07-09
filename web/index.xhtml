@@ -1,19 +1,39 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./newTemplate.xhtml">
 
             <ui:define name="totalContent">
-                aqui vai o conteudo<br/>
-                aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>
-                v
-                aqui vai o conteudo<br/>
-                aqui vai o conteudo<br/>
-                aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>aqui vai o conteudo<br/>
+
+
+                <div style="margin-left: auto; margin-right: auto;">
+                    <div class="card" style="width: 18rem; height: 15rem; ">
+                        <div class="card-body">
+                            <h1 class="card-title" style="text-align: center;">LOGIN</h1>
+                            <h:form>
+                                <h:panelGrid columns="2">
+
+                                    <h:outputText value="Usuário    "/>
+                                    <h:inputText value="" />
+
+                                    <h:outputText value="Senha      "/>
+                                    <h:inputText value="" />
+                                    <br/>
+                                    <a href="#" class="btn btn-primary">Entrar</a>
+                                </h:panelGrid></h:form>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
 
 
             </ui:define>
