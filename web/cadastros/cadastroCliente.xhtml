@@ -64,7 +64,9 @@
 
                     <br/>
 
-                    <p:commandButton value="Cadastrar" styleClass="aw-buttons"/>
+                    <p:commandButton value="Cadastrar" 
+                                     actionListener="#{clienteMB.cadastrar()}"
+                                     update="@form, formTabela"/>
 
                 </div>
 
