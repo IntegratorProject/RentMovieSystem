@@ -17,7 +17,7 @@ public class GenericDao<T> {
         
     }
     
-    public T salvar(T object){
+    public T salvar(T object) throws Exception{
         
         EntityManager manager = null;
         EntityTransaction transc = null;
@@ -39,7 +39,7 @@ public class GenericDao<T> {
             if(transc != null){
                 transc.rollback();
             }
-            return null;
+            throw new Exception("falha de conexao");
             
         }finally{
             
@@ -51,7 +51,7 @@ public class GenericDao<T> {
         
     }
     
-    public T editar(T object){
+    public T editar(T object) throws Exception{
         
         EntityManager manager = null;
         EntityTransaction transac = null;
@@ -72,6 +72,8 @@ public class GenericDao<T> {
             }
             e.printStackTrace();
             
+            throw new Exception("falha de conexao");
+            
         }finally{
             
             if(manager != null){
@@ -84,7 +86,7 @@ public class GenericDao<T> {
         
     }
     
-    public boolean delete(long id){
+    public boolean delete(long id) throws Exception{
         
         EntityManager manager = null;
         EntityTransaction transc = null;
@@ -116,7 +118,7 @@ public class GenericDao<T> {
             }
             e.printStackTrace();
             
-            return false;
+            throw new Exception("falha de conexao");
             
         }finally{
             
@@ -128,7 +130,7 @@ public class GenericDao<T> {
         
     }
     
-    public T buscarId(long id){
+    public T buscarId(long id) throws Exception{
         
         EntityManager manager = null;
         
@@ -140,7 +142,7 @@ public class GenericDao<T> {
         }catch(Exception e){
             
             e.printStackTrace();
-            return null;
+            throw new Exception("falha de conexao");
             
         }finally{
             if(manager != null){
@@ -150,7 +152,7 @@ public class GenericDao<T> {
         
     }
     
-    public List<T> buscarTodos(){
+    public List<T> buscarTodos() throws Exception{
         
         EntityManager manager = null;
         
@@ -163,7 +165,7 @@ public class GenericDao<T> {
         }catch(Exception e){
             
             e.printStackTrace();
-            return null;
+            throw new Exception("falha de conexao");
             
         }finally{
             if(manager != null){
