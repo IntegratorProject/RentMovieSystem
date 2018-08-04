@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="content">
+        <h1 class="aw-page-title">Cadastro de clientes</h1>
+
+        <h:form id="formCadastro">
+
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+
+                    <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                    <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
+                                 required="true"
+                                 styleClass="aw-inputtext"
+                                 requiredMessage="Preencha o campo Nome."/> <br/>
+
+                    <br/>
+
+                    <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                    <p:inputMask id="inputCPF" value="#{clienteMB.cliente.cpf}"
+                                 required="true"
+                                 mask="999.999.999-99"
+                                 styleClass="aw-inputtext"
+                                 requiredMessage="Preencha o campo CPF."/> <br/>
+
+                    <br/>
+
+                    <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
+                    <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
+                                 required="true"
+                                 styleClass="aw-inputtext"
+                                 requiredMessage="Preencha o campo Email."/><br/>
+
+                    <br/>
+
+                    <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                    <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
+                                value="#{clienteMB.cliente.dataNascimento}"
+                                required="true"
+                                styleClass="aw-inputcalendar"
+                                requiredMessage="Preencha o campo Data de Nascimento."/> 
+
+                </div>
+
+                <div class="ui-g-12 ui-md-6 ui-lg-2">
+
+                    <p:outputLabel for="inputTelefone">Telefone: </p:outputLabel><br/>
+                    <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
+                                 mask="(99) 99999-9999"
+                                 required="true"
+                                 styleClass="aw-inputtext"
+                                 requiredMessage="Preencha o campo Telefone."/><br/>
+
+                    <br/>
+
+                    <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
+                    <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
+                                 required="true"
+                                 styleClass="aw-inputtext"
+                                 requiredMessage="Preencha o campo Endereço."/><br/>
+
+                    <br/>
+
+                    <p:commandButton value="Cadastrar" styleClass="aw-buttons"/>
+
+                </div>
+
+            </div>
+
+        </h:form>
+
+
+
+        <br/>
+
+        <h:form id="formTabela">
+
+            
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
