@@ -20,7 +20,6 @@
                     <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
                     <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
                                  required="true"
-                                 styleClass="aw-inputtext"
                                  requiredMessage="Preencha o campo Nome."/> <br/>
 
                     <br/>
@@ -29,7 +28,6 @@
                     <p:inputMask id="inputCPF" value="#{clienteMB.cliente.cpf}"
                                  required="true"
                                  mask="999.999.999-99"
-                                 styleClass="aw-inputtext"
                                  requiredMessage="Preencha o campo CPF."/> <br/>
 
                     <br/>
@@ -37,7 +35,6 @@
                     <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
                     <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
                                  required="true"
-                                 styleClass="aw-inputtext"
                                  requiredMessage="Preencha o campo Email."/><br/>
 
                     <br/>
@@ -46,7 +43,6 @@
                     <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
                                 value="#{clienteMB.cliente.dataNascimento}"
                                 required="true"
-                                styleClass="aw-inputcalendar"
                                 requiredMessage="Preencha o campo Data de Nascimento."/> 
 
                 </div>
@@ -57,7 +53,6 @@
                     <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
                                  mask="(99) 99999-9999"
                                  required="true"
-                                 styleClass="aw-inputtext"
                                  requiredMessage="Preencha o campo Telefone."/><br/>
 
                     <br/>
@@ -65,7 +60,6 @@
                     <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
                     <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
                                  required="true"
-                                 styleClass="aw-inputtext"
                                  requiredMessage="Preencha o campo Endereço."/><br/>
 
                     <br/>
@@ -84,10 +78,66 @@
 
         <h:form id="formTabela">
 
-            
+            <p:dataTable value="#{clienteMB.clientes}" var="cliente">
 
-        </h:form>
+                <p:column headerText="Id">
+                    <h:outputText value="#cliente.id"/>
+                </p:column>
 
-    </ui:define>
+                <p:column headerText="Nome">
+                    <h:outputText value="#cliente.nome"/>
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#cliente.cpf"/>
+                </p:column>
+
+                <p:column headerText="Email">
+                    <h:outputText value="#cliente.email"/>
+                </p:column>
+
+                <p:column headerText="Data de Nascimento">
+                    <h:outputText value="#cliente.dataNascimento"/>
+                </p:column>
+
+                <p:column headerText="Telefone">
+                    <h:outputText value="#cliente.telefone"/>
+                </p:column>
+
+                <p:column headerText="Endereço">
+                    <h:outputText value="#cliente.endereco"/>
+                </p:column>
+
+                <p:column headerText="Ações">
+
+                    <p:commandButton value="Alterar" update="@form,formCadastro">
+
+                        <f:setPropertyActionListener value="cliente" target="#{clienteMB.cliente}"/>
+
+                </p:commandButton>
+
+                <p:commandButton value="Excluir"
+                                 actionListener="#{clienteMB.excluir(cliente.id)}"
+                                 update="@form">
+
+                    <p:confirm header="Confirmação" 
+                               message="Deseja excluir o cliente?"
+                               icon="ui-icon-alert"/>
+
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="Sim" type="button"
+                             styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="Não" type="button"
+                             styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>
+
+    </h:form>
+
+</ui:define>
 
 </ui:composition>
