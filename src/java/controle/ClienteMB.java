@@ -62,6 +62,15 @@ public class ClienteMB extends DefaultMB{
     
     public void excluir(long id){
         
+        try{
+            
+            dao.delete(id);
+            updateList();
+            
+        }catch(Exception e){
+            connetionError();
+        }
+        
     }
     
     private void updateList(){
