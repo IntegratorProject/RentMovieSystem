@@ -3,7 +3,9 @@ package controle;
 
 import dao.GenericDao;
 import entidade.Cliente;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -99,6 +101,13 @@ public class ClienteMB extends DefaultMB{
         this.clientes = clientes;
     }
     
+    public String formatCPF(String cpf){
+        return new ValidadorCPF().imprimeCPF(cpf);
+    }
     
+    public String formatData(Date data){
+        DateFormat formataData = DateFormat.getDateInstance();
+        return formataData.format(data);
+    }
     
 }

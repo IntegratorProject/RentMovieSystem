@@ -89,7 +89,7 @@
                 </p:column>
 
                 <p:column headerText="CPF">
-                    <h:outputText value="#{cliente.cpf}"/>
+                    <h:outputText value="#{clienteMB.formatCPF(cliente.cpf)}"/>
                 </p:column>
 
                 <p:column headerText="Email">
@@ -97,7 +97,7 @@
                 </p:column>
 
                 <p:column headerText="Data de Nascimento">
-                    <h:outputText value="#{cliente.dataNascimento}"/>
+                    <h:outputText value="#{clienteMB.formatData(cliente.dataNascimento)}"/>
                 </p:column>
 
                 <p:column headerText="Telefone">

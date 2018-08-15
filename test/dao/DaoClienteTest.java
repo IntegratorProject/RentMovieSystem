@@ -48,7 +48,7 @@ public class DaoClienteTest {
         GenericDao<Midia> dao2 = new GenericDao<>(Midia.class);
         dao2.salvar(m);
 
-        */
+        
         
         Cliente c = new Cliente();
         c.setNome("Eduaweefw");
@@ -78,7 +78,7 @@ public class DaoClienteTest {
         
         GenericDao<Locacao> dao4 = new GenericDao<>(Locacao.class);
         dao4.salvar(l);
-        
+        */
         }
     
 }
