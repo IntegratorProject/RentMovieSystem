@@ -6,73 +6,88 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
+
+        <script type="text/javascript">
+            function handleDialogSubmit(xhr, status, args) {
+                if (args.validationFailed) {
+                    PF('dlg2').show();
+                } else {
+                    PF('dlg2').hide();
+                }
+            }
+        </script>
+
         <h1 class="aw-page-title">Cadastro de clientes</h1>
 
-        <h:form id="formCadastro">
+        <h:form id="cadButton">
+
+            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" />
+
+        </h:form>
+
+        <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="380"
+                  resizable="false">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
             </p:messages>
 
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-6 ui-lg-2">
+            <h:form id="formCadastro">
 
-                    <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
-                    <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
-                                 required="true"
-                                 requiredMessage="Preencha o campo Nome."/> <br/>
+                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/> <br/>
 
-                    <br/>
+                <br/>
 
-                    <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
-                    <p:inputMask id="inputCPF" value="#{clienteMB.cliente.cpf}"
-                                 required="true"
-                                 mask="999.999.999-99"
-                                 requiredMessage="Preencha o campo CPF."/> <br/>
+                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:inputMask validator="custom.cpfValidator" id="inputCPF" value="#{clienteMB.cliente.cpf}"
+                             required="true"
+                             mask="999.999.999-99"
+                             requiredMessage="Preencha o campo CPF."/> <br/>
 
-                    <br/>
+                <br/>
 
-                    <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
-                    <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
-                                 required="true"
-                                 requiredMessage="Preencha o campo Email."/><br/>
+                <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
+                <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
+                             required="true"
+                             requiredMessage="Preencha o campo Email."/><br/>
 
-                    <br/>
+                <br/>
 
-                    <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
-                    <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
-                                value="#{clienteMB.cliente.dataNascimento}"
-                                required="true"
-                                requiredMessage="Preencha o campo Data de Nascimento."/> 
+                <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
+                            value="#{clienteMB.cliente.dataNascimento}"
+                            required="true"
+                            requiredMessage="Preencha o campo Data de Nascimento."/> <br/>
 
-                </div>
+                <br/>
 
-                <div class="ui-g-12 ui-md-6 ui-lg-2">
+                <p:outputLabel for="inputTelefone">Telefone: </p:outputLabel><br/>
+                <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
+                             mask="(99) 99999-9999"
+                             required="true"
+                             requiredMessage="Preencha o campo Telefone."/><br/>
 
-                    <p:outputLabel for="inputTelefone">Telefone: </p:outputLabel><br/>
-                    <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
-                                 mask="(99) 99999-9999"
-                                 required="true"
-                                 requiredMessage="Preencha o campo Telefone."/><br/>
+                <br/>
 
-                    <br/>
+                <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
+                <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
+                             required="true"
+                             requiredMessage="Preencha o campo Endereço."/><br/>
 
-                    <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
-                    <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
-                                 required="true"
-                                 requiredMessage="Preencha o campo Endereço."/><br/>
+                <br/>
 
-                    <br/>
+                <p:commandButton value="Cadastrar" 
+                                 actionListener="#{clienteMB.cadastrar()}"
+                                 update="@form, formTabela"
+                                 oncomplete="handleDialogSubmit(xhr, status, args)" 
+                                 />
 
-                    <p:commandButton value="Cadastrar" 
-                                     actionListener="#{clienteMB.cadastrar()}"
-                                     update="@form, formTabela"/>
+            </h:form>
 
-                </div>
-
-            </div>
-
-        </h:form>
+        </p:dialog>
 
         <br/>
 
@@ -110,7 +125,7 @@
 
                 <p:column headerText="Ações">
 
-                    <p:commandButton value="Alterar" update="@form,formCadastro">
+                    <p:commandButton value="Alterar" update="@form,formCadastro" onclick="PF('dlg2').show();">
 
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
 
