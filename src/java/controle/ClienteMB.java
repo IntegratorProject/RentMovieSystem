@@ -24,6 +24,9 @@ public class ClienteMB extends DefaultMB {
 
     public void cadastrar() {
 
+        ValidadorCPF vCPF = new ValidadorCPF();
+        cliente.setCpf(vCPF.removeMask(cliente.getCpf()));
+        
         if (cliente.getId() == 0) {
 
             try {
