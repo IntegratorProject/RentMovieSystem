@@ -1,4 +1,3 @@
-
 package controle;
 
 import dao.GenericDao;
@@ -13,8 +12,8 @@ import util.ValidadorCPF;
 
 @ManagedBean
 @ViewScoped
-public class ClienteMB extends DefaultMB{
-    
+public class ClienteMB extends DefaultMB {
+
     private GenericDao<Cliente> dao = new GenericDao<>(Cliente.class);
     private Cliente cliente = new Cliente();
     private List<Cliente> clientes = new ArrayList<>();
@@ -22,77 +21,68 @@ public class ClienteMB extends DefaultMB{
     public ClienteMB() {
         updateList();
     }
-    
-    public void cadastrar(){
-        
-        ValidadorCPF vCPF = new ValidadorCPF();
-        cliente.setCpf(vCPF.removeMask(cliente.getCpf()));
-        
-        if(vCPF.isCPF(cliente.getCpf())){
-            
-            if(cliente.getId() == 0){
-                
-                try{
-                    
-                    dao.salvar(cliente);
-                    cliente = new Cliente();
-                    updateList();
-                    
-                }catch(Exception e){
-                    connetionError();
-                }
-                
-            }else{
-                
-                try{
-                    
-                    dao.editar(cliente);
-                    cliente = new Cliente();
-                    updateList();
-                    
-                }catch(Exception e){
-                    connetionError();
-                }
-                
+
+    public void cadastrar() {
+
+        if (cliente.getId() == 0) {
+
+            try {
+
+                dao.salvar(cliente);
+                cliente = new Cliente();
+                updateList();
+
+            } catch (Exception e) {
+                connetionError();
             }
-            
-        }else{
-            showErrorMessage("Erro!", "CPF inválido!");
+
+        } else {
+
+            try {
+
+                dao.editar(cliente);
+                cliente = new Cliente();
+                updateList();
+
+            } catch (Exception e) {
+                connetionError();
+            }
+
         }
-        
+
     }
-    
-    public void excluir(long id){
-        
-        try{
-            
+
+    public void excluir(long id) {
+
+        try {
+
             dao.delete(id);
             updateList();
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             connetionError();
         }
-        
+
     }
-    
-    private void updateList(){
-        
-        try{
+
+    private void updateList() {
+
+        try {
             clientes = dao.buscarTodos();
-        }catch(Exception e){
+        } catch (Exception e) {
             connetionError();
         }
-       
+
     }
-    
+
     public Cliente getCliente() {
         return cliente;
     }
-    
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
     public List<Cliente> getClientes() {
         return clientes;
     }
@@ -100,14 +90,14 @@ public class ClienteMB extends DefaultMB{
     public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
     }
-    
-    public String formatCPF(String cpf){
+
+    public String formatCPF(String cpf) {
         return new ValidadorCPF().imprimeCPF(cpf);
     }
-    
-    public String formatData(Date data){
+
+    public String formatData(Date data) {
         DateFormat formataData = DateFormat.getDateInstance();
         return formataData.format(data);
     }
-    
+
 }
