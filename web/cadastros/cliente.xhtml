@@ -21,11 +21,11 @@
 
         <h:form id="cadButton">
 
-            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" />
+            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show(); " icon="fa fa-user-plus" styleClass="ui-color-green" />
 
         </h:form>
 
-        <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="380"
+        <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="420" width="280"
                   resizable="false">
 
             <p:messages id="messages" showDetail="true" closable="true">
@@ -82,7 +82,7 @@
                 <p:commandButton value="Cadastrar" 
                                  actionListener="#{clienteMB.cadastrar()}"
                                  update="@form, formTabela"
-                                 oncomplete="handleDialogSubmit(xhr, status, args)" 
+                                 oncomplete="handleDialogSubmit(xhr, status, args)" styleClass="ui-color-green" 
                                  />
 
             </h:form>
@@ -125,15 +125,13 @@
 
                 <p:column headerText="Ações">
 
-                    <p:commandButton value="Alterar" update="@form,formCadastro" onclick="PF('dlg2').show();">
+                    <p:commandButton value="Alterar" update="@form,formCadastro" onclick="PF('dlg2').show();" styleClass="ui-priority-primary" icon="fa fa-pencil">
 
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
 
                     </p:commandButton>
 
-                    <p:commandButton value="Excluir"
-                                     actionListener="#{clienteMB.excluir(cliente.id)}"
-                                     update="@form">
+                    <p:commandButton value="Excluir" actionListener="#{clienteMB.excluir(cliente.id)}"  update="@form" styleClass="ui-color-red" icon="fa fa-trash">
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja excluir o cliente?"

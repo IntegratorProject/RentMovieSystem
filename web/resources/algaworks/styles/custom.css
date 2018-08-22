@@ -26,3 +26,25 @@ body {
 		border: none;
 	}
 }
+
+/*Color CommandButton */
+.ui-color-red{
+    
+    background: #dd0000 !important;
+    color:white !important;
+ 
+    
+}
+.ui-color-red:hover{
+    background: #ce0000 !important;
+}
+/*.ui-color-green{
+    background: green !important;
+    color:white !important;
+
+    
+}
+.ui-color-green:hover{
+    background: #007004 !important;
+    
+}*/

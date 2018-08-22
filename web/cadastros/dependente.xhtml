@@ -6,59 +6,78 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
+
+
+        <script type="text/javascript">
+            function handleDialogSubmit(xhr, status, args) {
+                if (args.validationFailed) {
+                    PF('dlg2').show();
+                } else {
+                    PF('dlg2').hide();
+                }
+            }
+        </script>
+
         <h1 class="aw-page-title">Cadastro de dependentes</h1>
 
-        <h:form id="formCadastro">
+        <h:form id="cadButton">
+
+            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" icon="fa fa-user-plus" styleClass="ui-color-green" />
+
+        </h:form><br/>
+
+        <p:dialog header="Cadastrar Funcionários" widgetVar="dlg2" modal="true" height="250" width="350" minWidth="300">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
             </p:messages>
 
-            <div class="ui-g">
-                <div class="ui-g-12 ui-md-6 ui-lg-2">
-                    
-                    <p:outputLabel>Cliente:</p:outputLabel><br/>
-                    <p:selectOneMenu> <!-- Arrumar isso -->
-                        <f:selectItems value="#{clienteMB.clientes}" var="cli"
-					itemLabel="#{cli.nome}" itemValue="#{cli}" />
-			</p:selectOneMenu>  
-<!--                    <p:message for="dependente" />-->
-                    
-			
-                    
-                    
-                    <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
-                    <p:inputText id="inputNome" value=""
-                                 required="true"
-                                 requiredMessage="Preencha o campo Nome."/> <br/>
+            <h:form id="formCadastro">
 
-                    <br/>
+                <p:messages id="messages" showDetail="true" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
 
 
-                    <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
-                    <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
-                                value=""
-                                required="true"
-                                requiredMessage="Preencha o campo Data de Nascimento."/> 
-                    
-                    <br/>
-                    <br/>
-                    
-                    <p:commandButton value="Cadastrar" actionListener="#" update="@form, formTabela"/>
-                 
-                    <br/>
-                    
-                    
-                    
-                    
-                </div>
+                        <p:outputLabel>Cliente:</p:outputLabel><br/>
+                        <p:selectOneMenu> <!-- Arrumar isso -->
+                            <f:selectItems value="#{clienteMB.clientes}" var="cli"
+                                           itemLabel="#{cli.nome}" itemValue="#{cli}" />
+                        </p:selectOneMenu>  
+                        <!--                    <p:message for="dependente" />--><br/><br/>
 
-            </div>
 
-        </h:form>
-         <h:form id="formTabela">
 
-             <p:dataTable value="" var="dependentes">
+
+                        <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                        <p:inputText id="inputNome" value=""
+                                     required="true"
+                                     requiredMessage="Preencha o campo Nome."/> <br/>
+
+                        <br/>
+
+
+                        <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                        <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
+                                    value=""
+                                    required="true"
+                                    requiredMessage="Preencha o campo Data de Nascimento."/> 
+
+                        <br/>
+                        <br/>
+
+                        <p:commandButton value="Cadastrar" actionListener="#" update="@form, formTabela"  styleClass="ui-color-green"/>
+
+                        <br/>
+
+
+
+            </h:form>
+
+        </p:dialog>
+        <h:form id="formTabela">
+
+            <p:dataTable value="" var="dependentes">
 
                 <p:column headerText="Id">
                     <h:outputText value=""/>
@@ -71,24 +90,22 @@
                 <p:column headerText="Data de Nascimento">
                     <h:outputText value=""/>
                 </p:column>
-                
+
                 <p:column headerText="Cliente">
                     <h:outputText value=""/>
                 </p:column>
-                
-                
+
+
 
                 <p:column headerText="Ações">
 
-                    <p:commandButton value="Alterar" update="@form,formCadastro">
+                    <p:commandButton value="Alterar" update="@form,formCadastro" styleClass="ui-priority-primary" icon="fa fa-pencil">
 
                         <f:setPropertyActionListener value="#" target="#"/>
 
                     </p:commandButton>
 
-                    <p:commandButton value="Excluir"
-                                     actionListener="#"
-                                     update="@form">
+                    <p:commandButton value="Excluir" actionListener="#" update="@form" styleClass="ui-color-red" icon="fa fa-trash">
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja excluir o dependente?"
@@ -110,7 +127,7 @@
 
         <br/>
 
-       
+
 
     </ui:define>
 
