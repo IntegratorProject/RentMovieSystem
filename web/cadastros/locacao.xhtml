@@ -1,0 +1,351 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/Layout.xhtml">
+
+    <ui:define name="content">
+
+
+        <script type="text/javascript">
+            function handleDialogSubmit(xhr, status, args) {
+                if (args.validationFailed) {
+                    PF('dlg2').show();
+                } else {
+                    PF('dlg2').hide();
+                }
+            }
+        </script>
+
+        <h1 class="aw-page-title">Locação</h1>
+
+        <h:form id="cadButton">
+
+            <p:commandButton value="Nova Locação" onclick="PF('dlg2').show();" icon="fa fa-user-plus" styleClass="ui-color-green" />
+
+        </h:form><br/>
+
+
+        <!--DIALOG CADASTRO-->
+        <p:dialog header="Cadastrar Locação" widgetVar="dlg2" modal="true" height="300" width="800" >
+
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formularioCabecalhoVenda">
+                <h:panelGrid columns="6">
+                    <h:outputText value="Cliente" />
+                    <p:selectOneMenu value="#"
+                                     filter="true"
+                                     filterMatchMode="startsWith">
+                        <f:selectItem itemLabel="Juninho" itemValue="" />
+                    </p:selectOneMenu>
+                    <h:outputText value="Data Locação:" />
+                    <p:calendar pattern="dd/MM/yyyy" value="" mask="true" />
+
+                    <h:outputText value="Data Devolução:    " />
+                    <p:calendar pattern="dd/MM/yyyy" value="" mask="true" />
+
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Funcionário:" />
+                    <p:selectOneMenu value="#"
+                                     filter="true"
+                                     filterMatchMode="startsWith">
+                        <f:selectItem itemLabel="play" itemValue="" />		
+                    </p:selectOneMenu>
+                    <h:outputText value="Observação: " />
+                    <p:inputText value=""/>
+                </h:panelGrid>
+                <!-- 		INÍCIO ITENS DE VENDA -->
+                <h:panelGrid columns="5">
+                    <h:outputText value="Midia: " />
+                    <p:selectOneMenu value="#"
+                                     filter="true"
+                                     filterMatchMode="startsWith">
+                        <f:selectItem itemLabel="Harry Potter " itemValue="" />
+                        <f:selectItem itemLabel="Senhor dos anéis" itemValue="" />
+                    </p:selectOneMenu>
+                    <h:outputText value="Quantidade:" />
+                    <p:inputText id="inputQtd" value=""/>
+                    <p:commandButton value="OK" update="tabelaItensVenda,inputQtd"
+                                     actionListener="#"/>
+                </h:panelGrid>
+                <!-- 		FIM DO ITENS DE VENDA -->
+                <p:dataTable id="tabelaItensVenda" value="#" var="obj">
+                    <p:column headerText="Mídia">
+                        <h:outputText value="Harry Potter" />
+
+                    </p:column>
+                    <p:column headerText="Quantidade">
+                        <h:outputText value="1" />
+
+                    </p:column>		
+                    <p:column headerText="Data Locação">
+                        <h:outputText value="01/01/2001" />
+
+                    </p:column>		
+                    <p:column headerText="Data Devolução">
+                        <h:outputText value="02/02/2002" />
+
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <br/>
+                <p:commandButton value="Finalizar Venda" 
+                                 actionListener="#" 
+                                 update=""/> 
+            </h:form>
+
+
+
+        </p:dialog>
+
+        <!--DIALOG ALTERAR CADASTRO-->
+        <p:dialog header="Cadastrar Locação" widgetVar="dlg3" modal="true" height="300" width="800" >
+
+            <p:messages id="messagess" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formularioAlterarCadastro">
+                <h:panelGrid columns="6">
+                    <h:outputText value="Cliente" />
+                    <p:selectOneMenu value="#"
+                                     filter="true"
+                                     filterMatchMode="startsWith">
+                        <f:selectItem itemLabel="Juninho" itemValue="" />
+                    </p:selectOneMenu>
+                    <h:outputText value="Data Locação:" />
+                    <p:calendar pattern="dd/MM/yyyy" value="" mask="true" />
+
+                    <h:outputText value="Data Devolução:    " />
+                    <p:calendar pattern="dd/MM/yyyy" value="" mask="true" />
+
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Funcionário:" />
+                    <p:selectOneMenu value="#"
+                                     filter="true"
+                                     filterMatchMode="startsWith">
+                        <f:selectItem itemLabel="play" itemValue="" />		
+                    </p:selectOneMenu>
+                    <h:outputText value="Observação: " />
+                    <p:inputText value=""/>
+                </h:panelGrid>
+                <!-- 		INÍCIO ITENS DE VENDA -->
+                <h:panelGrid columns="5">
+                    <h:outputText value="Midia: " />
+                    <p:selectOneMenu value="#"
+                                     filter="true"
+                                     filterMatchMode="startsWith">
+                        <f:selectItem itemLabel="Harry Potter " itemValue="" />
+                        <f:selectItem itemLabel="Senhor dos anéis" itemValue="" />
+                    </p:selectOneMenu>
+                    <h:outputText value="Quantidade:" />
+                    <p:inputText id="inputQtd" value=""/>
+                    <p:commandButton value="OK" update="tabelaItensVenda,inputQtd"
+                                     actionListener="#"/>
+                </h:panelGrid>
+                <!-- 		FIM DO ITENS DE VENDA -->
+                <p:dataTable id="tabelaItensVenda" value="#" var="obj">
+                    <p:column headerText="Mídia">
+                        <h:outputText value="Harry Potter" />
+
+                    </p:column>
+                    <p:column headerText="Quantidade">
+                        <h:outputText value="1" />
+
+                    </p:column>		
+                    <p:column headerText="Data Locação">
+                        <h:outputText value="01/01/2001" />
+
+                    </p:column>		
+                    <p:column headerText="Data Devolução">
+                        <h:outputText value="02/02/2002" />
+
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <br/>
+                <p:commandButton value="Finalizar Venda" 
+                                 actionListener="#" 
+                                 update=""/> 
+            </h:form>
+
+
+
+        </p:dialog>
+        <!--DIALOG MULTA-->
+        <p:dialog header="Multas" widgetVar="dlg4" modal="true" height="300" width="350" minWidth="300">
+
+
+
+            <h:form id="formMulta">
+
+                <p:messages id="messagesss" showDetail="true" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+
+
+
+                <p:outputLabel>Tipo de multas:</p:outputLabel><br/>
+                <p:selectOneMenu> <!-- Arrumar isso -->
+                    <f:selectItem itemLabel="Selecione" itemValue="" />
+                    <f:selectItem itemLabel="Atraso" itemValue="Xbox One" />
+                    <f:selectItem itemLabel="Danos" itemValue="PS4" />
+                    <f:selectItem itemLabel="Outros" itemValue="Wii U" />
+
+                </p:selectOneMenu>  
+                <br/>
+                <br/>
+                <p:outputLabel for="inputPrecoMulta">Preço Multa: </p:outputLabel><br/>
+                <p:inputNumber id="inputPrecoMulta" value=""  symbol="R$ " /><br/>
+                <br/>
+                <br/>
+                <p:outputLabel>Observações: </p:outputLabel>
+                <p:inputTextarea rows="5" cols="30" autoResize="false" />
+                <h:outputText id="display" />
+
+                <br/>
+                <br/>
+                <p:commandButton value="Enviar" actionListener="#" update="@form, formTabela" />
+
+                <br/>
+
+
+
+            </h:form>
+
+        </p:dialog>
+
+
+
+        <h:form id="formTabela">
+
+            <p:dataTable value="" var="dependentes">
+                
+                <p:column headerText="Número locação">
+                    <h:outputText value=""/>
+                </p:column>
+
+                <p:column headerText="Cliente">
+                    <h:outputText value=""/>
+                </p:column>
+
+                <p:column headerText="Data Locação">
+                    <h:outputText value=""/>
+                </p:column>
+
+                <p:column headerText="Data Devolução">
+                    <h:outputText value=""/>
+                </p:column>
+
+
+
+                <p:column headerText="Ações">
+
+                    <!--BOTÃo CADASTRO-->
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
+
+                        <f:setPropertyActionListener value="#" target="#"/>
+
+                    </p:commandButton>
+
+                    <!--BOTÃO MULTA-->
+
+                    <p:commandButton title="Multa" icon="fa fa-envelope-o" update="@form, " styleClass="ui-color-orange" onclick="PF('dlg4').show();">
+
+                        <f:setPropertyActionListener value="#" target="#"/>
+
+                    </p:commandButton>
+
+
+                    <!--BOTÃO EXCLUIR-->
+                    <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
+
+                        <p:confirm header="Confirmação" 
+                                   message="Deseja excluir o dependente?"
+                                   icon="ui-icon-alert"/>
+
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Não" type="button"
+                                 styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+        </h:form>
+
+        <br/>
+
+
+
+    </ui:define>
+
+</ui:composition>
+
+<!--<h:form id="formCadastro">
+
+    <p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    </p:messages>
+
+    <p:outputLabel>Funcionário: </p:outputLabel><br/>
+    <p:selectOneMenu>  Arrumar isso 
+        <f:selectItems value="Matheus" var="cli"
+                       itemLabel="Matheus" itemValue="" />
+    </p:selectOneMenu> 
+    <br/>
+    <br/>
+
+
+    <p:outputLabel>Cliente:</p:outputLabel><br/>
+    <p:selectOneMenu>  Arrumar isso 
+        <f:selectItems value="#{clienteMB.clientes}" var="cli"
+                       itemLabel="#{cli.nome}" itemValue="#{cli}" />
+    </p:selectOneMenu>  
+                        <p:message for="dependente" /><br/><br/>
+
+
+
+    <p:outputLabel for="inputDataLocação">Data da locação: </p:outputLabel><br/>
+    <p:calendar id="inputDataLocação" pattern="dd/MM/yyyy" mask="true"
+                value=""
+                required="true"
+                requiredMessage="Preencha o campo Data de Nascimento."/> 
+
+    <br/>
+    <br/>
+
+    <p:outputLabel for="inputDataDevolução">Data da devolução: </p:outputLabel><br/>
+    <p:calendar id="inputDataDevolução" pattern="dd/MM/yyyy" mask="true"
+                value=""
+                required="true"
+                requiredMessage="Preencha o campo Data de Nascimento."/> 
+
+    <br/>
+    <br/>
+
+    <p:outputLabel for="inputPrecoLocacao">Preço locação: </p:outputLabel><br/>
+    <p:inputNumber id="inputPrecoLocacao" value=""  symbol="R$ " /><br/>
+
+    <br/>
+
+
+
+
+    <p:commandButton value="Cadastrar" actionListener="#" update="@form, formTabela"  styleClass="ui-color-green"/>
+
+    <br/>
+
+
+
+</h:form>-->

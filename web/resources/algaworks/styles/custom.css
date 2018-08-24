@@ -38,16 +38,16 @@ body {
 .ui-color-red:hover{
     background: #ce0000 !important;
 }
-/*.ui-color-green{
-    background: green !important;
+.ui-color-orange{
+    
+    background: #ffb522 !important;
     color:white !important;
-
+ 
     
 }
-.ui-color-green:hover{
-    background: #007004 !important;
-    
-}*/
+.ui-color-orange:hover{
+    background: #e19600 !important;
+}
 
 
 /*TELA LOGIN*/
