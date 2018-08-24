@@ -26,7 +26,7 @@
 
         </h:form><br/>
 
-
+        <!--DIALOG CADASTRO-->
         <p:dialog header="Cadastrar Funcionários" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
             
             <p:messages id="messages" showDetail="true" closable="true">
@@ -89,6 +89,70 @@
 
             </h:form>
         </p:dialog>
+        
+        <!--DIALOG ALTERAR CADASTRO-->
+        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="350" minWidth="300">
+            
+            <p:messages id="messagess" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+            
+            <h:form id="formAtualizarCadastro">
+
+
+
+                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:inputText id="inputNome" value=""
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/> <br/>
+
+                <br/>
+
+                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:inputMask id="inputCPF" value=""
+                             required="true"
+                             mask="999.999.999-99"
+                             requiredMessage="Preencha o campo CPF."/> <br/>
+
+                <br/>
+                <p:outputLabel for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
+                <p:inputText id="inputLogin" value=""
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/> <br/>
+
+                <br/>
+                <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
+                <p:inputText id="inputSenha" type="password" required="true"/><br/>
+                <br/>
+
+
+
+
+
+                <p:outputLabel for="nivelDeAcesso" >Nível de acesso: </p:outputLabel><br/>
+                <p:selectOneMenu id="nivelDeAcesso" value="">
+                    <f:selectItem itemLabel="1" itemValue="1" />
+                    <f:selectItem itemLabel="2" itemValue="2" />
+                </p:selectOneMenu>
+
+                <br/><br/>
+                <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
+                <p:selectOneMenu id="cargo" value="">
+                    <f:selectItem itemLabel="Vendedor" itemValue="1" />
+                    <f:selectItem itemLabel="Gerência" itemValue="2" />
+                </p:selectOneMenu>
+
+                <br/><br/>
+
+                <p:commandButton value="Alterar " 
+                                 actionListener="#"
+                                 update="@form, "  styleClass="ui-color-green" /> <br/><br/><!-- adiconar formTabelaFuncionarios-->
+
+
+
+
+            </h:form>
+        </p:dialog>
 
 
         <h:form id="formTabelaFuncionarios">
@@ -121,13 +185,16 @@
 
                 <p:column headerText="Ações">
 
-                    <p:commandButton value="Alterar" update="@form, " styleClass="ui-priority-primary" icon="fa fa-pencil">
+                    
+                    <!--BOTÃO ALTERAR-->
+                     <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
 
                         <f:setPropertyActionListener value="#" target="#"/>
 
                     </p:commandButton>
 
-                    <p:commandButton value="Excluir"  actionListener="#" update="@form" styleClass="ui-color-red" icon="fa fa-trash">
+                    <!--BOTÃO EXCLUIR-->
+                    <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja excluir o funcionário?"

@@ -21,11 +21,13 @@
 
         <h:form id="cadButton">
 
-            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" />
+            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" icon="fa fa-user-plus"/>
 
         </h:form><br/>
 
-        <p:dialog header="Cadastrar Funcionários" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
+        
+        <!--DIALOG CADASTRAR-->
+        <p:dialog header="Cadastrar Dependentes" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -98,6 +100,80 @@
 
         </p:dialog>
 
+        <!--DIALOG ATUALIZAR CADASTRO-->
+        
+        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="350" minWidth="300">
+
+            <p:messages id="messagess" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formAtualizarCadastro">
+
+                <p:messages id="messages" showDetail="true" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+
+                <p:outputLabel for="inputTitulo">Título: </p:outputLabel><br/>
+                <p:inputText id="inputTitulo" value=""
+                             required="true"
+                             requiredMessage="Preencha o campo Título"/> <br/>
+
+                <br/>
+
+                <p:outputLabel for="inputDataLancamento">Data de Lançamento</p:outputLabel><br/>
+                <p:calendar id="inputDataLancamento" pattern="dd/MM/yyyy" mask="true"
+                            value="#"
+                            required="true"
+                            requiredMessage="Preencha o campo Data de Lançamento."/> 
+
+                <br/><br/>
+
+                <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
+                <p:selectOneMenu id="genero" value="">
+                    <f:selectItem itemLabel="Jogos" itemValue="1" /><!--Apenas exemplos-->
+                    <f:selectItem itemLabel="Ação" itemValue="2" /><!--Apenas exemplos-->
+                    <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
+                    <f:selectItem itemLabel="Terror" itemValue="2" /><!--Apenas exemplos-->                        
+                </p:selectOneMenu><!--Utilizar selectonemenu grouping (separar filmes e jogos) https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml-->
+
+                <br/><br/>
+
+                <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
+                <p:selectOneMenu id="classificacao" value="">
+                    <f:selectItem itemLabel="Livre" itemValue="1" />
+                    <f:selectItem itemLabel="10" itemValue="2" />
+                    <f:selectItem itemLabel="12" itemValue="3" />
+                    <f:selectItem itemLabel="14" itemValue="4" />
+                    <f:selectItem itemLabel="16" itemValue="5" />
+                    <f:selectItem itemLabel="18" itemValue="6" />
+                </p:selectOneMenu>
+
+                <br/><br/>
+
+                <p:outputLabel for="tipo" >Tipo: </p:outputLabel><br/>
+                <p:selectOneMenu id="tipo" value="">
+                    <f:selectItem itemLabel="DVD" itemValue="1" />
+                    <f:selectItem itemLabel="Blu-Ray" itemValue="2" />
+                    <f:selectItem itemLabel="CD" itemValue="3" />
+                    <f:selectItem itemLabel="Jogo" itemValue="4" />
+                </p:selectOneMenu>         
+
+                <br/><br/>
+                <p:outputLabel for="valorLocacao" value="Valor Locação: "/><br/>
+                <p:inputNumber id="valorLocacao" value=""  symbol="R$ " />
+                <br/>
+                <br/>
+
+                <p:commandButton value="Alterar" actionListener="#" update="@form,"/>
+
+                <br/>
+
+
+                
+            </h:form>
+
+        </p:dialog>
 
         <h:form id="formTabelaAcervo">
 
@@ -133,13 +209,17 @@
 
                 <p:column headerText="Ações">
 
-                    <p:commandButton value="Alterar" update="@form, " styleClass="ui-priority-primary" icon="fa fa-pencil">
+                    
+                    <!--BOTÃO ALTERAR-->
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
 
                         <f:setPropertyActionListener value="#" target="#"/>
 
                     </p:commandButton>
 
-                    <p:commandButton value="Excluir" actionListener="#" update="@form" styleClass="ui-color-red" icon="fa fa-trash">
+                    
+                    <!--BOTÃO EXCLUIR-->
+                    <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#" update="@form" styleClass="ui-color-red">
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja excluir o funcionário?"

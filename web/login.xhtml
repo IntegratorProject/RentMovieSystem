@@ -14,18 +14,59 @@ and open the template in the editor.
     <h:head>
 
         <title>RentMoviesSystem - Login</title>
-        <h:outputStylesheet name="css/styleLogin.css" />
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css" />
+        <h:outputStylesheet library="algaworks" name="styles/custom.css" />
+
+
 
     </h:head>
 
-    <h:body>
+    <h:body styleClass="grey lighten-4">
 
-        <br/>
-        
-        <div class="ui-g">
-            <div class="ui-g-12 ui-md-8 ui-lg-4"></div>
-            <div class="ui-g-12 ui-sm-4 ui-lg-4">
-                <h:form> 
+        <div class="valign-wrapper" id="login-page">
+            <div class="container">
+                <div class="center-align">
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <img class="responsive-img" src="resources/algaworks/images/logo2.png" style="max-width: 200px;" />
+                                    <div class="left-align">
+                                        <h:form id="form-login">
+                                            <p:growl autoUpdate="true" />
+                                            <div class="row">
+                                                <div class="col s12 input-field">
+                                                    <p:inputText class="teste" id="username" value="" required="true" requiredMessage="Digite o usuário"  placeholder="Usuário"/>
+
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <p:inputText id="password" type="password" required="true" value="" requiredMessage="Digite a senha" placeholder="Senha"/>
+
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <p:commandButton value="Entrar " styleClass=" btn-login" actionListener="#" ></p:commandButton>
+
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+
+</html>
+
+
+
+
+<!-- <h:form> 
 
                     <p:outputLabel for="inputLogin">Login: </p:outputLabel><br/>
                     <p:inputText id="inputLogin" required="true" style="width: 100%"/><br/><br/>
@@ -35,12 +76,4 @@ and open the template in the editor.
 
                     <p:commandButton value="Entrar"/>
 
-                </h:form>
-            </div>
-            <div class="ui-g-12 ui-md-8 ui-lg-4"></div>
-        </div>
-
-
-    </h:body>
-
-</html>
+                </h:form>-->

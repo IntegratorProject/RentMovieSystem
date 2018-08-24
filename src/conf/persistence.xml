@@ -6,9 +6,9 @@
     <class>entidade.Dependente</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/rentMoviesDB"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/rentmoviesdb"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.password" value="mysql"/>
+      <property name="javax.persistence.jdbc.password" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.show_sql" value="true"/>

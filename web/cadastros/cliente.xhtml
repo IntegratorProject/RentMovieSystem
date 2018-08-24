@@ -14,17 +14,19 @@
                 } else {
                     PF('dlg2').hide();
                 }
-            }
+            }         
         </script>
 
-        <h1 class="aw-page-title">Cadastro de clientes</h1>
+        <h1 class="aw-page-title">Cadastro de Clientes</h1>
 
         <h:form id="cadButton">
 
-            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show(); " icon="fa fa-user-plus" styleClass="ui-color-green" />
+            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show(); " icon="fa fa-user-plus" />
 
         </h:form>
 
+        
+        <!--DIALOG CADASTRO-->
         <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="420" width="280"
                   resizable="false">
 
@@ -82,13 +84,78 @@
                 <p:commandButton value="Cadastrar" 
                                  actionListener="#{clienteMB.cadastrar()}"
                                  update="@form, formTabela"
-                                 oncomplete="handleDialogSubmit(xhr, status, args)" styleClass="ui-color-green" 
+                                 oncomplete="handleDialogSubmit(xhr, status, args)" 
                                  />
 
             </h:form>
 
         </p:dialog>
 
+        
+        <!--DIALOG ATUALIZAR CADASTRO-->
+         <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="280"
+                  resizable="false">
+
+            <p:messages id="messagess" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formAtualizarCadastro">
+
+                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/> <br/>
+
+                <br/>
+
+                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:inputMask validator="custom.cpfValidator" id="inputCPF" value="#{clienteMB.cliente.cpf}"
+                             required="true"
+                             mask="999.999.999-99"
+                             requiredMessage="Preencha o campo CPF."/> <br/>
+
+                <br/>
+
+                <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
+                <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
+                             required="true"
+                             requiredMessage="Preencha o campo Email."/><br/>
+
+                <br/>
+
+                <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
+                            value="#{clienteMB.cliente.dataNascimento}"
+                            required="true"
+                            requiredMessage="Preencha o campo Data de Nascimento."/> <br/>
+
+                <br/>
+
+                <p:outputLabel for="inputTelefone">Telefone: </p:outputLabel><br/>
+                <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
+                             mask="(99) 99999-9999"
+                             required="true"
+                             requiredMessage="Preencha o campo Telefone."/><br/>
+
+                <br/>
+
+                <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
+                <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
+                             required="true"
+                             requiredMessage="Preencha o campo Endereço."/><br/>
+
+                <br/>
+
+                <p:commandButton value="Alterar" 
+                                 actionListener="#{clienteMB.cadastrar()}"
+                                 update="@form, formAtualizarCadastro"
+                                 oncomplete="handleDialogSubmit(xhr, status, args)" styleClass="ui-color-green" 
+                                 />
+
+            </h:form>
+
+        </p:dialog>
         <br/>
 
         <h:form id="formTabela">
@@ -124,14 +191,19 @@
                 </p:column>
 
                 <p:column headerText="Ações">
-
-                    <p:commandButton value="Alterar" update="@form,formCadastro" onclick="PF('dlg2').show();" styleClass="ui-priority-primary" icon="fa fa-pencil">
+                    
+                    
+                    <!--BOTÃO ALTERAR-->
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form,formAtualizarCadastro" onclick="PF('dlg3').show();" styleClass="ui-priority-primary" >
 
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
 
                     </p:commandButton>
 
-                    <p:commandButton value="Excluir" actionListener="#{clienteMB.excluir(cliente.id)}"  update="@form" styleClass="ui-color-red" icon="fa fa-trash">
+                    
+                    
+                    <!--BOTÃO EXCLUIR--> 
+                    <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#{clienteMB.excluir(cliente.id)}"  update="@form" styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja excluir o cliente?"
