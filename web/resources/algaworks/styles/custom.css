@@ -1,49 +1,49 @@
 /* BASE */
 body {
-	margin: 0;
-	font-size: 13px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-size: 13px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* TABVIEW */
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
-	color: #555;
+    color: #555;
 }
 
 @media (max-width: 640px) {
-	.ui-tabs.ui-tabs-top > .ui-tabs-nav li {
-		width: 100%;
-	}
+    .ui-tabs.ui-tabs-top > .ui-tabs-nav li {
+        width: 100%;
+    }
 }
 
 /* PANELGRID */
 .ui-panelgrid.panelgrid-noborder .ui-grid-responsive {
-	border: none;
+    border: none;
 }
 
 @media (max-width: 640px) {
-	.ui-panelgrid.panelgrid-noborder .ui-grid-responsive .ui-grid-row {
-		border: none;
-	}
+    .ui-panelgrid.panelgrid-noborder .ui-grid-responsive .ui-grid-row {
+        border: none;
+    }
 }
 
 /*Color CommandButton */
 .ui-color-red{
-    
+
     background: #dd0000 !important;
     color:white !important;
- 
-    
+
+
 }
 .ui-color-red:hover{
     background: #ce0000 !important;
 }
 .ui-color-orange{
-    
+
     background: #ffb522 !important;
     color:white !important;
- 
-    
+
+
 }
 .ui-color-orange:hover{
     background: #e19600 !important;
@@ -53,55 +53,75 @@ body {
 /*TELA LOGIN*/
 
 .botao-entrar{
-    
+
 }
 .teste{
 }
 .teste:focus{
-   
+
 }
 
 .btn-login {
-	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
-	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
-	background-color:#3d94f6;
-	-webkit-border-top-left-radius:8px;
-	-moz-border-radius-topleft:8px;
-	border-top-left-radius:8px;
-	-webkit-border-top-right-radius:8px;
-	-moz-border-radius-topright:8px;
-	border-top-right-radius:8px;
-	-webkit-border-bottom-right-radius:8px;
-	-moz-border-radius-bottomright:8px;
-	border-bottom-right-radius:8px;
-	-webkit-border-bottom-left-radius:8px;
-	-moz-border-radius-bottomleft:8px;
-	border-bottom-left-radius:8px;
-	text-indent:0;
-	border:1px solid #337fed;
-	display:inline-block;
-	color:#ffffff;
-	font-family:Arial Black;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-	height:40px;
-	line-height:40px;
-	width:100px;
-	text-decoration:none;
-	text-align:center;
-	text-shadow:1px 1px 0px #1570cd;
+    -moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+    box-shadow:inset 0px 1px 0px 0px #97c4fe;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+    background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+    background-color:#3d94f6;
+    -webkit-border-top-left-radius:8px;
+    -moz-border-radius-topleft:8px;
+    border-top-left-radius:8px;
+    -webkit-border-top-right-radius:8px;
+    -moz-border-radius-topright:8px;
+    border-top-right-radius:8px;
+    -webkit-border-bottom-right-radius:8px;
+    -moz-border-radius-bottomright:8px;
+    border-bottom-right-radius:8px;
+    -webkit-border-bottom-left-radius:8px;
+    -moz-border-radius-bottomleft:8px;
+    border-bottom-left-radius:8px;
+    text-indent:0;
+    border:1px solid #337fed;
+    display:inline-block;
+    color:#ffffff;
+    font-family:Arial Black;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:40px;
+    width:100px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #1570cd;
 }
 .btn-login:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
-	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
-	background-color:#1e62d0;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+    background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+    background-color:#1e62d0;
 }.btn-login:active {
-	position:relative;
-	top:1px;
+    position:relative;
+    top:1px;
+}
+
+/*PÁGINA INICIO*/
+
+.balao{
+
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 10px;
+    border-radius: 10px;
+    
+   
+}
+.grid-container-estilo{
+    background-color: #f6f6f6;
+    width: 75%;
 }

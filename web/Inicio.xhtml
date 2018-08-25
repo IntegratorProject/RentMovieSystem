@@ -6,53 +6,110 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
-        <div style="padding-top: 10px">
-            <h:form>
-
-                <p:dashboard id="board" model="#{inicioMB.model}">
-
-                    <p:panel id="locacoesAtrazadas" header="Locações Atrazadas">
-
-                        <div class="ui-g-12 ui-lg-6 ui-xl-3">
-                            <div class="ui-g overview-box overview-box-1">
-                                <div class="overview-box-icon">
-                                    <i class="fa fa-inbox"></i>
+        <h:head>
+            <link href="resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"></link>
+        </h:head>
+        <h:body>
+            <div style="padding-top: 10px">
+                <h:form>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-user" aria-hidden="true" style="font-size: 50px"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><h4>Clientes</h4></div>
+                                            <div>425</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="overview-box-content">
-                                    <div class="overview-box-title">Unread Messages</div>
-                                    <div class="overview-box-stats">150</div>
-                                    <div class="overview-box-details">+%50 more than yesterday</div>
-                                </div>
+                                <a href="#">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Ver detalhes</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    </p:panel>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x" style="font-size: 60px"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><h4>Locações em andamento</h4></div>
+                                            <div>521</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Ver detalhes</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-shopping-cart fa-5x" style="font-size: 60px"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><h4>Faturamento diario</h4></div>
+                                            <div>R$2.500,00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#">
+                                    <div class="panel-footer">
+                                        <span class="pull-left" >Ver detalhes</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-red">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-support fa-5x" style="font-size: 60px"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><h4>Suporte</h4></div>
+                                            <div>2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Ver detalhes</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
 
-                    <p:panel id="ultimasMovimentacoes" header="Ultimas Movimentações">
 
-
-
-                    </p:panel>
-
-                    <p:panel id="faturamentoDiario" header="Faturamento Diário">
-                        <h:outputText value="Total: 9087"  /><br/>
-                        <h:outputText value="Total de alugueis efetuados: 103"  />
-                    </p:panel>
-
-                    <p:panel id="devolucoesPrevistas" header="Devoluções previstas">
-                        <h:outputText value="awefe we fwa awefwe" />
-                        <h:outputText value="awefe we fwa awefwe" />
-                        <h:outputText value="awefe we fwa awefwe" />
-                        <h:outputText value="awefe we fwa awefwe" />
-                        <h:outputText value="awefe we fwa awefwe" /><br/>
-                        <h:outputText value="awefe we fwa awefwe" />
-                        <h:outputText value="awefe we fwa awefwe" />
-                        <h:outputText value="awefe we fwa awefwe" />
-                    </p:panel>
-
-                </p:dashboard>
-
-            </h:form>
-        </div>
+                </h:form>
+            </div>
+        </h:body>
     </ui:define>
 
+
 </ui:composition>
+<!--<i class="fa fa-user" aria-hidden="true" style="font-size: 48px"></i>
+<p:chart type="line" model="#{chartView.lineModel2}" style="height:300px;"/>tion>-->
