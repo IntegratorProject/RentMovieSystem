@@ -4,6 +4,10 @@ $(document).ready(function(){
     
     $('.selectMenu').removeClass('is-selected');
     
+    if(indice === "Inicio.xhtml"){
+        $('#selectMenuInicio').addClass('is-selected');
+    }
+    
     if(indice === "cliente.xhtml"){
         $('#selectMenuCliente').addClass('is-selected');
     }
@@ -18,6 +22,14 @@ $(document).ready(function(){
     
     if(indice === "acervo.xhtml"){
         $('#selectMenuAcervo').addClass('is-selected');
+    }
+    
+    if(indice === "relatorio.xhtml"){
+        $('#selectMenuRelatorios').addClass('is-selected');
+    }
+    
+    if(indice === "locacao.xhtml"){
+        $('#selectMenuLocacao').addClass('is-selected');
     }
     
 });
