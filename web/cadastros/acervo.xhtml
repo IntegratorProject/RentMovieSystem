@@ -27,7 +27,7 @@
 
 
         <!--DIALOG CADASTRAR-->
-        <p:dialog header="Cadastrar Acervo" widgetVar="dlg2" modal="true" height="430" width="550" minWidth="400">
+        <p:dialog header="Cadastrar Acervo" widgetVar="dlg2" modal="true" height="430" width="800" minWidth="550">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -109,10 +109,18 @@
                     <p:column headerText="Preço de Locação">
                         <h:outputText value="#{midia.precoLocacao}" />
                     </p:column>
+                    <p:column headerText="Disponibilidade">
+                        <h:outputText value="#{acervoMB.textFormater.formatDisponiblidade(midia.disponibilidade)}" />
+                    </p:column>
                     <p:column headerText="Ações">
                         
                         <!--BOTÃO EXCLUIR-->
-                        <p:commandButton title="Remover" icon="fa fa-trash" actionListener="#{acervoMB.removerMidia(midia)}" update="@form" styleClass="ui-color-red"/>
+                        <p:commandButton title="Remover" 
+                                         icon="fa fa-trash" 
+                                         actionListener="#{acervoMB.removerMidia(midia)}" 
+                                         update="@form" 
+                                         styleClass="ui-color-red"
+                                         rendered="#{midia.id == 0}"/>
                         
                     </p:column>
                     

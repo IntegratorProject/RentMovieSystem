@@ -21,6 +21,9 @@ public class Midia {
     @Column(nullable = false)
     private double precoLocacao;
     
+    @Column(nullable = false)
+    private String disponibilidade;
+    
     @ManyToOne
     private Acervo acervo;
 
@@ -55,5 +58,13 @@ public class Midia {
     public void setAcervo(Acervo acervo) {
         this.acervo = acervo;
     }
-    
+
+    public String getDisponibilidade() {
+        return disponibilidade;
+    }
+
+    public void setDisponibilidade(String disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
 }

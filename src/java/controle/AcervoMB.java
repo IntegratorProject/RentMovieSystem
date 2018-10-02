@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import util.TextFormater;
 
 @ManagedBean
 @ViewScoped
@@ -19,6 +20,8 @@ public class AcervoMB extends DefaultMB {
     private List<Acervo> acervos = new ArrayList<>();
     private List<Midia> listMidia = new ArrayList<>();
     private int quantidadeMidia = 0;
+    
+    private TextFormater textFormater = new TextFormater();
 
     private GenericDao<Acervo> daoAcervo = new GenericDao<Acervo>(Acervo.class);
     private GenericDao<Midia> daoMidia = new GenericDao<Midia>(Midia.class);
@@ -66,23 +69,11 @@ public class AcervoMB extends DefaultMB {
 
     }
 
-    public void excluir(long id) {
-
-        try {
-
-            daoAcervo.delete(id);
-            updateList();
-
-        } catch (Exception e) {
-            connetionError();
-        }
-
-    }
-
     public void adicionarMidia() {
 
+        midia.setDisponibilidade("disponivel");
         for (int i = 0; i < quantidadeMidia; i++) {
-
+            
             listMidia.add(midia);
 
         }
@@ -97,12 +88,7 @@ public class AcervoMB extends DefaultMB {
         listMidia.remove(midia);
 
     }
-
-    public String formatData(Date data) {
-        DateFormat formataData = DateFormat.getDateInstance();
-        return formataData.format(data);
-    }
-
+    
     public Acervo getAcervo() {
         return acervo;
     }
@@ -141,6 +127,14 @@ public class AcervoMB extends DefaultMB {
 
     public void setQuantidadeMidia(int quantidadeMidia) {
         this.quantidadeMidia = quantidadeMidia;
+    }
+
+    public TextFormater getTextFormater() {
+        return textFormater;
+    }
+
+    public void setTextFormater(TextFormater textFormater) {
+        this.textFormater = textFormater;
     }
 
 }
