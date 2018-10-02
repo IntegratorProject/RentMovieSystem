@@ -49,8 +49,12 @@ public class AcervoMB extends DefaultMB {
                 
                 for(Midia m : listMidia){
                     
-                    m.setAcervo(acervo);
-                    daoMidia.salvar(m);
+                    Midia tempMidia = new Midia();
+                    tempMidia.setAcervo(acervo);
+                    tempMidia.setPrecoLocacao(m.getPrecoLocacao());
+                    tempMidia.setTipo(m.getTipo());
+                    tempMidia.setDisponibilidade(m.getDisponibilidade());
+                    daoMidia.salvar(tempMidia);
                     
                 }
                 
