@@ -45,8 +45,16 @@ public class AcervoMB extends DefaultMB {
 
             try {
 
-                daoAcervo.salvar(acervo);
-                acervo = new Acervo();
+                acervo = daoAcervo.salvar(acervo);
+                
+                for(Midia m : listMidia){
+                    
+                    m.setAcervo(acervo);
+                    daoMidia.salvar(m);
+                    
+                }
+                
+                limparCadastro();
                 updateList();
 
             } catch (Exception e) {
@@ -67,6 +75,15 @@ public class AcervoMB extends DefaultMB {
 
         }
 
+    }
+    
+    public void limparCadastro(){
+        
+        acervo = new Acervo();
+        midia = new Midia();
+        listMidia.clear();
+        quantidadeMidia = 0;
+        
     }
 
     public void adicionarMidia() {
