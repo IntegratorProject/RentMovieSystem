@@ -4,7 +4,7 @@ package controle;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class DefaultMB {
+public abstract class DefaultMB {
     
     /**
      * Creates an information message displayed on a dialog for error on xhtml page
