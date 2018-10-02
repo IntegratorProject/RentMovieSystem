@@ -19,7 +19,7 @@ public class Midia {
     private String tipo;
     
     @Column(nullable = false)
-    private double preco_locacao;
+    private double precoLocacao;
     
     @ManyToOne
     private Acervo acervo;
@@ -40,12 +40,12 @@ public class Midia {
         this.tipo = tipo;
     }
 
-    public double getPreco_locacao() {
-        return preco_locacao;
+    public double getPrecoLocacao() {
+        return precoLocacao;
     }
 
-    public void setPreco_locacao(double preco_locacao) {
-        this.preco_locacao = preco_locacao;
+    public void setPrecoLocacao(double preco_locacao) {
+        this.precoLocacao = preco_locacao;
     }
 
     public Acervo getAcervo() {

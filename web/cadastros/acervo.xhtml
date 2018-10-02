@@ -27,7 +27,7 @@
 
 
         <!--DIALOG CADASTRAR-->
-        <p:dialog header="Cadastrar Itens" widgetVar="dlg2" modal="true" height="430" width="550" minWidth="400">
+        <p:dialog header="Cadastrar Acervo" widgetVar="dlg2" modal="true" height="430" width="550" minWidth="400">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -35,12 +35,8 @@
 
             <h:form id="formCadastro">
 
-                <p:messages id="messages" showDetail="true" closable="true">
-                    <p:autoUpdate />
-                </p:messages>
-
                 <p:outputLabel for="inputTitulo">Título: </p:outputLabel><br/>
-                <p:inputText id="inputTitulo" value=""
+                <p:inputText id="inputTitulo" value="#{acervoMB.acervo.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Título"/> <br/>
 
@@ -48,14 +44,14 @@
 
                 <p:outputLabel for="inputDataLancamento">Data de Lançamento</p:outputLabel><br/>
                 <p:calendar id="inputDataLancamento" pattern="dd/MM/yyyy" mask="true"
-                            value="#"
+                            value="#{acervoMB.acervo.dataLancamento}"
                             required="true"
                             requiredMessage="Preencha o campo Data de Lançamento."/> 
 
                 <br/><br/>
 
                 <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
-                <p:selectOneMenu id="genero" value="">
+                <p:selectOneMenu id="genero" value="#{acervoMB.acervo.genero}">
                     <f:selectItem itemLabel="Jogos" itemValue="1" /><!--Apenas exemplos-->
                     <f:selectItem itemLabel="Ação" itemValue="2" /><!--Apenas exemplos-->
                     <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
@@ -65,7 +61,7 @@
                 <br/><br/>
 
                 <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
-                <p:selectOneMenu id="classificacao" value="">
+                <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
                     <f:selectItem itemLabel="Livre" itemValue="1" />
                     <f:selectItem itemLabel="10" itemValue="2" />
                     <f:selectItem itemLabel="12" itemValue="3" />
@@ -74,47 +70,59 @@
                     <f:selectItem itemLabel="18" itemValue="6" />
                 </p:selectOneMenu>
 
-                <br/><br/>
+                <br/>
+                <div style="border: 0.5px solid black; width: 99%; margin-top: 10px"></div>
+                <br/>
 
                 <p:outputLabel for="tipo" >Tipo: </p:outputLabel><br/>
-                <p:selectOneMenu id="tipo" value="">
-                    <f:selectItem itemLabel="DVD" itemValue="1" />
-                    <f:selectItem itemLabel="Blu-Ray" itemValue="2" />
-                    <f:selectItem itemLabel="CD" itemValue="3" />
-                    <f:selectItem itemLabel="Jogo" itemValue="4" />
+                <p:selectOneMenu id="tipo" value="#{acervoMB.midia.tipo}">
+                    <f:selectItem itemLabel="DVD" itemValue="DVD" />
+                    <f:selectItem itemLabel="Blu-Ray" itemValue="Blu-ray" />
+                    <f:selectItem itemLabel="CD" itemValue="CD" />
+                    <f:selectItem itemLabel="Jogo" itemValue="Jogo" />
                 </p:selectOneMenu>         
 
                 <br/><br/>
                 <p:outputLabel for="valorLocacao" value="Valor Locação: "/><br/>
-                <p:inputNumber id="valorLocacao" value=""  symbol="R$ " />
+                <p:inputNumber id="valorLocacao" value="#{acervoMB.midia.precoLocacao}"  symbol="R$ " />
                 <br/>
                 <br/>
 
-                <p:commandButton value="Adicionar" actionListener="#" update="@form,"/>
+                <p:outputLabel for="quantidadeMidia" value="Quantidade: "/><br/>
+                <p:spinner id="quantidadeMidia" value="#{acervoMB.quantidadeMidia}" min="1"/>
+                <br/>
+                <br/>
+
+                <p:commandButton value="Adicionar" actionListener="#{acervoMB.adicionarMidia()}" update="quantidadeMidia, valorLocacao, tipo, dataTableMidias"/>
 
                 <br/>
                 <br/>
 
-                <p:dataTable>
-                    <p:column headerText="Data de Lançamento">
-                        <h:outputText value="ew" />
-                    </p:column>
-                    <p:column headerText="Classificação Etária">
-                        <h:outputText value="we}" />
+                <p:dataTable id="dataTableMidias" value="#{acervoMB.listMidia}" var="midia">
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{midia.id}" />
                     </p:column>
                     <p:column headerText="Tipo">
-                        <h:outputText value="ew" />
+                        <h:outputText value="#{midia.tipo}" />
                     </p:column>
                     <p:column headerText="Preço de Locação">
-                        <h:outputText value="we" />
+                        <h:outputText value="#{midia.precoLocacao}" />
                     </p:column>
+                    <p:column headerText="Ações">
+                        
+                        <!--BOTÃO EXCLUIR-->
+                        <p:commandButton title="Remover" icon="fa fa-trash" actionListener="#{acervoMB.removerMidia(midia)}" update="@form" styleClass="ui-color-red"/>
+                        
+                    </p:column>
+                    
                 </p:dataTable>
-                
+
                 <br/>
                 <br/>
 
                 <p:commandButton value="Concluir" actionListener="#" update="@form,"/>
-                
+
             </h:form>
 
         </p:dialog>
@@ -187,8 +195,6 @@
                 <p:commandButton value="Alterar" actionListener="#" update="@form,"/>
 
                 <br/>
-
-
 
             </h:form>
 

@@ -1,8 +1,8 @@
-
 package controle;
 
 import dao.GenericDao;
 import entidade.Acervo;
+import entidade.Midia;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,32 +12,37 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class AcervoMB extends DefaultMB{
-    
+public class AcervoMB extends DefaultMB {
+
     private Acervo acervo = new Acervo();
+    private Midia midia = new Midia();
     private List<Acervo> acervos = new ArrayList<>();
-    private GenericDao<Acervo> dao = new GenericDao<Acervo>(Acervo.class);
+    private List<Midia> listMidia = new ArrayList<>();
+    private int quantidadeMidia = 0;
+
+    private GenericDao<Acervo> daoAcervo = new GenericDao<Acervo>(Acervo.class);
+    private GenericDao<Midia> daoMidia = new GenericDao<Midia>(Midia.class);
 
     public AcervoMB() {
         updateList();
     }
-    
-    public void updateList(){
-        try{
-            acervos = dao.buscarTodos();
-        }catch(Exception e){
+
+    public void updateList() {
+        try {
+            acervos = daoAcervo.buscarTodos();
+        } catch (Exception e) {
             e.printStackTrace();
             connetionError();
         }
     }
-    
+
     public void cadastrar() {
-        
+
         if (acervo.getId() == 0) {
 
             try {
 
-                dao.salvar(acervo);
+                daoAcervo.salvar(acervo);
                 acervo = new Acervo();
                 updateList();
 
@@ -49,7 +54,7 @@ public class AcervoMB extends DefaultMB{
 
             try {
 
-                dao.editar(acervo);
+                daoAcervo.editar(acervo);
                 acervo = new Acervo();
                 updateList();
 
@@ -60,12 +65,12 @@ public class AcervoMB extends DefaultMB{
         }
 
     }
-    
+
     public void excluir(long id) {
 
         try {
 
-            dao.delete(id);
+            daoAcervo.delete(id);
             updateList();
 
         } catch (Exception e) {
@@ -73,7 +78,26 @@ public class AcervoMB extends DefaultMB{
         }
 
     }
-    
+
+    public void adicionarMidia() {
+
+        for (int i = 0; i < quantidadeMidia; i++) {
+
+            listMidia.add(midia);
+
+        }
+
+        midia = new Midia();
+        quantidadeMidia = 0;
+
+    }
+
+    public void removerMidia(Midia midia) {
+
+        listMidia.remove(midia);
+
+    }
+
     public String formatData(Date data) {
         DateFormat formataData = DateFormat.getDateInstance();
         return formataData.format(data);
@@ -94,5 +118,29 @@ public class AcervoMB extends DefaultMB{
     public void setAcervos(List<Acervo> acervos) {
         this.acervos = acervos;
     }
-    
+
+    public List<Midia> getListMidia() {
+        return listMidia;
+    }
+
+    public void setListMidia(List<Midia> listMidia) {
+        this.listMidia = listMidia;
+    }
+
+    public Midia getMidia() {
+        return midia;
+    }
+
+    public void setMidia(Midia midia) {
+        this.midia = midia;
+    }
+
+    public int getQuantidadeMidia() {
+        return quantidadeMidia;
+    }
+
+    public void setQuantidadeMidia(int quantidadeMidia) {
+        this.quantidadeMidia = quantidadeMidia;
+    }
+
 }
