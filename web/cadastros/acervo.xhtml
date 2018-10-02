@@ -25,9 +25,9 @@
 
         </h:form><br/>
 
-        
+
         <!--DIALOG CADASTRAR-->
-        <p:dialog header="Cadastrar Itens" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
+        <p:dialog header="Cadastrar Itens" widgetVar="dlg2" modal="true" height="430" width="550" minWidth="400">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -90,18 +90,37 @@
                 <br/>
                 <br/>
 
-                <p:commandButton value="Cadastrar" actionListener="#" update="@form,"/>
+                <p:commandButton value="Adicionar" actionListener="#" update="@form,"/>
 
                 <br/>
+                <br/>
 
+                <p:dataTable>
+                    <p:column headerText="Data de Lançamento">
+                        <h:outputText value="ew" />
+                    </p:column>
+                    <p:column headerText="Classificação Etária">
+                        <h:outputText value="we}" />
+                    </p:column>
+                    <p:column headerText="Tipo">
+                        <h:outputText value="ew" />
+                    </p:column>
+                    <p:column headerText="Preço de Locação">
+                        <h:outputText value="we" />
+                    </p:column>
+                </p:dataTable>
+                
+                <br/>
+                <br/>
 
+                <p:commandButton value="Concluir" actionListener="#" update="@form,"/>
                 
             </h:form>
 
         </p:dialog>
 
         <!--DIALOG ATUALIZAR CADASTRO-->
-        
+
         <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="350" minWidth="300">
 
             <p:messages id="messagess" showDetail="true" closable="true">
@@ -170,7 +189,7 @@
                 <br/>
 
 
-                
+
             </h:form>
 
         </p:dialog>
@@ -209,7 +228,7 @@
 
                 <p:column headerText="Ações">
 
-                    
+
                     <!--BOTÃO ALTERAR-->
                     <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
 
@@ -217,7 +236,7 @@
 
                     </p:commandButton>
 
-                    
+
                     <!--BOTÃO EXCLUIR-->
                     <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#" update="@form" styleClass="ui-color-red">
 
