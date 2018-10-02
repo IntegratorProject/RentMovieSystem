@@ -2,12 +2,11 @@ package controle;
 
 import dao.GenericDao;
 import entidade.Cliente;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import util.TextFormater;
 import util.ValidadorCPF;
 
 @ManagedBean
@@ -17,6 +16,8 @@ public class ClienteMB extends DefaultMB {
     private GenericDao<Cliente> dao = new GenericDao<>(Cliente.class);
     private Cliente cliente = new Cliente();
     private List<Cliente> clientes = new ArrayList<>();
+    
+    private TextFormater textFormater = new TextFormater();
 
     public ClienteMB() {
         updateList();
@@ -94,13 +95,20 @@ public class ClienteMB extends DefaultMB {
         this.clientes = clientes;
     }
 
-    public String formatCPF(String cpf) {
-        return new ValidadorCPF().imprimeCPF(cpf);
+    public GenericDao<Cliente> getDao() {
+        return dao;
     }
 
-    public String formatData(Date data) {
-        DateFormat formataData = DateFormat.getDateInstance();
-        return formataData.format(data);
+    public void setDao(GenericDao<Cliente> dao) {
+        this.dao = dao;
+    }
+
+    public TextFormater getTextFormater() {
+        return textFormater;
+    }
+
+    public void setTextFormater(TextFormater textFormater) {
+        this.textFormater = textFormater;
     }
 
 }
