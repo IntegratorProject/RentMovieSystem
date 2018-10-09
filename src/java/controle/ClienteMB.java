@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import util.TextFormater;
-import util.ValidadorCPF;
+import util.prime.validadores.ValidadorCPF;
 
 @ManagedBean
 @ViewScoped
@@ -16,8 +15,6 @@ public class ClienteMB extends DefaultMB {
     private GenericDao<Cliente> dao = new GenericDao<>(Cliente.class);
     private Cliente cliente = new Cliente();
     private List<Cliente> clientes = new ArrayList<>();
-    
-    private TextFormater textFormater = new TextFormater();
 
     public ClienteMB() {
         updateList();
@@ -102,13 +99,5 @@ public class ClienteMB extends DefaultMB {
     public void setDao(GenericDao<Cliente> dao) {
         this.dao = dao;
     }
-
-    public TextFormater getTextFormater() {
-        return textFormater;
-    }
-
-    public void setTextFormater(TextFormater textFormater) {
-        this.textFormater = textFormater;
-    }
-
+    
 }

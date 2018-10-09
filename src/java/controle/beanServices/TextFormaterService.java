@@ -1,10 +1,15 @@
 
-package util;
+package controle.beanServices;
 
 import java.text.DateFormat;
 import java.util.Date;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import util.prime.validadores.ValidadorCPF;
 
-public class TextFormater {
+@ManagedBean(name = "textFormaterService")
+@RequestScoped
+public class TextFormaterService {
     
     public String formatCPF(String cpf) {
         return new ValidadorCPF().imprimeCPF(cpf);

@@ -171,7 +171,7 @@
                 </p:column>
 
                 <p:column headerText="CPF">
-                    <h:outputText value="#{clienteMB.textFormater.formatCPF(cliente.cpf)}"/>
+                    <h:outputText value="#{textFormaterService.formatCPF(cliente.cpf)}"/>
                 </p:column>
 
                 <p:column headerText="Email">
@@ -179,7 +179,7 @@
                 </p:column>
 
                 <p:column headerText="Data de Nascimento">
-                    <h:outputText value="#{clienteMB.textFormater.formatData(cliente.dataNascimento)}"/>
+                    <h:outputText value="#{textFormaterService.formatData(cliente.dataNascimento)}"/>
                 </p:column>
 
                 <p:column headerText="Telefone">
