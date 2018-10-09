@@ -1,5 +1,5 @@
 
-package validadores;
+package util.validadores;
 
 import java.util.Map;
 import javax.faces.application.FacesMessage;
@@ -9,7 +9,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import org.primefaces.validate.ClientValidator;
-import util.ValidadorCPF;
+import util.prime.validadores.ValidadorCPF;
 
 @FacesValidator("custom.cpfValidator")
 public class CPFValidator implements Validator, ClientValidator{
