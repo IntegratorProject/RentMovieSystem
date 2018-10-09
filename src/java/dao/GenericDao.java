@@ -175,4 +175,27 @@ public class GenericDao<T> {
         
     }
     
+    public List<T> buscarCondicao(String condicao) throws Exception{
+        
+        EntityManager manager = null;
+        
+        try{
+            
+            manager = Fabrica.get().createEntityManager();
+            Query query = manager.createQuery(" from "+classe.getName()+" where "+condicao);
+            return query.getResultList();
+            
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            throw new Exception("falha de conexao");
+            
+        }finally{
+            if(manager != null){
+                manager.close();
+            }
+        }
+        
+    }
+    
 }
