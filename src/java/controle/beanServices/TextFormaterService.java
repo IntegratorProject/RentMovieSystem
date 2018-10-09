@@ -12,12 +12,18 @@ import util.prime.validadores.ValidadorCPF;
 public class TextFormaterService {
     
     public String formatCPF(String cpf) {
-        return new ValidadorCPF().imprimeCPF(cpf);
+        if(!cpf.isEmpty()){
+            return new ValidadorCPF().imprimeCPF(cpf);
+        }
+        return "";
     }
     
     public String formatData(Date data) {
-        DateFormat formataData = DateFormat.getDateInstance();
-        return formataData.format(data);
+        if(data != null){
+            DateFormat formataData = DateFormat.getDateInstance();
+            return formataData.format(data);
+        }
+        return null;
     }
     
     public String formatDisponiblidade(String entrada){
