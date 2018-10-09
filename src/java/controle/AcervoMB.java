@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import util.TextFormater;
 
 @ManagedBean
 @ViewScoped
@@ -20,8 +19,6 @@ public class AcervoMB extends DefaultMB {
     private List<Acervo> acervos = new ArrayList<>();
     private List<Midia> listMidia = new ArrayList<>();
     private int quantidadeMidia = 0;
-    
-    private TextFormater textFormater = new TextFormater();
 
     private GenericDao<Acervo> daoAcervo = new GenericDao<Acervo>(Acervo.class);
     private GenericDao<Midia> daoMidia = new GenericDao<Midia>(Midia.class);
@@ -110,6 +107,18 @@ public class AcervoMB extends DefaultMB {
 
     }
     
+    public List<Midia> getMidiasBySelectedAcervo(){
+        
+        try{
+            return daoMidia.buscarCondicao("acervo_id = "+this.acervo.getId());
+        }catch(Exception e){
+            e.printStackTrace();
+            connetionError();
+            return null;
+        }
+        
+    }
+    
     public Acervo getAcervo() {
         return acervo;
     }
@@ -149,13 +158,5 @@ public class AcervoMB extends DefaultMB {
     public void setQuantidadeMidia(int quantidadeMidia) {
         this.quantidadeMidia = quantidadeMidia;
     }
-
-    public TextFormater getTextFormater() {
-        return textFormater;
-    }
-
-    public void setTextFormater(TextFormater textFormater) {
-        this.textFormater = textFormater;
-    }
-
+    
 }
