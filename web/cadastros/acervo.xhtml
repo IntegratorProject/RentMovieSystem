@@ -25,6 +25,54 @@
 
         </h:form><br/>
 
+        <h:form id="formTabelaAcervo">
+
+            <p:dataTable value="#{acervoMB.acervos}" var="document">
+
+                <p:column headerText="Título">
+                    <h:outputText value="#{document.nome}"/>
+                </p:column>
+
+                <p:column headerText="Data de lançamento">
+                    <h:outputText value="#{textFormaterService.formatData(document.dataLancamento)}"/>
+                </p:column>
+
+                <p:column headerText="Gênero">
+                    <h:outputText value="#{document.genero}"/>
+                </p:column>
+
+                <p:column headerText="Classificação Etária">
+                    <h:outputText value="#{document.classificacaoEtaria}"/>
+                </p:column>
+
+                <p:column headerText="Ações">
+
+                    <!--                    BOTÃO DETALHES-->
+
+                    <p:commandButton title="Detalhes" icon="fa fa-pencil" update="@form, contentViewAcervoMidia" styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
+
+                        <f:setPropertyActionListener value="#{document}" target="#{acervoMB.acervo}"/>
+
+                    </p:commandButton>
+
+                    <!--                    BOTÃO ALTERAR-->
+                    <p:commandButton title="Alterar" 
+                                     icon="fa fa-pencil" 
+                                     update="@form, formAlterar" 
+                                     styleClass="ui-priority-primary"
+                                     action="#{acervoMB.loadMidiasBySelectedAcervo()}"
+                                     onclick="PF('dlg4').show();">
+
+                        <f:setPropertyActionListener value="#{document}" target="#{acervoMB.acervo}"/>
+
+                    </p:commandButton>
+
+
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
 
         <!--DIALOG CADASTRAR-->
         <p:dialog header="Cadastrar Acervo" widgetVar="dlg2" modal="true" height="430" width="800" minWidth="550">
@@ -136,61 +184,8 @@
             </h:form>
 
         </p:dialog>
-        <!--FIM DA DIALOG CADASTRAR-->
 
-        <h:form id="formTabelaAcervo">
-
-            <p:dataTable value="#{acervoMB.acervos}" var="document">
-
-                <p:column headerText="Título">
-                    <h:outputText value="#{document.nome}"/>
-                </p:column>
-
-                <p:column headerText="Data de lançamento">
-                    <h:outputText value="#{textFormaterService.formatData(document.dataLancamento)}"/>
-                </p:column>
-
-                <p:column headerText="Gênero">
-                    <h:outputText value="#{document.genero}"/>
-                </p:column>
-
-                <p:column headerText="Classificação Etária">
-                    <h:outputText value="#{document.classificacaoEtaria}"/>
-                </p:column>
-
-                <p:column headerText="Ações">
-
-<!--                    BOTÃO DETALHES-->
-                    
-                    <p:commandButton title="Detalhes" icon="fa fa-pencil" update="@form, contentViewAcervoMidia" styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
-
-                        <f:setPropertyActionListener value="#{document}" target="#{acervoMB.acervo}"/>
-
-                    </p:commandButton>
-
-<!--                    BOTÃO ALTERAR-->
-                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
-
-                        <f:setPropertyActionListener value="#" target="#"/>
-
-                    </p:commandButton>
-
-
-                </p:column>
-
-            </p:dataTable>
-
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                <p:commandButton value="Sim" type="button"
-                                 styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                <p:commandButton value="Não" type="button"
-                                 styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-            </p:confirmDialog>
-
-        </h:form>
-        
         <!--DIALOG DETALHES-->
-
         <p:dialog header="Detalhes Acervo" widgetVar="dlg3" modal="true" height="420" width="350" minWidth="300">
 
             <h:form id="contentViewAcervoMidia">
@@ -208,12 +203,12 @@
                 <h:outputText id="genero" value="#{acervoMB.acervo.genero}"/><br/>
 
                 <br/>
-                
+
                 <p:outputLabel for="classificacaoEtaria">Classificação Etária: </p:outputLabel><br/>
                 <h:outputText id="classificacaoEtaria" value="#{acervoMB.acervo.classificacaoEtaria}"/><br/>
-                
+
                 <br/>
-                
+
                 <p:dataTable id="dataTableMidias" value="#{acervoMB.getMidiasBySelectedAcervo()}" var="midia">
 
                     <p:column headerText="ID">
@@ -228,11 +223,131 @@
                     <p:column headerText="Disponibilidade">
                         <h:outputText value="#{textFormaterService.formatDisponiblidade(midia.disponibilidade)}" />
                     </p:column>
-                    
+
                 </p:dataTable>
 
                 <br/>
             </h:form>
+        </p:dialog>
+
+        <!--DIALOG ALTERAR-->
+        <p:dialog header="Alterar Acervo" widgetVar="dlg4" modal="true" height="430" width="800" minWidth="550">
+
+            <p:messages showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formAlterar">
+
+                <p:outputLabel for="inputTitulo">Título: </p:outputLabel><br/>
+                <p:inputText id="inputTitulo" value="#{acervoMB.acervo.nome}"
+                             required="true"
+                             requiredMessage="Preencha o campo Título"/> <br/>
+
+                <br/>
+
+                <p:outputLabel for="inputDataLancamento">Data de Lançamento</p:outputLabel><br/>
+                <p:calendar id="inputDataLancamento" pattern="dd/MM/yyyy" mask="true"
+                            value="#{acervoMB.acervo.dataLancamento}"
+                            required="true"
+                            requiredMessage="Preencha o campo Data de Lançamento."/> 
+
+                <br/><br/>
+
+                <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
+                <p:selectOneMenu id="genero" value="#{acervoMB.acervo.genero}">
+                    <f:selectItem itemLabel="Jogos" itemValue="1" /><!--Apenas exemplos-->
+                    <f:selectItem itemLabel="Ação" itemValue="2" /><!--Apenas exemplos-->
+                    <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
+                    <f:selectItem itemLabel="Terror" itemValue="2" /><!--Apenas exemplos-->                        
+                </p:selectOneMenu><!--Utilizar selectonemenu grouping (separar filmes e jogos) https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml-->
+
+                <br/><br/>
+
+                <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
+                <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
+                    <f:selectItem itemLabel="Livre" itemValue="Livre" />
+                    <f:selectItem itemLabel="10" itemValue="10" />
+                    <f:selectItem itemLabel="12" itemValue="12" />
+                    <f:selectItem itemLabel="14" itemValue="14" />
+                    <f:selectItem itemLabel="16" itemValue="16" />
+                    <f:selectItem itemLabel="18" itemValue="18" />
+                </p:selectOneMenu>
+
+                <br/>
+                <div style="border: 0.5px solid black; width: 99%; margin-top: 10px"></div>
+                <br/>
+
+                <p:outputLabel for="tipo"  >Tipo: </p:outputLabel><br/>
+                <p:selectOneMenu id="tipo" value="#{acervoMB.midia.tipo}" >
+                    <f:selectItem itemLabel="DVD" itemValue="DVD" />
+                    <f:selectItem itemLabel="Blu-Ray" itemValue="Blu-ray" />
+                    <f:selectItem itemLabel="CD" itemValue="CD" />
+                    <f:selectItem itemLabel="Jogo" itemValue="Jogo" />
+                </p:selectOneMenu>         
+
+                <br/><br/>
+                <p:outputLabel for="valorLocacao" value="Valor Locação: "/><br/>
+                <p:inputNumber id="valorLocacao" value="#{acervoMB.midia.precoLocacao}"  symbol="R$ "/>
+                <br/>
+                <br/>
+
+                <p:commandButton value="Adicionar" actionListener="#{acervoMB.alterarMidia()}" update="valorLocacao, tipo, dataTableMidias" />
+
+                <br/>
+                <br/>
+
+                <p:dataTable id="dataTableMidias" value="#{acervoMB.listMidia}" var="midia">
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{midia.id}" />
+                    </p:column>
+                    <p:column headerText="Tipo">
+                        <h:outputText value="#{midia.tipo}" />
+                    </p:column>
+                    <p:column headerText="Preço de Locação">
+                        <h:outputText value="#{midia.precoLocacao}" />
+                    </p:column>
+                    <p:column headerText="Disponibilidade">
+                        <h:outputText value="#{textFormaterService.formatDisponiblidade(midia.disponibilidade)}"
+                                      rendered="#{midia.disponibilidade.equals('alugado')}"/>
+
+                        <!--Ta dando erro nesse botao pq ele nao ta chamando a action do ajax-->
+                        <p:selectBooleanButton value="#{acervoMB.getMidiaDisponibilidadeBooleanDefeito(midia.disponibilidade)}"
+                                               onLabel="Disponível" offLabel="Indisponível"
+                                               onIcon="ui-icon-check" offIcon="ui-icon-close"
+                                               rendered="#{!midia.disponibilidade.equals('alugado')}"
+                                               onchange="#">
+                            <p:ajax update="dataTableMidias" listener="#{acervoMB.changeDisponibilidadeMidia(midia)}"/>
+                        </p:selectBooleanButton>
+
+                    </p:column>
+                    <p:column headerText="Ações">
+
+                        <!--                    BOTÃO ALTERAR-->
+                        <p:commandButton title="Alterar" 
+                                         icon="fa fa-pencil" 
+                                         update="@form" 
+                                         styleClass="ui-priority-primary"
+                                         actionListener="#{acervoMB.setOldMidia(midia)}">
+
+                            <f:setPropertyActionListener value="#{midia}" target="#{acervoMB.midia}"/>
+
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+                <br/>
+                <br/>
+
+                <p:commandButton value="Concluir" actionListener="#{acervoMB.cadastrar()}"
+                                 oncomplete="handleDialogSubmit(xhr, status, args)"
+                                 update="@form, formTabelaAcervo"/>
+
+            </h:form>
+
         </p:dialog>
 
     </ui:define>
