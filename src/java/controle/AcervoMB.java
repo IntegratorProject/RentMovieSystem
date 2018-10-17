@@ -67,6 +67,11 @@ public class AcervoMB extends DefaultMB {
 
                 daoAcervo.editar(acervo);
                 acervo = new Acervo();
+                
+                for(Midia m : listMidia){
+                    daoMidia.editar(m);
+                }
+                
                 updateList();
 
             } catch (Exception e) {
@@ -129,26 +134,6 @@ public class AcervoMB extends DefaultMB {
 
     public void loadMidiasBySelectedAcervo() {
         listMidia = getMidiasBySelectedAcervo();
-    }
-
-    public boolean getMidiaDisponibilidadeBooleanDefeito(String disponibilidade) {
-        return disponibilidade.equals("disponivel") ? true : false;
-    }
-
-    public void changeDisponibilidadeMidia(Midia oldMidia) {
-
-        if (oldMidia != null) {
-            listMidia.remove(oldMidia);
-            if (oldMidia.getDisponibilidade().equals("disponivel")) {
-                oldMidia.setDisponibilidade("indisponivel");
-                System.out.println(oldMidia.getId() + " - " + oldMidia.getDisponibilidade());
-            } else if (oldMidia.getDisponibilidade().equals("indisponivel")) {
-                oldMidia.setDisponibilidade("disponivel");
-                System.out.println(oldMidia.getId() + " - " + oldMidia.getDisponibilidade());
-            }
-            listMidia.add(oldMidia);
-        }
-        
     }
 
     public Acervo getAcervo() {

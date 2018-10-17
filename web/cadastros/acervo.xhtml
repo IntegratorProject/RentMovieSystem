@@ -15,6 +15,14 @@
                     PF('dlg2').hide();
                 }
             }
+            
+            function handleDialogSubmit2(xhr, status, args) {
+                if (args.validationFailed) {
+                    PF('dlg4').show();
+                } else {
+                    PF('dlg4').hide();
+                }
+            }
         </script>
 
         <h1 class="aw-page-title">Cadastro de Itens</h1>
@@ -292,6 +300,18 @@
                 <br/>
                 <br/>
 
+                <p:outputLabel for="disponibilidade" rendered="#{!acervoMB.midia.disponibilidade.equals('alugado')}"
+                               value="Disponibilidade:"/><br/>
+                <p:selectOneMenu id="disponibilidade" 
+                                 value="#{acervoMB.midia.disponibilidade}"
+                                 rendered="#{!acervoMB.midia.disponibilidade.equals('alugado')}">
+                    <f:selectItem itemLabel="Disponível" itemValue="disponivel" />
+                    <f:selectItem itemLabel="Indisponível" itemValue="indisponivel" />
+                </p:selectOneMenu>
+                
+                <br/>
+                <br/>
+                
                 <p:commandButton value="Adicionar" actionListener="#{acervoMB.alterarMidia()}" update="valorLocacao, tipo, dataTableMidias" />
 
                 <br/>
@@ -309,18 +329,7 @@
                         <h:outputText value="#{midia.precoLocacao}" />
                     </p:column>
                     <p:column headerText="Disponibilidade">
-                        <h:outputText value="#{textFormaterService.formatDisponiblidade(midia.disponibilidade)}"
-                                      rendered="#{midia.disponibilidade.equals('alugado')}"/>
-
-                        <!--Ta dando erro nesse botao pq ele nao ta chamando a action do ajax-->
-                        <p:selectBooleanButton value="#{acervoMB.getMidiaDisponibilidadeBooleanDefeito(midia.disponibilidade)}"
-                                               onLabel="Disponível" offLabel="Indisponível"
-                                               onIcon="ui-icon-check" offIcon="ui-icon-close"
-                                               rendered="#{!midia.disponibilidade.equals('alugado')}"
-                                               onchange="#">
-                            <p:ajax update="dataTableMidias" listener="#{acervoMB.changeDisponibilidadeMidia(midia)}"/>
-                        </p:selectBooleanButton>
-
+                        <h:outputText value="#{textFormaterService.formatDisponiblidade(midia.disponibilidade)}"/>
                     </p:column>
                     <p:column headerText="Ações">
 
@@ -329,7 +338,8 @@
                                          icon="fa fa-pencil" 
                                          update="@form" 
                                          styleClass="ui-priority-primary"
-                                         actionListener="#{acervoMB.setOldMidia(midia)}">
+                                         actionListener="#{acervoMB.setOldMidia(midia)}"
+                                         rendered="#{!midia.disponibilidade.equals('alugado')}">
 
                             <f:setPropertyActionListener value="#{midia}" target="#{acervoMB.midia}"/>
 
@@ -343,7 +353,7 @@
                 <br/>
 
                 <p:commandButton value="Concluir" actionListener="#{acervoMB.cadastrar()}"
-                                 oncomplete="handleDialogSubmit(xhr, status, args)"
+                                 oncomplete="handleDialogSubmit2(xhr, status, args)"
                                  update="@form, formTabelaAcervo"/>
 
             </h:form>
