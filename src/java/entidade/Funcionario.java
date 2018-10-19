@@ -28,10 +28,10 @@ public class Funcionario {
     
     @Column(nullable = false)
     private String cargo;
-    
-    @Column(nullable = false)
-    private int nivelAcesso;
 
+    @Column(nullable = false)
+    private boolean enable = true;
+    
     public long getId() {
         return id;
     }
@@ -80,12 +80,12 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public int getNivelAcesso() {
-        return nivelAcesso;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setNivelAcesso(int nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
     
 }
