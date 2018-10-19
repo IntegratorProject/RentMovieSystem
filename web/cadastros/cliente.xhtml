@@ -14,7 +14,15 @@
                 } else {
                     PF('dlg2').hide();
                 }
-            }         
+            }
+            
+            function handleDialogSubmitDialogAlterar(xhr, status, args) {
+                if (args.validationFailed) {
+                    PF('dlg3').show();
+                } else {
+                    PF('dlg3').hide();
+                }
+            }       
         </script>
 
         <h1 class="aw-page-title">Cadastro de Clientes</h1>
@@ -149,8 +157,8 @@
 
                 <p:commandButton value="Alterar" 
                                  actionListener="#{clienteMB.cadastrar()}"
-                                 update="@form, formAtualizarCadastro"
-                                 oncomplete="handleDialogSubmit(xhr, status, args)" styleClass="ui-color-green" 
+                                 update="@form, formTabela"
+                                 oncomplete="handleDialogSubmitDialogAlterar(xhr, status, args)" styleClass="ui-color-green" 
                                  />
 
             </h:form>
