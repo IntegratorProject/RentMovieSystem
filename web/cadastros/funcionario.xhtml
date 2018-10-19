@@ -35,8 +35,6 @@
             
             <h:form id="formCadastro">
 
-
-
                 <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value=""
                              required="true"
@@ -60,16 +58,6 @@
                 <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
                 <p:inputText id="inputSenha" type="password" required="true"/><br/>
                 <br/>
-
-
-
-
-
-                <p:outputLabel for="nivelDeAcesso" >Nível de acesso: </p:outputLabel><br/>
-                <p:selectOneMenu id="nivelDeAcesso" value="">
-                    <f:selectItem itemLabel="1" itemValue="1" />
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                </p:selectOneMenu>
 
                 <br/><br/>
                 <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
@@ -85,8 +73,6 @@
                                  update="@form, "  styleClass="ui-color-green" /> <br/><br/><!-- adiconar formTabelaFuncionarios-->
 
 
-
-
             </h:form>
         </p:dialog>
         
@@ -98,7 +84,6 @@
             </p:messages>
             
             <h:form id="formAtualizarCadastro">
-
 
 
                 <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
@@ -125,16 +110,6 @@
                 <p:inputText id="inputSenha" type="password" required="true"/><br/>
                 <br/>
 
-
-
-
-
-                <p:outputLabel for="nivelDeAcesso" >Nível de acesso: </p:outputLabel><br/>
-                <p:selectOneMenu id="nivelDeAcesso" value="">
-                    <f:selectItem itemLabel="1" itemValue="1" />
-                    <f:selectItem itemLabel="2" itemValue="2" />
-                </p:selectOneMenu>
-
                 <br/><br/>
                 <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
                 <p:selectOneMenu id="cargo" value="">
@@ -147,9 +122,6 @@
                 <p:commandButton value="Alterar " 
                                  actionListener="#"
                                  update="@form, "  styleClass="ui-color-green" /> <br/><br/><!-- adiconar formTabelaFuncionarios-->
-
-
-
 
             </h:form>
         </p:dialog>
