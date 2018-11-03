@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import util.prime.validadores.ValidadorCPF;
+import util.validadores.ValidadorCPF;
 
 @ManagedBean(name = "textFormaterService")
 @RequestScoped

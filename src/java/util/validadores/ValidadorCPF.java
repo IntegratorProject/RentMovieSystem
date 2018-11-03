@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util.prime.validadores;
+package util.validadores;
 
 import java.util.InputMismatchException;
           
