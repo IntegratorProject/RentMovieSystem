@@ -19,7 +19,6 @@
 
         <h1 class="aw-page-title">Cadastro de Funcionário</h1>
 
-
         <h:form id="cadButton">
 
             <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" icon="fa fa-user-plus" styleClass="ui-color-green"  />
@@ -27,7 +26,7 @@
         </h:form><br/>
 
         <!--DIALOG CADASTRO-->
-        <p:dialog header="Cadastrar Funcionários" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
+        <p:dialog header="Funcionários" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
             
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -36,143 +35,109 @@
             <h:form id="formCadastro">
 
                 <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
-                <p:inputText id="inputNome" value=""
+                <p:inputText id="inputNome" value="#{funcionarioMB.funcionario.nome}"
                              required="true"
-                             requiredMessage="Preencha o campo Nome."/> <br/>
-
+                             requiredMessage="Preencha o campo Nome."/><br/>
                 <br/>
 
                 <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
-                <p:inputMask id="inputCPF" value=""
+                <p:inputMask id="inputCPF" value="#{funcionarioMB.funcionario.cpf}"
                              required="true"
                              mask="999.999.999-99"
+                             validator="custom.cpfValidator"
                              requiredMessage="Preencha o campo CPF."/> <br/>
 
                 <br/>
                 <p:outputLabel for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
-                <p:inputText id="inputLogin" value=""
+                <p:inputText id="inputLogin" value="#{funcionarioMB.funcionario.login}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
 
                 <br/>
                 <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
-                <p:inputText id="inputSenha" type="password" required="true"/><br/>
+                <p:inputText id="inputSenha" type="password" required="true" value="#{funcionarioMB.funcionario.senha}"/><br/>
                 <br/>
 
                 <br/><br/>
                 <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
-                <p:selectOneMenu id="cargo" value="">
-                    <f:selectItem itemLabel="Vendedor" itemValue="1" />
-                    <f:selectItem itemLabel="Gerência" itemValue="2" />
+                <p:selectOneMenu id="cargo" value="#{funcionarioMB.funcionario.cargo}">
+                    <f:selectItem itemLabel="Atendente" itemValue="Atendente" />
+                    <f:selectItem itemLabel="Gerência" itemValue="Gerente" />
                 </p:selectOneMenu>
 
                 <br/><br/>
 
                 <p:commandButton value="Cadastrar" 
-                                 actionListener="#"
-                                 update="@form, "  styleClass="ui-color-green" /> <br/><br/><!-- adiconar formTabelaFuncionarios-->
-
+                                 actionListener="#{funcionarioMB.cadastrar()}"
+                                 oncomplete="handleDialogSubmit(xhr, status, args)" 
+                                 update="@form, formTabelaFuncionarios"  styleClass="ui-color-green" /> <br/><br/>
 
             </h:form>
+            
         </p:dialog>
         
-        <!--DIALOG ALTERAR CADASTRO-->
-        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="350" minWidth="300">
-            
-            <p:messages id="messagess" showDetail="true" closable="true">
-                <p:autoUpdate />
-            </p:messages>
-            
-            <h:form id="formAtualizarCadastro">
-
-
-                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
-                <p:inputText id="inputNome" value=""
-                             required="true"
-                             requiredMessage="Preencha o campo Nome."/> <br/>
-
-                <br/>
-
-                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
-                <p:inputMask id="inputCPF" value=""
-                             required="true"
-                             mask="999.999.999-99"
-                             requiredMessage="Preencha o campo CPF."/> <br/>
-
-                <br/>
-                <p:outputLabel for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
-                <p:inputText id="inputLogin" value=""
-                             required="true"
-                             requiredMessage="Preencha o campo Nome."/> <br/>
-
-                <br/>
-                <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
-                <p:inputText id="inputSenha" type="password" required="true"/><br/>
-                <br/>
-
-                <br/><br/>
-                <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
-                <p:selectOneMenu id="cargo" value="">
-                    <f:selectItem itemLabel="Vendedor" itemValue="1" />
-                    <f:selectItem itemLabel="Gerência" itemValue="2" />
-                </p:selectOneMenu>
-
-                <br/><br/>
-
-                <p:commandButton value="Alterar " 
-                                 actionListener="#"
-                                 update="@form, "  styleClass="ui-color-green" /> <br/><br/><!-- adiconar formTabelaFuncionarios-->
-
-            </h:form>
-        </p:dialog>
-
-
         <h:form id="formTabelaFuncionarios">
 
-            <p:dataTable value="#" var="funcionario">
-
-                <p:column headerText="Id">
-                    <h:outputText value="aqui vai o id"/>
-                </p:column>
+            <p:dataTable value="#{funcionarioMB.listFuncionario}" var="funcionario">
 
                 <p:column headerText="Nome">
-                    <h:outputText value="aqui vai "/>
+                    <h:outputText value="#{funcionario.nome}"/>
                 </p:column>
 
                 <p:column headerText="CPF">
-                    <h:outputText value="aqui vai cpf"/>
+                    <h:outputText value="#{textFormaterService.formatCPF(funcionario.cpf)}"/>
                 </p:column>
 
                 <p:column headerText="Nome de Usuário">
-                    <h:outputText value="aqui vai CPF"/>
+                    <h:outputText value="#{funcionario.login}"/>
                 </p:column>
 
                 <p:column headerText="Cargo">
-                    <h:outputText value="aqui vai cargo"/>
+                    <h:outputText value="#{funcionario.cargo}"/>
                 </p:column>
-
-                <p:column headerText="Nível de Acesso">
-                    <h:outputText value="aqui vai nível de acesso"/>
+                
+                <p:column headerText="Status">
+                    <h:outputText value="Ativo" rendered="#{funcionario.enable}"/>
+                    <h:outputText value="Inativo" rendered="#{!funcionario.enable}"/>
                 </p:column>
 
                 <p:column headerText="Ações">
 
-                    
                     <!--BOTÃO ALTERAR-->
-                     <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
+                     <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formCadastro" styleClass="ui-priority-primary" onclick="PF('dlg2').show();">
 
-                        <f:setPropertyActionListener value="#" target="#"/>
+                         <f:setPropertyActionListener value="#{funcionario}" target="#{funcionarioMB.funcionario}"/>
 
                     </p:commandButton>
 
-                    <!--BOTÃO EXCLUIR-->
-                    <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
+                    <!--BOTÃO DESATIVAR-->
+                    <p:commandButton title="Desativar" 
+                                     icon="fa fa-trash"  
+                                     rendered="#{funcionario.enable}"
+                                     actionListener="#{funcionarioMB.statusChange(funcionario, false)}" 
+                                     update="@form" 
+                                     styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
-                                   message="Deseja excluir o funcionário?"
+                                   message="Deseja desativar o funcionário?"
                                    icon="ui-icon-alert" />
 
                     </p:commandButton>
+                    
+                    <!--BOTÃO ATIVAR-->
+                    <p:commandButton title="Ativar" 
+                                     icon="fa fa-trash"  
+                                     rendered="#{!funcionario.enable}"
+                                     actionListener="#{funcionarioMB.statusChange(funcionario, true)}" 
+                                     update="@form" 
+                                     styleClass="ui-color-red" >
+
+                        <p:confirm header="Confirmação" 
+                                   message="Deseja reativar o funcionário?"
+                                   icon="ui-icon-alert" />
+
+                    </p:commandButton>
+                    
                 </p:column>
 
             </p:dataTable>
