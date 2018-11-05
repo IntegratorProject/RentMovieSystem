@@ -7,7 +7,6 @@
 
     <ui:define name="content">
 
-
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
                 if (args.validationFailed) {
@@ -22,11 +21,21 @@
 
         <h:form id="cadButton">
 
-            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" icon="fa fa-user-plus" styleClass="ui-color-green" />
+            <p:outputLabel>Cliente:</p:outputLabel><br/>
+            <p:selectOneMenu id="cliente" 
+                             value="#{dependenteMB.clienteAtual}"
+                             converter="converterCliente"
+                             filter="true"
+                             filterMatchMode="startsWith">
+                <f:selectItems value="#{dependenteMB.listClientesAtivos}" var="cli"
+                               itemLabel="#{cli.nome} - #{cli.cpf}" itemValue="#{cli}" />
+            </p:selectOneMenu>  
+            <br/><br/>
+
+            <p:commandButton value="Adicionar" onclick="PF('dlg2').show();" icon="fa fa-user-plus" styleClass="ui-color-green" update="@form, formCadastro"/>
 
         </h:form><br/>
 
-        
         <!--DIALOG CADASTRO-->
         <p:dialog header="Cadastrar Dependentes" widgetVar="dlg2" modal="true" height="250" width="350" minWidth="300">
 
@@ -36,136 +45,80 @@
 
             <h:form id="formCadastro">
 
-                <p:messages id="messages" showDetail="true" closable="true">
-                    <p:autoUpdate />
-                </p:messages>
-
-
-                        <p:outputLabel>Cliente:</p:outputLabel><br/>
-                        <p:selectOneMenu> <!-- Arrumar isso -->
-                            <f:selectItems value="#{clienteMB.clientes}" var="cli"
-                                           itemLabel="#{cli.nome}" itemValue="#{cli}" />
-                        </p:selectOneMenu>  
-                        <!--                    <p:message for="dependente" />--><br/><br/>
-
-
-
-
-                        <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
-                        <p:inputText id="inputNome" value=""
-                                     required="true"
-                                     requiredMessage="Preencha o campo Nome."/> <br/>
-
-                        <br/>
-
-
-                        <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
-                        <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
-                                    value=""
-                                    required="true"
-                                    requiredMessage="Preencha o campo Data de Nascimento."/> 
-
-                        <br/>
-                        <br/>
-
-                        <p:commandButton value="Cadastrar" actionListener="#" update="@form, formTabela"  styleClass="ui-color-green"/>
-
-                        <br/>
-
-
-
-            </h:form>
-
-        </p:dialog>
-        
-        <!--DIALOG ALTERAR CADASTRO-->
-        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="250" width="350" minWidth="300">
-
-
-
-            <h:form id="formAtualizarCadastro">
-
-                <p:messages id="messagess" showDetail="true" closable="true">
-                    <p:autoUpdate />
-                </p:messages>
-
-
-                <p:outputLabel>Cliente:</p:outputLabel><br/>
-                <p:selectOneMenu> <!-- Arrumar isso -->
-                    <f:selectItems value="#{clienteMB.clientes}" var="cli"
-                                   itemLabel="#{cli.nome}" itemValue="#{cli}" />
-                </p:selectOneMenu>  
-                <!--                    <p:message for="dependente" />--><br/><br/>
-
-
-
-
+                <p:outputLabel for="selectedClientNome">Nome: </p:outputLabel><br/>
+                <h:outputText id="selectedClientNome" value="#{dependenteMB.clienteAtual.nome}"/>
+                <br/>
+                <br/>
+                
+                <p:outputLabel for="selectedClientCPF">CPF: </p:outputLabel><br/>
+                <h:outputText id="selectedClientCPF" value="#{textFormaterService.formatCPF(dependenteMB.clienteAtual.cpf)}"/>
+                <br/>
+                <br/>
+                
                 <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
-                <p:inputText id="inputNome" value=""
+                <p:inputText id="inputNome" value="#{dependenteMB.dependente.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
-
                 <br/>
-
 
                 <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
                 <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
-                            value=""
+                            value="#{dependenteMB.dependente.dataNascimento}"
                             required="true"
                             requiredMessage="Preencha o campo Data de Nascimento."/> 
-
                 <br/>
                 <br/>
 
-                <p:commandButton value="Alterar" actionListener="#" update="@form, formTabela" />
+                <p:commandButton value="Cadastrar" onclick="handleDialogSubmit(xhr, status, args)" actionListener="#{dependenteMB.cadastrar()}" update="@form, formTabela"  styleClass="ui-color-green"/>
 
                 <br/>
-
-
 
             </h:form>
 
         </p:dialog>
-        
+
         <h:form id="formTabela">
 
-            <p:dataTable value="" var="dependentes">
-
-                <p:column headerText="Id">
-                    <h:outputText value=""/>
-                </p:column>
+            <p:dataTable value="#{dependenteMB.listDependente}" var="dependente">
 
                 <p:column headerText="Nome">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{dependente.nome}"/>
                 </p:column>
 
                 <p:column headerText="Data de Nascimento">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{textFormaterService.formatData(dependente.dataNascimento)}"/>
                 </p:column>
 
                 <p:column headerText="Cliente">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{dependente.cliente.nome} - #{textFormaterService.formatCPF(dependente.cliente.cpf)}"/>
                 </p:column>
 
-
+                <p:column headerText="Status">
+                    <h:outputText value="Ativo" rendered="#{dependente.enable}"/>
+                    <h:outputText value="Inativo" rendered="#{!dependente.enable}"/>
+                </p:column>
 
                 <p:column headerText="Ações">
-                    
+
                     <!--BOTÃo CADASTRO-->
-                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
-
-                        <f:setPropertyActionListener value="#" target="#"/>
-
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formCadastro" styleClass="ui-priority-primary" onclick="PF('dlg2').show();">
+                        <f:setPropertyActionListener value="#{dependente}" target="#{dependenteMB.dependente}"/>
                     </p:commandButton>
 
-                    <!--BOTÃO EXCLUIR-->
-                    <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
-
+                    <!--BOTÃO ATIVAR-->
+                    <p:commandButton title="Ativar" icon="fa fa-trash"  actionListener="#{dependenteMB.statusChange(dependente, true)}" update="@form" styleClass="ui-color-red" rendered="#{!dependente.enable}">
                         <p:confirm header="Confirmação" 
-                                   message="Deseja excluir o dependente?"
+                                   message="Deseja reativar o dependente?"
                                    icon="ui-icon-alert"/>
-
                     </p:commandButton>
+
+                    <!--BOTÃO DESATIVAR-->
+                    <p:commandButton title="Desativar" icon="fa fa-trash"  actionListener="#{dependenteMB.statusChange(dependente, false)}" update="@form" styleClass="ui-color-red" rendered="#{dependente.enable}">
+                        <p:confirm header="Confirmação" 
+                                   message="Deseja desativar o dependente?"
+                                   icon="ui-icon-alert"/>
+                    </p:commandButton>
+
                 </p:column>
 
             </p:dataTable>
@@ -180,8 +133,6 @@
         </h:form>
 
         <br/>
-
-
 
     </ui:define>
 

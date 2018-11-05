@@ -2,6 +2,7 @@
 package entidade;
 
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,9 @@ public class Dependente {
     
     @Column(nullable = false)
     private String nome;
+    
+    @Column(nullable = false)
+    private boolean enable = true;
     
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -62,5 +66,40 @@ public class Dependente {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Dependente other = (Dependente) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (this.enable != other.enable) {
+            return false;
+        }
+        if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
+            return false;
+        }
+        if (!Objects.equals(this.cliente, other.cliente)) {
+            return false;
+        }
+        return true;
+    }
+
 }
