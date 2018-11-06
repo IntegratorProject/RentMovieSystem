@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 
 @ManagedBean
 @ViewScoped
@@ -17,10 +20,18 @@ public class DependenteMB extends DefaultMB {
     private List<Dependente> listDependente = new ArrayList<>();
     private List<Cliente> listClientesAtivos = new ArrayList<>();
     private GenericDao<Dependente> dao = new GenericDao<>(Dependente.class);
+    private GenericDao<Cliente> daoCliente = new GenericDao<Cliente>(Cliente.class);
 
     public DependenteMB() {
+        
         updateList();
         updateListClientes();
+
+        Flash f = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+        clienteAtual = (Cliente) f.get("cliente");
+        
+        if(clienteAtual == null) clienteAtual = new Cliente(); 
+        
     }
 
     public void cadastrar() {
@@ -32,7 +43,7 @@ public class DependenteMB extends DefaultMB {
             if (dependente.getId() == 0) {
 
                 try {
-                    
+
                     dependente.setCliente(clienteAtual);
                     dao.salvar(dependente);
                     dependente = new Dependente();
@@ -75,10 +86,7 @@ public class DependenteMB extends DefaultMB {
     public void updateListClientes() {
 
         try {
-
-            GenericDao<Cliente> daoCliente = new GenericDao<Cliente>(Cliente.class);
             listClientesAtivos = daoCliente.buscarCondicao("enable = 1");
-
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();

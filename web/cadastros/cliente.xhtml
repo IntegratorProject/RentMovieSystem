@@ -236,6 +236,16 @@
 
                     </p:commandButton>
                     
+                    <!--BOTÃO CADASTRAR DEPENDENTE-->
+                    <p:commandButton title="Cadastrar Dedendente" 
+                                     icon="fa fa-pencil"
+                                     styleClass="ui-priority-primary"
+                                     action="#{clienteMB.redirectDependente()}">
+
+                        <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
+
+                    </p:commandButton>
+                    
                 </p:column>
 
             </p:dataTable>

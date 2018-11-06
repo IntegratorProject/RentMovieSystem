@@ -3,10 +3,13 @@ package controle;
 import dao.GenericDao;
 import entidade.Cliente;
 import entidade.Dependente;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import util.validadores.ValidadorCPF;
 
 @ManagedBean
@@ -83,14 +86,14 @@ public class ClienteMB extends DefaultMB {
 
             c.setEnable(status);
             dao.editar(c);
-            
+
             List<Dependente> list = daoDep.buscarCondicao("cliente_id = " + c.getId());
-            
-            for(Dependente d : list){
+
+            for (Dependente d : list) {
                 d.setEnable(status);
                 daoDep.editar(d);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -105,6 +108,17 @@ public class ClienteMB extends DefaultMB {
         } catch (Exception e) {
             connetionError();
         }
+
+    }
+
+    public String redirectDependente() {
+
+        FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getFlash()
+                .put("cliente", cliente);
+
+        return "dependente?faces-redirect=true";
 
     }
 
