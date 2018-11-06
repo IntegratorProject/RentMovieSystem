@@ -25,16 +25,15 @@ public class DependenteMB extends DefaultMB {
 
     public void cadastrar() {
 
-        dependente.setCliente(clienteAtual);
-
         if (dependente.getNome().trim().toLowerCase().equals(
-                dependente.getCliente().getNome().trim().toLowerCase())) {
+                clienteAtual.getNome().trim().toLowerCase())) {
             showErrorMessage("Erro!", "O dependente não pode ter o mesmo nome que o dono da conta!");
         } else {
             if (dependente.getId() == 0) {
 
                 try {
-
+                    
+                    dependente.setCliente(clienteAtual);
                     dao.salvar(dependente);
                     dependente = new Dependente();
                     updateList();

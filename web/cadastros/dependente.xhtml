@@ -8,11 +8,11 @@
     <ui:define name="content">
 
         <script type="text/javascript">
-            function handleDialogSubmit(xhr, status, args) {
+            function handleDialogSubmitAlterar(xhr, status, args) {
                 if (args.validationFailed) {
-                    PF('dlg2').show();
+                    PF('dlgAlterar').show();
                 } else {
-                    PF('dlg2').hide();
+                    PF('dlgAlterar').hide();
                 }
             }
         </script>
@@ -28,7 +28,7 @@
                              filter="true"
                              filterMatchMode="startsWith">
                 <f:selectItems value="#{dependenteMB.listClientesAtivos}" var="cli"
-                               itemLabel="#{cli.nome} - #{cli.cpf}" itemValue="#{cli}" />
+                               itemLabel="#{cli.nome} - #{textFormaterService.formatCPF(cli.cpf)}" itemValue="#{cli}" />
             </p:selectOneMenu>  
             <br/><br/>
 
@@ -49,12 +49,12 @@
                 <h:outputText id="selectedClientNome" value="#{dependenteMB.clienteAtual.nome}"/>
                 <br/>
                 <br/>
-                
+
                 <p:outputLabel for="selectedClientCPF">CPF: </p:outputLabel><br/>
                 <h:outputText id="selectedClientCPF" value="#{textFormaterService.formatCPF(dependenteMB.clienteAtual.cpf)}"/>
                 <br/>
                 <br/>
-                
+
                 <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value="#{dependenteMB.dependente.nome}"
                              required="true"
@@ -69,7 +69,55 @@
                 <br/>
                 <br/>
 
-                <p:commandButton value="Cadastrar" onclick="handleDialogSubmit(xhr, status, args)" actionListener="#{dependenteMB.cadastrar()}" update="@form, formTabela"  styleClass="ui-color-green"/>
+                <p:commandButton value="Cadastrar" 
+                                 actionListener="#{dependenteMB.cadastrar()}" 
+                                 update="@form, formTabela"  
+                                 styleClass="ui-color-green"/>
+
+                <br/>
+
+            </h:form>
+
+        </p:dialog>
+
+        <!--DIALOG ALTERAR-->
+        <p:dialog header="Alterar Dependentes" widgetVar="dlgAlterar" modal="true" height="250" width="350" minWidth="300">
+
+            <p:messages id="messagesAlterar" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formAlterar">
+
+                <p:outputLabel>Cliente:</p:outputLabel><br/>
+                <p:selectOneMenu id="clienteAlterar" 
+                                 value="#{dependenteMB.dependente.cliente}"
+                                 converter="converterCliente"
+                                 filter="true"
+                                 filterMatchMode="startsWith">
+                    <f:selectItems value="#{dependenteMB.listClientesAtivos}" var="cli"
+                                   itemLabel="#{cli.nome} - #{textFormaterService.formatCPF(cli.cpf)}" itemValue="#{cli}" />
+                </p:selectOneMenu>  
+                <br/><br/>
+
+                <p:outputLabel for="inputNomeAlterar">Nome: </p:outputLabel><br/>
+                <p:inputText id="inputNomeAlterar" value="#{dependenteMB.dependente.nome}"
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/> <br/>
+                <br/>
+
+                <p:outputLabel for="inputDataNascimentoAlterar">Data de Nascimento: </p:outputLabel><br/>
+                <p:calendar id="inputDataNascimentoAlterar" pattern="dd/MM/yyyy" mask="true"
+                            value="#{dependenteMB.dependente.dataNascimento}"
+                            required="true"
+                            requiredMessage="Preencha o campo Data de Nascimento."/> 
+                <br/>
+                <br/>
+
+                <p:commandButton value="Alterar" onclick="handleDialogSubmitAlterar(xhr, status, args)"
+                                 actionListener="#{dependenteMB.cadastrar()}"
+                                 update="@form, formTabela"
+                                 styleClass="ui-color-green"/>
 
                 <br/>
 
@@ -101,7 +149,7 @@
                 <p:column headerText="Ações">
 
                     <!--BOTÃo CADASTRO-->
-                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formCadastro" styleClass="ui-priority-primary" onclick="PF('dlg2').show();">
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formAlterar" styleClass="ui-priority-primary" onclick="PF('dlgAlterar').show();">
                         <f:setPropertyActionListener value="#{dependente}" target="#{dependenteMB.dependente}"/>
                     </p:commandButton>
 
