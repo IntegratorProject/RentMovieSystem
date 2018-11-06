@@ -1,10 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 /* TOGGLE */
 .aw-toggle {
     float: right;
     line-height: 50px;
     margin-right: 15px;
-
     color: #fff;
+}
+
+#currentUserName{
+
+    float:right;
+    line-height: 50px;
+    margin-right: 15px;
+    font-family: 'Open Sans', sans-serif;
+    color: #727171;
+    
 }
 
 /* MENU */

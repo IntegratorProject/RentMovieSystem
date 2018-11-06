@@ -24,9 +24,9 @@
 
 	<header class="aw-topbar">
 		<h:graphicImage library="algaworks" name="images/logo.png" />
-		
 		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"></i></a>
-	</header>
+                <label id="currentUserName"><h:outputText value="Olá, #{sessionMB.funcionario.nome}!"/></label>
+        </header>
 	
     <aside class="aw-sidebar  js-sidebar">
 		<ui:include src="Menu.xhtml"  />
