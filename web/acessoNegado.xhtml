@@ -6,7 +6,7 @@
 
     <head>
         <meta charset="UTF-8"/>
-        <link href="resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"></link>
+        <link href="#{facesContext.externalContext.request.contextPath}/resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"></link>
 
         <title>Acesso Negado</title>
         <style type="text/css">
@@ -28,24 +28,20 @@
                 position: absolute;
                 right: 0px;
                 width: 250px;
-
-
             }
-
-
         </style>
     </head>
     <body>
         <div id="centro"> 
 
-            <img  src="./resources/algaworks/images/logo2.png" />
+            <img  src="#{facesContext.externalContext.request.contextPath}//resources/algaworks/images/logo2.png" />
             <br/>
             <br/>
             <div class="alert alert-danger" role="alert">
                 Acesso negado!
             </div>
 
-            <a  href="Inicio.xhtml" class="btn btn-info right">Retornar ao Início</a>
+            <a  href="#{facesContext.externalContext.request.contextPath}/user/Inicio.xhtml" class="btn btn-info right">Retornar ao Início</a>
         </div>
     </body>
 </html>

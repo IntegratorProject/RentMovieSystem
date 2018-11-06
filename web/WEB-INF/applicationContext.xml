@@ -4,11 +4,20 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <http auto-config="true" use-expressions="true">
+        
         <access-denied-handler error-page="/acessoNegado.xhtml" />
         <form-login login-page="/login.xhtml"
-			authentication-failure-url="/login.jsf?error=true" />
+			authentication-failure-url="/login.xhtml?error=true" />
         
+        <intercept-url pattern="/paginas/padrao/**"
+			access="hasRole('Administrador') or hasRole('Vendedor')" />
         <!--Aqui que vem as informacoes de interceptacao-->
+        
+        <intercept-url pattern="/user/**"
+			access="hasRole('Atendente') or hasRole('Gerente')" />
+        
+        <intercept-url pattern="/admin/**"
+			access="hasRole('Gerente')" />
         
     </http>
 
@@ -17,19 +26,16 @@
             
             <jdbc-user-service data-source-ref="jdbcDataSource" 
                     users-by-username-query="SELECT login as username, senha as password, enable FROM funcionario WHERE login=?" 
-                    authorities-by-username-query="SELECT login as username, cargo as authority FROM usuario WHERE login=?" /> 
+                    authorities-by-username-query="SELECT login as username, cargo as authority FROM funcionario WHERE login=?" /> 
 				
         </authentication-provider>
     </authentication-manager>
     
-    <beans:bean id="jdbcDataSource" 
-                 class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
-        <beans:property name="url" 
-                     value="jdbc:mysql://localhost/rentmoviesdb" /> 
-        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" 
-        /> 
-        <beans:property name="username" value="root" /> 
-        <beans:property name="password" value="12345" /> 
-    </beans:bean> 
+    <beans:bean id="jdbcDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/rentmoviesdb" />
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	<beans:property name="username" value="root" />
+	<beans:property name="password" value="12345" />
+    </beans:bean>
 
 </beans:beans>

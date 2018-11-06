@@ -5,27 +5,29 @@
     <nav class="aw-menu">
         <ul>
             <li id="selectMenuInicio" class="selectMenu">
-                <h:link outcome="/Inicio.xhtml"><i class="fa  fa-fw  fa-home"></i>Início</h:link>
+                <h:link outcome="/user/Inicio.xhtml"><i class="fa  fa-fw  fa-home"></i>Início</h:link>
             </li>
             <li id="selectMenuCliente" class="selectMenu">
-                <h:link outcome="/cadastros/cliente.xhtml"><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
+                <h:link outcome="/user/cliente.xhtml"><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
             </li>
             <li id="selectMenuDependente" class="selectMenu">
-                <h:link outcome="/cadastros/dependente.xhtml"><i class="fa fa-users"></i> Dependentes</h:link>
+                <h:link outcome="/user/dependente.xhtml"><i class="fa fa-users"></i> Dependentes</h:link>
             </li>
             <li id="selectMenuFuncionario" class="selectMenu">
-                <h:link outcome="/cadastros/funcionario.xhtml"><i class="fa fa-black-tie"></i> Funcionários</h:link>
+                <h:link outcome="/admin/funcionario.xhtml"><i class="fa fa-black-tie"></i> Funcionários</h:link>
             </li>
             <li id="selectMenuAcervo" class="selectMenu">
-                <h:link outcome="/cadastros/acervo.xhtml"><i class="fa fa-archive"></i> Acervo</h:link>
+                <h:link outcome="/user/acervo.xhtml"><i class="fa fa-archive"></i> Acervo</h:link>
             </li>
             <li id="selectMenuRelatorios" class="selectMenu">
-                <h:link outcome="/relatorios/relatorio.xhtml"><i class="fa fa-bar-chart"></i> Relatórios</h:link>
+                <h:link outcome="/admin/relatorio.xhtml"><i class="fa fa-bar-chart"></i> Relatórios</h:link>
             </li>
             <li id="selectMenuLocacao" class="selectMenu">
-                <h:link outcome="/cadastros/locacao.xhtml"><i class="fa fa-book"></i> Locação</h:link>
+                <h:link outcome="/user/locacao.xhtml"><i class="fa fa-book"></i> Locação</h:link>
             </li>
-            
+            <li id="selectMenuSair" class="selectMenu">
+                <a href="#{facesContext.externalContext.request.contextPath}/j_spring_security_logout"><i class="fa fa-book"></i> Sair</a>
+            </li>
         </ul>
     </nav>
 

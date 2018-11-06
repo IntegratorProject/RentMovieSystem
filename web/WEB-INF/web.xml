@@ -37,7 +37,7 @@
     </mime-mapping>
     
     <welcome-file-list>
-        <welcome-file>Inicio.xhtml</welcome-file>
+        <welcome-file>user/Inicio.xhtml</welcome-file>
     </welcome-file-list>
     
     

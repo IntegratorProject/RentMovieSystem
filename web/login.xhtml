@@ -20,9 +20,6 @@ and open the template in the editor.
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
-
     </h:head>
 
     <h:body>
@@ -35,7 +32,7 @@ and open the template in the editor.
                             <strong> Efetue login para continuar</strong>
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="#" method="POST">
+                            <form role="form" action="j_spring_security_check" method="POST">
                                 <fieldset>
                                     <div class="row">
                                         <div class="center-block">
@@ -50,7 +47,7 @@ and open the template in the editor.
                                                     <span class="input-group-addon">
                                                         <i class="glyphicon glyphicon-user"></i>
                                                     </span> 
-                                                    <input class="form-control" placeholder="Nome de usúario" name="login" type="text"/>
+                                                    <input id="j_username" class="form-control" placeholder="Nome de usúario" name="j_username" type="text"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -58,7 +55,7 @@ and open the template in the editor.
                                                     <span class="input-group-addon">
                                                         <i class="glyphicon glyphicon-lock"></i>
                                                     </span>
-                                                    <input class="form-control" placeholder="Senha" name="senha" type="password" value=""/>
+                                                    <input id="j_password" name="j_password" class="form-control" placeholder="Senha" type="password" value=""/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -70,7 +67,7 @@ and open the template in the editor.
                             </form>
                         </div>
                         <div class="panel-footer ">
-                            Não tem uma conta! <a href="#" onClick=""> Cadastre-se </a>
+                            <h:outputText value="E-mail ou senha incorretos" rendered="#{param.error==true}"/>
                         </div>
                     </div>
                 </div>
