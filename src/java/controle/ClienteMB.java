@@ -77,14 +77,22 @@ public class ClienteMB extends DefaultMB {
 
     }
 
-    public void excluir(long id) {
+    public void changeStatus(Cliente c, boolean status) {
 
         try {
 
-            dao.delete(id);
-            updateList();
-
+            c.setEnable(status);
+            dao.editar(c);
+            
+            List<Dependente> list = daoDep.buscarCondicao("cliente_id = " + c.getId());
+            
+            for(Dependente d : list){
+                d.setEnable(status);
+                daoDep.editar(d);
+            }
+            
         } catch (Exception e) {
+            e.printStackTrace();
             connetionError();
         }
 

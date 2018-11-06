@@ -170,10 +170,6 @@
 
             <p:dataTable value="#{clienteMB.clientes}" var="cliente">
 
-                <p:column headerText="Id">
-                    <h:outputText value="#{cliente.id}"/>
-                </p:column>
-
                 <p:column headerText="Nome">
                     <h:outputText value="#{cliente.nome}"/>
                 </p:column>
@@ -197,9 +193,13 @@
                 <p:column headerText="Endereço">
                     <h:outputText value="#{cliente.endereco}"/>
                 </p:column>
+                
+                <p:column headerText="Status">
+                    <h:outputText value="Ativo" rendered="#{cliente.enable}"/>
+                    <h:outputText value="Inativo" rendered="#{!cliente.enable}"/>
+                </p:column>
 
                 <p:column headerText="Ações">
-                    
                     
                     <!--BOTÃO ALTERAR-->
                     <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form,formAtualizarCadastro" onclick="PF('dlg3').show();" styleClass="ui-priority-primary" >
@@ -208,16 +208,34 @@
 
                     </p:commandButton>
 
-                    
-                    
-                    <!--BOTÃO EXCLUIR--> 
-                    <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#{clienteMB.excluir(cliente.id)}"  update="@form" styleClass="ui-color-red" >
+                    <!--BOTÃO ATIVAR--> 
+                    <p:commandButton title="Ativar" 
+                                     icon="fa fa-trash"
+                                     actionListener="#{clienteMB.changeStatus(cliente, true)}"
+                                     rendered="#{!cliente.enable}"
+                                     update="@form"
+                                     styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
-                                   message="Deseja excluir o cliente?"
+                                   message="Deseja reativar o cliente?"
                                    icon="ui-icon-alert"/>
 
                     </p:commandButton>
+                    
+                    <!--BOTÃO DESATIVAR--> 
+                    <p:commandButton title="Desativar" 
+                                     icon="fa fa-trash"
+                                     actionListener="#{clienteMB.changeStatus(cliente, false)}"
+                                     rendered="#{cliente.enable}"
+                                     update="@form"
+                                     styleClass="ui-color-red" >
+
+                        <p:confirm header="Confirmação" 
+                                   message="Deseja desativar o cliente?"
+                                   icon="ui-icon-alert"/>
+
+                    </p:commandButton>
+                    
                 </p:column>
 
             </p:dataTable>
