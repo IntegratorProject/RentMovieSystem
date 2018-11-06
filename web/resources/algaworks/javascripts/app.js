@@ -4,7 +4,7 @@ $(document).ready(function(){
     
     $('.selectMenu').removeClass('is-selected');
     
-    if(indice === "Inicio.xhtml"){
+    if(indice === "Inicio.xhtml" | indice === ""){
         $('#selectMenuInicio').addClass('is-selected');
     }
     
