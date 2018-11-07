@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
@@ -97,9 +96,17 @@ public class DependenteMB extends DefaultMB {
     public void statusChange(Dependente d, boolean status) {
 
         try {
+            
+            if(status && !d.getCliente().isEnable()){
+               Cliente c = d.getCliente();
+               c.setEnable(status);
+               daoCliente.editar(c);
+            }
+            
             d.setEnable(status);
             dao.editar(d);
             updateList();
+            
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
