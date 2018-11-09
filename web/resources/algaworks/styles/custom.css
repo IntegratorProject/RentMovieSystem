@@ -46,9 +46,18 @@ body {
 
 }
 .ui-color-orange:hover{
-    background: #e19600 !important;
+    background: greenyellow !important;
 }
+.ui-color-greenButton{
 
+    background: #00d600 !important;
+    color:white !important;
+
+
+}
+.ui-color-greenButton:hover{
+    background:#00b700 !important;
+}
 
 /*TELA LOGIN*/
 

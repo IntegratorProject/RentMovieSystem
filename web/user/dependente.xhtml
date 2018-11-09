@@ -154,7 +154,7 @@
                     </p:commandButton>
 
                     <!--BOTÃO ATIVAR-->
-                    <p:commandButton title="Ativar" icon="fa fa-trash"  actionListener="#{dependenteMB.statusChange(dependente, true)}" update="@form" styleClass="ui-color-red" rendered="#{!dependente.enable}">
+                    <p:commandButton title="Ativar" icon="fa fa-check"  actionListener="#{dependenteMB.statusChange(dependente, true)}" update="@form" styleClass="ui-color-greenButton" rendered="#{!dependente.enable}">
                         <p:confirm header="Confirmação" 
                                    message="Deseja reativar o dependente?"
                                    icon="ui-icon-alert"/>
