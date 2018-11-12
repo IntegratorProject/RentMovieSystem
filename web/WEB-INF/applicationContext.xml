@@ -8,16 +8,12 @@
         <access-denied-handler error-page="/acessoNegado.xhtml" />
         <form-login login-page="/login.xhtml"
 			authentication-failure-url="/login.xhtml?error=true" />
-        
-        <intercept-url pattern="/paginas/padrao/**"
-			access="hasRole('Administrador') or hasRole('Vendedor')" />
-<!--        Aqui que vem as informacoes de interceptacao-->
-        
+
         <intercept-url pattern="/user/**"
-			access="hasRole('Administrador') or hasRole('Atendente') or hasRole('Gerente')" />
+			access="hasRole('Atendente') or hasRole('Gerente')" />
         
         <intercept-url pattern="/admin/**"
-			access="hasRole('Administrador') or hasRole('Gerente')" />
+			access="hasRole('Gerente')" />
         
     </http>
 
@@ -35,7 +31,7 @@
         <beans:property name="url" value="jdbc:mysql://localhost:3306/rentmoviesdb" />
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	<beans:property name="username" value="root" />
-	<beans:property name="password" value="root" />
+	<beans:property name="password" value="mysql" />
     </beans:bean>
 
 </beans:beans>
