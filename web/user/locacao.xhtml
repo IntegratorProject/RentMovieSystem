@@ -240,41 +240,26 @@
             <!--Informações Gerais-->
             <h:panelGrid columns="2">
 
-                <p:outputLabel for="idCliente">Id: </p:outputLabel>
-                <p:inputText id="idCliente" requiredMessage="Preencha o campo ID"/>
+                <h:outputLabel for="detalhesID" value="ID:" />
+                <h:outputText id="detalhesID" value="123123"/>
 
-                <h:outputLabel for="selectOneMenuStatus" value="Status:" />
-                <p:selectOneMenu id="selectOneMenuStatus" value="#"
-                                 filter="true"
-                                 filterMatchMode="startsWith">
-                    <f:selectItem itemLabel="Reservado" itemValue=""/>
-                    <f:selectItem itemLabel="Devolvido" itemValue=""/>
+                <h:outputLabel for="detalhesStatus" value="Status:" />
+                <h:outputText id="detalhesStatus" value="Reserva"/>
 
-                </p:selectOneMenu>
+                <h:outputLabel for="detalhesLocador" value="Locador:" />
+                <h:outputText id="detalhesLocador" value="Carinha"/>
 
-                <h:outputLabel for="selectOneMenuCliente" value="Cliente:" />
-                <p:selectOneMenu id="selectOneMenuCliente" value="#"
-                                 filter="true"
-                                 filterMatchMode="startsWith">
-                    <f:selectItem itemLabel="Selecione um Cliente" itemValue=""/>
+                <h:outputLabel for="detalhesDataLocacao" value="Data de Locação:" />
+                <h:outputText id="detalhesDataLocacao" value="12/11/1111"/>
 
-                </p:selectOneMenu>
-                
-                </h:panelGrid>
-            <br/>
+                <h:outputLabel for="detalhesDataPrevDevolucao" value="Data de Devolução Prevista:" />
+                <h:outputText id="detalhesDataPrevDevolucao" value="16/11/1111"/>
 
-                <h:panelGrid columns="4">
-                <h:outputLabel for="calendarDataLocacao" value="Data de Locação:" />
-                <p:calendar id="calendarDataLocacao" pattern="dd/MM/yyyy" value="" mask="true"/>
-                
-                <h:outputLabel for="calendarDataDevolucaoPrevista" value="Data de Devolução Prevista:" />
-                <p:calendar id="calendarDataDevolucaoPrevista" pattern="dd/MM/yyyy" value="" mask="true"/>
+                <h:outputLabel for="detalhesDataDevolucao" value="Data de Devolução:" />
+                <h:outputText id="detalhesDataDevolucao" value="16/11/1111"/>
 
-                <h:outputLabel for="calendarDataDevolucao" value="Data de Devolução:" />
-                <p:calendar id="calendarDataDevolucao" pattern="dd/MM/yyyy" value="" mask="true"/>
-                
-                <h:outputLabel for="calendarDataPagamento" value="Data de Pagamento:" />
-                <p:calendar id="calendarDataPagamento" pattern="dd/MM/yyyy" value="" mask="true"/>
+                <h:outputLabel for="detalhesDataPagamento" value="Data de Pagamento:" />
+                <h:outputText id="detalhesDataPagamento" value="16/11/1111"/>
 
             </h:panelGrid>
 
@@ -287,81 +272,64 @@
                     <h:outputText value="12312" />
                 </p:column>
 
-                <p:column headerText="Status">
-                    <h:outputText value="Reserva" />
+                <p:column headerText="Nome">
+                    <h:outputText value="1" />
                 </p:column>		
 
-                <p:column headerText="Locador">
-                    <h:outputText value="Carinha" />
+                <p:column headerText="Tipo">
+                    <h:outputText value="DVD" />
                 </p:column>		
 
-                <p:column headerText="Data de Locação">
+                <p:column headerText="Data de Lançamento">
                     <h:outputText value="02/02/2002" />
                 </p:column>
 
-                <p:column headerText="Data de Devolução Prevista">
-                    <h:outputText value="03/02/2002" />
+                <p:column headerText="Gênero">
+                    <h:outputText value="Ação" />
                 </p:column>
 
-                <p:column headerText="Data de Devoulção">
-                    <h:outputText value="05/02/2002" />
+                <p:column headerText="Classificação Etária">
+                    <h:outputText value="Livre" />
                 </p:column>
 
-                <p:column headerText="Data de Pagamento">
+                <p:column headerText="Preço">
                     <h:outputText value="02/02/2002" />
                 </p:column>
 
             </p:dataTable>
 
             <br/>
-
+            
             <!--Informações de Multa-->
             <h:panelGrid columns="2">
 
                 <f:facet name="header">
                     <h:outputText value="Multa"/>
                 </f:facet>
+                
+                <h:outputLabel for="detalhesDescricaoMulta" value="Descrição:" />
+                <h:outputText id="detalhesDescricaoMulta" value="Disco zuado"/>
 
-                <p:outputLabel for="descricaoMulta">Descrição:  </p:outputLabel>
-                <p:inputText id="descricaoMulta" requiredMessage="Preencha o campo ID"/>
-                 
+                <h:outputLabel for="detalhesValorMulta" value="Valor da multa:" />
+                <h:outputText id="detalhesValorMulta" value="R$ 1231,32"/>
 
-                <p:outputLabel for="valordaMulta">Valor da multa: </p:outputLabel>
-                <p:inputText id="valordaMulta" requiredMessage="Preencha o valor da multa"/>
-                <p:outputLabel for="valorLocação">Valor da locação: </p:outputLabel>
-                <p:inputText id="valorLocação" requiredMessage="Preencha o valor da locaçao"/>
-                <p:outputLabel for="valorPago">Valor pago: </p:outputLabel>
-                <p:inputText id="valorPago" requiredMessage="Preencha o valor pago"/>
+            </h:panelGrid>
+            
+            <!--Informações de Preço-->
+            
+            <h:panelGrid columns="2">
+
+                <h:outputLabel for="detalhesPrecoLocacao" value="Preço da Locação:" />
+                <h:outputText id="detalhesPrecoLocacao" value="R$ 2312,32"/>
+
+                <h:outputLabel for="detalhesValorPago" value="Valor Pago:" />
+                <h:outputText id="detalhesValorPago" value="R$ 1231,32"/>
 
             </h:panelGrid>
 
-            <p:dataTable id="tabelaItensLocacaoMulta" value="#" var="obj">
-
-                <p:column headerText="Descrição">
-                    <h:outputText value="Quebrou o Disco" />
-                </p:column>
-
-                <p:column headerText="Valor da multa">
-                    <h:outputText value="R$50,00" />
-                </p:column>
-
-                <p:column headerText="Preço da Locação">
-                    <h:outputText value="R$5,00" />
-
-                </p:column><p:column headerText="Valor pago">
-                    <h:outputText value="R$55,00" />
-                </p:column>
-
-
-            </p:dataTable>
-
-            <!--Informações de Preço-->
-
-           
-
         </p:dialog>
 
-        <!--DIALOG TABELA PRINCIPAL-->
+        <!--TABELA PRINCIPAL-->
         <h:form id="formTabela">
 
             <p:dataTable value="" var="locao">
