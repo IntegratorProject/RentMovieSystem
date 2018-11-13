@@ -37,19 +37,26 @@
 
                 <h:panelGrid columns="2">
 
-                    <h:outputLabel for="selectOneMenuCliente" value="Cliente:" />
-                    <p:selectOneMenu id="selectOneMenuCliente" value="#"
+                    <h:outputLabel for="selectOneMenuCliente" value="Locador:" />
+                    <p:selectOneMenu id="selectOneMenuCliente" value="#{locacaoMB.locacao.dependente}"
+                                     converter="converterDependente"
                                      filter="true"
-                                     filterMatchMode="startsWith">
-                        <f:selectItem itemLabel="Selecione um Cliente" itemValue=""/>
-
+                                     filterMatchMode="startsWith"
+                                     required="true"
+                                     requiredMessage="Selecione um Locador"
+                                     onchange="#{locacaoMB.updateValidMidias()}">
+                        <f:selectItem itemLabel="Selecione um Locador" itemValue=""/>
+                        <f:selectItems value="#{dependenteMB.listDependente}" var="obj" 
+                                       itemLabel="#{obj.nome} - #{obj.cliente.nome} - #{textFormaterService.formatCPF(obj.cliente.cpf)}"
+                                       itemValue="#{obj}"/>
+                        <f:ajax render="cadastroSelectOneMidia"/>
                     </p:selectOneMenu>
 
                     <h:outputLabel for="calendarDataLocacao" value="Data de Locação:" />
-                    <p:calendar id="calendarDataLocacao" pattern="dd/MM/yyyy" value="" mask="true"/>
+                    <p:calendar id="calendarDataLocacao" pattern="dd/MM/yyyy" value="#{locacaoMB.locacao.dataLocacao}" mask="true"/>
 
                     <h:outputLabel for="calendarDataDevolucao" value="Data de Devolução:" />
-                    <p:calendar id="calendarDataDevolucao" pattern="dd/MM/yyyy" value="" mask="true"/>
+                    <p:calendar id="calendarDataDevolucao" pattern="dd/MM/yyyy" value="#{locacaoMB.locacao.dataPrevDevolucao}" mask="true"/>
 
                 </h:panelGrid>
 
@@ -58,13 +65,20 @@
 
                 <!-- 		INÍCIO DE MIDIAS -->
                 <h:panelGrid columns="4">
+                    
                     <h:outputText value="Midia: " />
-                    <p:selectOneMenu value="#"
+                    <p:selectOneMenu id="cadastroSelectOneMidia" value="#{locacaoMB.itemLocacao}"
                                      filter="true"
-                                     filterMatchMode="startsWith">
-                        <f:selectItem itemLabel="123123 - Harry Potter - Disponibilidade" itemValue="" />
-                        <f:selectItem itemLabel="675645 - Senhor dos anéis - Disponibilidade" itemValue="" />
+                                     filterMatchMode="startsWith"
+                                     editable="#{locacaoMB.locacao.dependente != null}"
+                                     converter="converterLocacao">
+                        <f:selectItem itemLabel="Selecione uma midia" itemValue="" />
+                        <f:selectItems value="#{locacaoMB.midiasDisponiveis}" var="obj"
+                                       itemLabel="#{obj.id} - #{obj.acervo.nome} - #{obj.tipo}"
+                                       itemValue="obj"/>
                     </p:selectOneMenu>
+                    
+                    <!--fiz funcionar ate aqui-->
 
                     <p:inputNumber id="valorItemLocacao" placeholder="Preço" value="" symbol="R$ " />
 
@@ -140,6 +154,7 @@
 
                 <h:panelGrid columns="2">
 
+                    <!--Tem que alterar algumas coisas de acordo com oq foi alterado no dialog de cadastro-->
                     <h:outputLabel for="selectOneMenuClienteAlterar" value="Cliente:" />
                     <p:selectOneMenu id="selectOneMenuClienteAlterar" value="#"
                                      filter="true"

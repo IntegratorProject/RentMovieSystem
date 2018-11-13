@@ -2,6 +2,7 @@
 package entidade;
 
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,13 +23,16 @@ public class Locacao {
     
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date dataLocacao;
+    private Date dataLocacao = new Date();
     
     @Column(nullable = false)
     private boolean reserva;
     
     @Column(nullable = false)
     private double precoLocacao;
+    
+    @Temporal(TemporalType.DATE)
+    private Date dataDevolucao;
     
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -83,6 +87,14 @@ public class Locacao {
 
     public void setPrecoLocacao(double precoLocacao) {
         this.precoLocacao = precoLocacao;
+    }
+
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 
     public Date getDataPrevDevolucao() {
@@ -140,5 +152,58 @@ public class Locacao {
     public void setDependente(Dependente dependente) {
         this.dependente = dependente;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Locacao other = (Locacao) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (this.reserva != other.reserva) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.precoLocacao) != Double.doubleToLongBits(other.precoLocacao)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.valorPago) != Double.doubleToLongBits(other.valorPago)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.valorMulta) != Double.doubleToLongBits(other.valorMulta)) {
+            return false;
+        }
+        if (!Objects.equals(this.descricaoMulta, other.descricaoMulta)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataLocacao, other.dataLocacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataDevolucao, other.dataDevolucao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataPrevDevolucao, other.dataPrevDevolucao)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataPagamento, other.dataPagamento)) {
+            return false;
+        }
+        if (!Objects.equals(this.funcionario, other.funcionario)) {
+            return false;
+        }
+        if (!Objects.equals(this.dependente, other.dependente)) {
+            return false;
+        }
+        return true;
+    }
+
+    
     
 }
