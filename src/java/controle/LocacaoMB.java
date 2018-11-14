@@ -93,9 +93,9 @@ public class LocacaoMB extends DefaultMB {
     }
 
     public void cadastrar() {
-        
+
         if (locacao.getId() == 0) {
-            
+
             try {
 
                 locacao.setDataPagamento(locacao.getDataPrevDevolucao());
@@ -108,27 +108,27 @@ public class LocacaoMB extends DefaultMB {
                 locacao.setFuncionario(UserSession.getCurrentUser());
 
                 locacao = daoLocacao.salvar(locacao);
-                
-                for(ItensLocacao il : listItensLocacao){
+
+                for (ItensLocacao il : listItensLocacao) {
                     il.setLocacao(locacao);
                     daoItensLocacao.salvar(il);
                     daoMidia.mudarDisponibilidade(il.getMidia(), "alugado");
                 }
-                
+
                 fullClear();
-                
+
                 showInformationMessage("Sucesso!", "Cadastro concluído.");
 
             } catch (Exception e) {
                 e.printStackTrace();
                 connetionError();
             }
-            
+
         }
-        
+
     }
-    
-    private void fullClear(){
+
+    private void fullClear() {
         locacao = new Locacao();
         midia = new Midia();
         itemLocacao = new ItensLocacao();
@@ -136,73 +136,95 @@ public class LocacaoMB extends DefaultMB {
         listLocacao.clear();
         midiasDisponiveis.clear();
     }
-    
-    public String definirStatus(Locacao l){
-        if(l.isReserva()){
+
+    public String definirStatus(Locacao l) {
+        if (l.isReserva()) {
             return "Reserva";
-        }else{
-            if(l.getDataDevolucao() != null){
+        } else {
+            if (l.getDataDevolucao() != null) {
                 return "Concluído";
-            }else{
+            } else {
                 return "Corrente";
             }
         }
     }
-    
-    public void carregarItensLocacaoByLocacao(Locacao l){
-        
+
+    public void carregarItensLocacaoByLocacao(Locacao l) {
+
         listItensLocacao.clear();
-        try{
-            listItensLocacao = daoItensLocacao.buscarCondicao("locacao_id = "+l.getId());
-        }catch(Exception e){
+        try {
+            listItensLocacao = daoItensLocacao.buscarCondicao("locacao_id = " + l.getId());
+        } catch (Exception e) {
             e.printStackTrace();
             connetionError();
         }
-        
+
     }
-    
-    public void solicitarExclusaoLocacao(Locacao l){
-        if(l.isReserva()){
+
+    public void solicitarExclusaoLocacao(Locacao l) {
+        if (l.isReserva()) {
             excluirLocacao(l);
-        }else{
-            
+        } else {
+
             Calendar hoje = Calendar.getInstance();
             Calendar dataLocacao = Calendar.getInstance();
             dataLocacao.setTime(l.getDataLocacao());
-            
-            if(hoje.equals(dataLocacao)){
+
+            if (hoje.equals(dataLocacao)) {
                 excluirLocacao(l);
                 return;
-            }else{
+            } else {
                 showWarningMessage("Atenção",
                         "Apenas reservas e locações realizadas no dia de hoje podem ser excluidas.");
             }
         }
     }
-    
-    private void excluirLocacao(Locacao l){
-        
-        try{
-            
-            List<ItensLocacao> tempListLocacao = daoItensLocacao.buscarCondicao("locacao_id = "+l.getId());
-            
-            for(ItensLocacao il : tempListLocacao){
-                
+
+    private void excluirLocacao(Locacao l) {
+
+        try {
+
+            List<ItensLocacao> tempListLocacao = daoItensLocacao.buscarCondicao("locacao_id = " + l.getId());
+
+            for (ItensLocacao il : tempListLocacao) {
+
                 daoMidia.mudarDisponibilidade(il.getMidia(), "disponivel");
                 daoItensLocacao.delete(il.getId());
-                
+
             }
-            
+
             daoLocacao.delete(l.getId());
             updateList();
-            
+
             showInformationMessage("Sucesso!", "Locação removida");
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
             connetionError();
         }
-        
+
+    }
+
+    public void modificarStatusLocacao(Locacao l) {
+
+        Calendar hoje = Calendar.getInstance();
+        Calendar dataLocacao = Calendar.getInstance();
+        dataLocacao.setTime(l.getDataLocacao());
+
+        if (hoje.equals(dataLocacao) || hoje.before(dataLocacao)) {
+            try {
+                l.setReserva(false);
+                if(!hoje.equals(dataLocacao)) l.setDataLocacao(hoje.getTime());
+                daoLocacao.editar(l);
+                showInformationMessage("Sucesso!", "Reserva transformada em locação.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                connetionError();
+            }
+        }else{
+            showErrorMessage("Erro!", "A reserva passou do prazo determinado.");
+        }
+
     }
 
     public Locacao getLocacao() {

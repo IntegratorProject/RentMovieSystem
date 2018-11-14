@@ -410,7 +410,6 @@
                     </p:commandButton>
 
                     <!--BOTÃO EXCLUIR-->
-                    <!--Deixar excluir somente quando o a data de locacao for <= hoje-->
                     <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#{locacaoMB.solicitarExclusaoLocacao(obj)}" update="@form, topMessage" styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
@@ -419,6 +418,14 @@
 
                     </p:commandButton>
 
+                    <!--BOTÃO ACIONAR RESERVA-->
+                    <p:commandButton title="Trasformar para Locação Corrente" 
+                                     icon="fa fa-pencil" 
+                                     update="@form, topMessage" 
+                                     styleClass="ui-priority-primary" 
+                                     rendered="#{obj.reserva}"
+                                     actionListener="#{locacaoMB.modificarStatusLocacao(obj)}"/>
+                    
                 </p:column>
 
             </p:dataTable>
