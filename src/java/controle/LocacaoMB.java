@@ -133,6 +133,30 @@ public class LocacaoMB extends DefaultMB {
         listLocacao.clear();
         midiasDisponiveis.clear();
     }
+    
+    public String definirStatus(Locacao l){
+        if(l.isReserva()){
+            return "Reserva";
+        }else{
+            if(l.getDataDevolucao() != null){
+                return "Concluído";
+            }else{
+                return "Corrente";
+            }
+        }
+    }
+    
+    public void carregarItensLocacaoByLocacao(Locacao l){
+        
+        listItensLocacao.clear();
+        try{
+            listItensLocacao = daoItensLocacao.buscarCondicao("locacao_id = "+l.getId());
+        }catch(Exception e){
+            e.printStackTrace();
+            connetionError();
+        }
+        
+    }
 
     public Locacao getLocacao() {
         return locacao;

@@ -24,7 +24,7 @@ public class TextFormaterService {
             DateFormat formataData = DateFormat.getDateInstance();
             return formataData.format(data);
         }
-        return null;
+        return "";
     }
     
     public String formatDisponiblidade(String entrada){

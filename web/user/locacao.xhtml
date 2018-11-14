@@ -75,7 +75,7 @@
 
                 <!-- 		INÍCIO DE MIDIAS -->
                 <h:panelGrid columns="4">
-                    
+
                     <h:outputText value="Midia: " />
                     <p:selectOneMenu id="cadastroSelectOneMidia" value="#{locacaoMB.midia}"
                                      filter="true"
@@ -88,7 +88,7 @@
                                        itemValue="#{obj}"/>
                         <f:ajax listener="#{locacaoMB.definirItemLocacao()}" render="valorItemLocacao"/>
                     </p:selectOneMenu>
-                   
+
                     <p:inputNumber id="valorItemLocacao" placeholder="Preço" value="#{locacaoMB.itemLocacao.preco}" symbol="R$ " />
 
                     <p:commandButton value="Adicionar" update="@form"
@@ -254,141 +254,148 @@
         <!--DIALOG DETALHES-->
         <p:dialog header="Detalhes Locação" widgetVar="dlgDetalhesLocacao" modal="true" height="300" width="800" >
 
-            <!--Se não funcionario pode ser pq nao ta dentro de um form-->
+            <h:form id="formDialogDetalhes">
+                <!--Informações Gerais-->
+                <h:panelGrid columns="2">
 
-            <!--Informações Gerais-->
-            <h:panelGrid columns="2">
+                    <h:outputLabel for="detalhesID" value="ID:" />
+                    <h:outputText id="detalhesID" value="#{locacaoMB.locacao.id}"/>
 
-                <h:outputLabel for="detalhesID" value="ID:" />
-                <h:outputText id="detalhesID" value="123123"/>
+                    <h:outputLabel for="detalhesStatus" value="Status:" />
+                    <h:outputText id="detalhesStatus" value="#{locacaoMB.definirStatus(locacaoMB.locacao)}"/>
 
-                <h:outputLabel for="detalhesStatus" value="Status:" />
-                <h:outputText id="detalhesStatus" value="Reserva"/>
+                    <h:outputLabel for="detalhesLocador" value="Locador:" />
+                    <h:outputText id="detalhesLocador" 
+                                  value="#{locacaoMB.locacao.dependente.nome} - #{locacaoMB.locacao.dependente.cliente.nome} 
+                                  - #{textFormaterService.formatCPF(locacaoMB.locacao.dependente.cliente.cpf)}"/>
 
-                <h:outputLabel for="detalhesLocador" value="Locador:" />
-                <h:outputText id="detalhesLocador" value="Carinha"/>
+                    <h:outputLabel for="detalhesDataLocacao" value="Data de Locação:" />
+                    <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataLocacao)}"/>
 
-                <h:outputLabel for="detalhesDataLocacao" value="Data de Locação:" />
-                <h:outputText id="detalhesDataLocacao" value="12/11/1111"/>
+                    <h:outputLabel for="detalhesDataPrevDevolucao" value="Data de Devolução Prevista:" />
+                    <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPrevDevolucao)}"/>
 
-                <h:outputLabel for="detalhesDataPrevDevolucao" value="Data de Devolução Prevista:" />
-                <h:outputText id="detalhesDataPrevDevolucao" value="16/11/1111"/>
+                    <h:outputLabel for="detalhesDataDevolucao" value="Data de Devolução:" />
+                    <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataDevolucao)}"/>
 
-                <h:outputLabel for="detalhesDataDevolucao" value="Data de Devolução:" />
-                <h:outputText id="detalhesDataDevolucao" value="16/11/1111"/>
+                    <h:outputLabel for="detalhesDataPagamento" value="Data de Pagamento:" />
+                    <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPagamento)}"/>
 
-                <h:outputLabel for="detalhesDataPagamento" value="Data de Pagamento:" />
-                <h:outputText id="detalhesDataPagamento" value="16/11/1111"/>
+                </h:panelGrid>
 
-            </h:panelGrid>
+                <br/>
 
-            <br/>
+                <!--Itens de Locação-->
+                <p:dataTable id="tabelaItensLocacaoDetalhes" value="#{locacaoMB.listItensLocacao}" var="obj">
 
-            <!--Itens de Locação-->
-            <p:dataTable id="tabelaItensLocacaoDetalhes" value="#" var="obj">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{obj.midia.id}" />
+                    </p:column>
 
-                <p:column headerText="ID">
-                    <h:outputText value="12312" />
-                </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{obj.midia.acervo.nome}" />
+                    </p:column>		
 
-                <p:column headerText="Nome">
-                    <h:outputText value="1" />
-                </p:column>		
+                    <p:column headerText="Tipo">
+                        <h:outputText value="#{obj.midia.tipo}" />
+                    </p:column>		
 
-                <p:column headerText="Tipo">
-                    <h:outputText value="DVD" />
-                </p:column>		
+                    <p:column headerText="Data de Lançamento">
+                        <h:outputText value="#{textFormaterService.formatData(obj.midia.acervo.dataLancamento)}" />
+                    </p:column>
 
-                <p:column headerText="Data de Lançamento">
-                    <h:outputText value="02/02/2002" />
-                </p:column>
+                    <p:column headerText="Gênero">
+                        <h:outputText value="#{obj.midia.acervo.genero}" />
+                    </p:column>
 
-                <p:column headerText="Gênero">
-                    <h:outputText value="Ação" />
-                </p:column>
+                    <p:column headerText="Classificação Etária">
+                        <h:outputText value="#{obj.midia.acervo.classificacaoEtaria}" />
+                    </p:column>
 
-                <p:column headerText="Classificação Etária">
-                    <h:outputText value="Livre" />
-                </p:column>
+                    <p:column headerText="Preço">
+                        <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
+                    </p:column>
 
-                <p:column headerText="Preço">
-                    <h:outputText value="02/02/2002" />
-                </p:column>
+                </p:dataTable>
 
-            </p:dataTable>
+                <br/>
 
-            <br/>
-            
-            <!--Informações de Multa-->
-            <h:panelGrid columns="2">
+                <!--Informações de Multa-->
+                <h:panelGrid columns="2" rendered="#{!locacaoMB.locacao.descricaoMulta.isEmpty() and locacaoMB.locacao.valorMulta != 0}">
 
-                <f:facet name="header">
-                    <h:outputText value="Multa"/>
-                </f:facet>
-                
-                <h:outputLabel for="detalhesDescricaoMulta" value="Descrição:" />
-                <h:outputText id="detalhesDescricaoMulta" value="Disco zuado"/>
+                    <f:facet name="header">
+                        <h:outputText value="Multa"/>
+                    </f:facet>
 
-                <h:outputLabel for="detalhesValorMulta" value="Valor da multa:" />
-                <h:outputText id="detalhesValorMulta" value="R$ 1231,32"/>
+                    <h:outputLabel for="detalhesDescricaoMulta" value="Descrição:" />
+                    <h:outputText id="detalhesDescricaoMulta" value="#{locacaoMB.locacao.descricaoMulta}"/>
 
-            </h:panelGrid>
-            
-            <!--Informações de Preço-->
-            
-            <h:panelGrid columns="2">
+                    <h:outputLabel for="detalhesValorMulta" value="Valor da multa:" />
+                    <h:outputText id="detalhesValorMulta" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorMulta)}"/>
 
-                <h:outputLabel for="detalhesPrecoLocacao" value="Preço da Locação:" />
-                <h:outputText id="detalhesPrecoLocacao" value="R$ 2312,32"/>
+                </h:panelGrid>
 
-                <h:outputLabel for="detalhesValorPago" value="Valor Pago:" />
-                <h:outputText id="detalhesValorPago" value="R$ 1231,32"/>
+                <!--Informações de Preço-->
 
-            </h:panelGrid>
+                <h:panelGrid columns="2">
 
+                    <h:outputLabel for="detalhesPrecoLocacao" value="Preço da Locação:" />
+                    <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}"/>
+
+                    <h:outputLabel for="detalhesValorPago" value="Valor Pago:" />
+                    <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorPago)}"/>
+
+                </h:panelGrid>
+            </h:form>
         </p:dialog>
 
         <!--TABELA PRINCIPAL-->
         <h:form id="formTabela">
 
-            <p:dataTable value="" var="locao">
+            <p:dataTable value="#{locacaoMB.listLocacao}" var="obj">
 
                 <p:column headerText="ID">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{obj.id}"/>
                 </p:column>
 
                 <p:column headerText="Data de Locação">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{textFormaterService.formatData(obj.dataLocacao)}"/>
                 </p:column>
 
                 <p:column headerText="Data de Devolução Prevista">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{textFormaterService.formatData(obj.dataPrevDevolucao)}"/>
                 </p:column>
 
                 <p:column headerText="Data de Devolução">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{textFormaterService.formatData(obj.dataDevolucao)}"/>
                 </p:column>
 
                 <p:column headerText="Locador">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{obj.dependente.nome} - #{obj.dependente.cliente.nome}"/>
+                </p:column>
+
+                <p:column headerText="Atendente">
+                    <h:outputText value="#{obj.funcionario.nome}"/>
                 </p:column>
 
                 <p:column headerText="Status">
-                    <!--Mostrar se é uma reserva, locacao corrente ou locacao concluida-->
-                    <h:outputText value=""/>
+                    <h:outputText value="#{locacaoMB.definirStatus(obj)}"/>
                 </p:column>
 
                 <p:column headerText="Preço">
-                    <h:outputText value=""/>
+                    <h:outputText value="#{textFormaterService.formatDinheiro(obj.precoLocacao)}"/>
                 </p:column>
 
                 <p:column headerText="Ações">
 
                     <!--BOTÃO DETALHES-->
-                    <p:commandButton title="Detalhes" icon="fa fa-envelope-o" update="@form, " styleClass="ui-color-orange" onclick="PF('dlgDetalhesLocacao').show();">
-
-                        <f:setPropertyActionListener value="#" target="#"/>
-
+                    <p:commandButton title="Detalhes" 
+                                     icon="fa fa-envelope-o" 
+                                     update="@form, formDialogDetalhes" 
+                                     styleClass="ui-color-orange"
+                                     actionListener="#{locacaoMB.carregarItensLocacaoByLocacao(obj)}"
+                                     onclick="PF('dlgDetalhesLocacao').show();">
+                        <f:setPropertyActionListener value="#{obj}" target="#{locacaoMB.locacao}"/>
                     </p:commandButton>
 
                     <!--BOTÃO ALTERAR-->
