@@ -1,0 +1,11 @@
+.ui-growl {
+    position: fixed;
+    top: 60px;
+    right: 10px;
+}
+
+/*.ui-growl-message {
+    padding: 0 0 5px 0;
+    width: 95%;
+    float: left;
+}*/
