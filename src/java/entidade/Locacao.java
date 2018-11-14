@@ -38,17 +38,14 @@ public class Locacao {
     @Column(nullable = false)
     private Date dataPrevDevolucao;
     
-    @Column(nullable = false)
     private double valorPago;
     
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date dataPagamento;
     
-    @Column(nullable = false)
     private String descricaoMulta;
     
-    @Column(nullable = false)
     private double valorMulta;
     
     @ManyToOne

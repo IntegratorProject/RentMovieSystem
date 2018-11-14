@@ -2,6 +2,7 @@
 package controle.beanServices;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -44,6 +45,10 @@ public class TextFormaterService {
                 
         }
         
+    }
+    
+    public String formatDinheiro(double entrada){
+        return new DecimalFormat("#,##0.00").format(entrada);
     }
     
 }

@@ -20,7 +20,7 @@ public class ConverterMidia implements Converter{
                 return (Midia) dao.buscarId(Long.parseLong(value));
             }catch(Exception e){
                 e.printStackTrace();
-                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ", "Midia inválido"));
+                throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro midia invalida", ""));
             }
         }
         return null;
