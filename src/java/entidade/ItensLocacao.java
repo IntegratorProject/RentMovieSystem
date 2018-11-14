@@ -1,6 +1,7 @@
 
 package entidade;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,6 +57,33 @@ public class ItensLocacao {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ItensLocacao other = (ItensLocacao) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.locacao, other.locacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.midia, other.midia)) {
+            return false;
+        }
+        if (!Objects.equals(this.preco, other.preco)) {
+            return false;
+        }
+        return true;
     }
     
 }

@@ -204,6 +204,4 @@ public class Locacao {
         return true;
     }
 
-    
-    
 }
