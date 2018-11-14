@@ -112,9 +112,12 @@ public class LocacaoMB extends DefaultMB {
                 for(ItensLocacao il : listItensLocacao){
                     il.setLocacao(locacao);
                     daoItensLocacao.salvar(il);
+                    daoMidia.mudarDisponibilidade(il.getMidia(), "alugado");
                 }
                 
                 fullClear();
+                
+                showInformationMessage("Sucesso!", "Cadastro concluído.");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -151,6 +154,50 @@ public class LocacaoMB extends DefaultMB {
         listItensLocacao.clear();
         try{
             listItensLocacao = daoItensLocacao.buscarCondicao("locacao_id = "+l.getId());
+        }catch(Exception e){
+            e.printStackTrace();
+            connetionError();
+        }
+        
+    }
+    
+    public void solicitarExclusaoLocacao(Locacao l){
+        if(l.isReserva()){
+            excluirLocacao(l);
+        }else{
+            
+            Calendar hoje = Calendar.getInstance();
+            Calendar dataLocacao = Calendar.getInstance();
+            dataLocacao.setTime(l.getDataLocacao());
+            
+            if(hoje.equals(dataLocacao)){
+                excluirLocacao(l);
+                return;
+            }else{
+                showWarningMessage("Atenção",
+                        "Apenas reservas e locações realizadas no dia de hoje podem ser excluidas.");
+            }
+        }
+    }
+    
+    private void excluirLocacao(Locacao l){
+        
+        try{
+            
+            List<ItensLocacao> tempListLocacao = daoItensLocacao.buscarCondicao("locacao_id = "+l.getId());
+            
+            for(ItensLocacao il : tempListLocacao){
+                
+                daoMidia.mudarDisponibilidade(il.getMidia(), "disponivel");
+                daoItensLocacao.delete(il.getId());
+                
+            }
+            
+            daoLocacao.delete(l.getId());
+            updateList();
+            
+            showInformationMessage("Sucesso!", "Locação removida");
+            
         }catch(Exception e){
             e.printStackTrace();
             connetionError();

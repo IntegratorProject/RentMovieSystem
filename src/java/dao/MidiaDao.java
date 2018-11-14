@@ -37,5 +37,12 @@ public class MidiaDao extends GenericDao<Midia> {
         return tempList;
         
     }
+    
+    public Midia mudarDisponibilidade(Midia midia, String disponibilidade) throws Exception{
+        
+        midia.setDisponibilidade(disponibilidade);
+        return editar(midia);
+        
+    }
 
 }

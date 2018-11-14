@@ -7,7 +7,6 @@
 
     <ui:define name="content">
 
-
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
                 if (args.validationFailed) {
@@ -20,6 +19,11 @@
 
         <h1 class="aw-page-title">Locação</h1>
 
+        <!--BALAO DE MENSAGEM-->
+        <h:form id="topMessage">
+            <p:growl showDetail="true" sticky="false" />
+        </h:form>
+        
         <h:form id="cadButton">
 
             <p:commandButton value="Nova Locação" onclick="PF('dlgLocacao').show();" icon="fa fa-user-plus" styleClass="ui-color-green" />
@@ -138,7 +142,7 @@
                 <p:commandButton value="Finalizar Locação" 
                                  actionListener="#{locacaoMB.cadastrar()}"
                                  oncomplete="handleDialogSubmit(xhr, status, args)"
-                                 update="@form"/> 
+                                 update="@form, topMessage, formTabela"/> 
 
                 <h:outputText value="Total: R$ #{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}" 
                               style="float:right;font-size: 16px"/>
@@ -231,7 +235,7 @@
                         <!--BOTÃO EXCLUIR-->
                         <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
 
-
+                            
                         </p:commandButton>
 
                     </p:column>
@@ -407,10 +411,10 @@
 
                     <!--BOTÃO EXCLUIR-->
                     <!--Deixar excluir somente quando o a data de locacao for <= hoje-->
-                    <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
+                    <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#{locacaoMB.solicitarExclusaoLocacao(obj)}" update="@form, topMessage" styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
-                                   message="Deseja excluir o dependente?"
+                                   message="Deseja excluir a locação?"
                                    icon="ui-icon-alert"/>
 
                     </p:commandButton>
