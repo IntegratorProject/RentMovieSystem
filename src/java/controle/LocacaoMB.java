@@ -2,6 +2,7 @@ package controle;
 
 import dao.MidiaDao;
 import dao.GenericDao;
+import dao.LocacaoDao;
 import entidade.ItensLocacao;
 import entidade.Locacao;
 import entidade.Midia;
@@ -25,7 +26,7 @@ public class LocacaoMB extends DefaultMB {
     private List<Locacao> listLocacao = new ArrayList<>();
     private List<ItensLocacao> listItensLocacao = new ArrayList<>();
 
-    private GenericDao<Locacao> daoLocacao = new GenericDao<>(Locacao.class);
+    private LocacaoDao daoLocacao = new LocacaoDao();
     private GenericDao<ItensLocacao> daoItensLocacao = new GenericDao<>(ItensLocacao.class);
     private MidiaDao daoMidia = new MidiaDao();
 
@@ -184,16 +185,7 @@ public class LocacaoMB extends DefaultMB {
 
         try {
 
-            List<ItensLocacao> tempListLocacao = daoItensLocacao.buscarCondicao("locacao_id = " + l.getId());
-
-            for (ItensLocacao il : tempListLocacao) {
-
-                daoMidia.mudarDisponibilidade(il.getMidia(), "disponivel");
-                daoItensLocacao.delete(il.getId());
-
-            }
-
-            daoLocacao.delete(l.getId());
+            daoLocacao.delete(l);
             updateList();
 
             showInformationMessage("Sucesso!", "Locação removida");
