@@ -3,6 +3,7 @@ package controle;
 import dao.MidiaDao;
 import dao.GenericDao;
 import dao.LocacaoDao;
+import entidade.Dependente;
 import entidade.ItensLocacao;
 import entidade.Locacao;
 import entidade.Midia;
@@ -25,18 +26,31 @@ public class LocacaoMB extends DefaultMB {
     private List<Midia> midiasDisponiveis = new ArrayList<>();
     private List<Locacao> listLocacao = new ArrayList<>();
     private List<ItensLocacao> listItensLocacao = new ArrayList<>();
+    private List<ItensLocacao> listItensLocacaoRemovidos = new ArrayList<>();
+    private List<Dependente> listDependente = new ArrayList<>();
 
     private LocacaoDao daoLocacao = new LocacaoDao();
     private GenericDao<ItensLocacao> daoItensLocacao = new GenericDao<>(ItensLocacao.class);
     private MidiaDao daoMidia = new MidiaDao();
+    private GenericDao<Dependente> daoDependente = new GenericDao<>(Dependente.class);
 
     public LocacaoMB() {
         updateList();
+        updateListDependentes();
     }
 
     private void updateList() {
         try {
             listLocacao = daoLocacao.buscarTodos();
+        } catch (Exception e) {
+            e.printStackTrace();
+            connetionError();
+        }
+    }
+
+    private void updateListDependentes() {
+        try {
+            listDependente = daoDependente.buscarCondicao("enable = 1");
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -85,6 +99,11 @@ public class LocacaoMB extends DefaultMB {
         updateTotalLocacao();
     }
 
+    public void addItensLocacaoRemovidos(ItensLocacao il) {
+        listItensLocacaoRemovidos.add(il);
+        removerItemLocacao(il);
+    }
+
     private void updateTotalLocacao() {
         double totalLocacao = 0.d;
         for (ItensLocacao il : listItensLocacao) {
@@ -95,8 +114,9 @@ public class LocacaoMB extends DefaultMB {
 
     public void cadastrar() {
 
-        if (locacao.getId() == 0) {
-
+        if (listItensLocacao.isEmpty()) {
+            showErrorMessage("Erro!", "Nenhum item foi adicionado à locação.");
+        } else {
             try {
 
                 locacao.setDataPagamento(locacao.getDataPrevDevolucao());
@@ -104,27 +124,58 @@ public class LocacaoMB extends DefaultMB {
                 Calendar dataLocacao = Calendar.getInstance();
                 dataLocacao.setTime(locacao.getDataLocacao());
                 Calendar dataHoje = Calendar.getInstance();
+                Calendar dataPrevDev = Calendar.getInstance();
+                dataPrevDev.setTime(locacao.getDataPrevDevolucao());
+
+                if (dataPrevDev.equals(dataLocacao)) {
+                    showErrorMessage("Erro!", "A data de previsão de locação não pode ser a mesma da de locação");
+                    return;
+                }
+
                 locacao.setReserva(dataLocacao.after(dataHoje));
 
                 locacao.setFuncionario(UserSession.getCurrentUser());
 
-                locacao = daoLocacao.salvar(locacao);
+                String operacao = "";
+                if (locacao.getId() == 0) { //Ação de salvar
 
-                for (ItensLocacao il : listItensLocacao) {
-                    il.setLocacao(locacao);
-                    daoItensLocacao.salvar(il);
-                    daoMidia.mudarDisponibilidade(il.getMidia(), "alugado");
+                    operacao = "Cadastro";
+                    locacao = daoLocacao.salvar(locacao);
+
+                    for (ItensLocacao il : listItensLocacao) {
+                        il.setLocacao(locacao);
+                        daoItensLocacao.salvar(il);
+                        daoMidia.mudarDisponibilidade(il.getMidia(), "alugado");
+                    }
+
+                } else { //Ação de alterar
+
+                    operacao = "Alteração";
+
+                    locacao = daoLocacao.editar(locacao);
+
+                    for (ItensLocacao il : listItensLocacao) {
+                        il.setLocacao(locacao);
+                        daoItensLocacao.editar(il);
+                        daoMidia.mudarDisponibilidade(il.getMidia(), "alugado");
+                    }
+
+                    for (ItensLocacao il : listItensLocacaoRemovidos) {
+                        daoItensLocacao.delete(il.getId());
+                        daoMidia.mudarDisponibilidade(il.getMidia(), "disponivel");
+                    }
+
                 }
 
                 fullClear();
+                updateList();
 
-                showInformationMessage("Sucesso!", "Cadastro concluído.");
+                showInformationMessage("Sucesso!", operacao + " concluído.");
 
             } catch (Exception e) {
                 e.printStackTrace();
                 connetionError();
             }
-
         }
 
     }
@@ -135,6 +186,7 @@ public class LocacaoMB extends DefaultMB {
         itemLocacao = new ItensLocacao();
         listItensLocacao.clear();
         listLocacao.clear();
+        listItensLocacaoRemovidos.clear();
         midiasDisponiveis.clear();
     }
 
@@ -206,17 +258,33 @@ public class LocacaoMB extends DefaultMB {
         if (hoje.equals(dataLocacao) || hoje.before(dataLocacao)) {
             try {
                 l.setReserva(false);
-                if(!hoje.equals(dataLocacao)) l.setDataLocacao(hoje.getTime());
+                if (!hoje.equals(dataLocacao)) {
+                    l.setDataLocacao(hoje.getTime());
+                }
                 daoLocacao.editar(l);
                 showInformationMessage("Sucesso!", "Reserva transformada em locação.");
             } catch (Exception e) {
                 e.printStackTrace();
                 connetionError();
             }
-        }else{
+        } else {
             showErrorMessage("Erro!", "A reserva passou do prazo determinado.");
         }
 
+    }
+
+    public void carregarAlteracao(Locacao l) {
+
+        locacao = l;
+        carregarItensLocacaoByLocacao(locacao);
+        updateValidMidias();
+
+    }
+
+    public void alterarItemLocacao(ItensLocacao itemLocacao) {
+        midia = itemLocacao.getMidia();
+        midiasDisponiveis.add(itemLocacao.getMidia());
+        listItensLocacao.remove(itemLocacao);
     }
 
     public Locacao getLocacao() {
@@ -265,6 +333,14 @@ public class LocacaoMB extends DefaultMB {
 
     public void setMidia(Midia midia) {
         this.midia = midia;
+    }
+
+    public List<Dependente> getListDependente() {
+        return listDependente;
+    }
+
+    public void setListDependente(List<Dependente> listDependente) {
+        this.listDependente = listDependente;
     }
 
 }

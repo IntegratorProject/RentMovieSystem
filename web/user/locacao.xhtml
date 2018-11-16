@@ -15,6 +15,13 @@
                     PF('dlgLocacao').hide();
                 }
             }
+            function handleDialogAlterarSubmit(xhr, status, args) {
+                if (args.validationFailed) {
+                    PF('dlgAlterarLocacao').show();
+                } else {
+                    PF('dlgAlterarLocacao').hide();
+                }
+            }
         </script>
 
         <h1 class="aw-page-title">Locação</h1>
@@ -50,7 +57,7 @@
                                      required="true"
                                      requiredMessage="Selecione um Locador">
                         <f:selectItem itemLabel="Selecione um Locador" itemValue=""/>
-                        <f:selectItems value="#{dependenteMB.listDependente}" var="obj" 
+                        <f:selectItems value="#{locacaoMB.listDependente}" var="obj" 
                                        itemLabel="#{obj.nome} - #{obj.cliente.nome} - #{textFormaterService.formatCPF(obj.cliente.cpf)}"
                                        itemValue="#{obj}"/>
                         <f:ajax render="cadastroSelectOneMidia" listener="#{locacaoMB.updateValidMidias()}"/>
@@ -162,20 +169,28 @@
 
                 <h:panelGrid columns="2">
 
-                    <!--Tem que alterar algumas coisas de acordo com oq foi alterado no dialog de cadastro-->
                     <h:outputLabel for="selectOneMenuClienteAlterar" value="Cliente:" />
-                    <p:selectOneMenu id="selectOneMenuClienteAlterar" value="#"
+                    <p:selectOneMenu id="selectOneMenuClienteAlterar" value="#{locacaoMB.locacao.dependente}"
+                                     converter="converterDependente"
                                      filter="true"
-                                     filterMatchMode="startsWith">
-                        <f:selectItem itemLabel="Selecione um Cliente" itemValue=""/>
-
+                                     filterMatchMode="startsWith"
+                                     required="true"
+                                     requiredMessage="Selecione um Locador">
+                        <f:selectItems value="#{locacaoMB.listDependente}" var="obj" 
+                                       itemLabel="#{obj.nome} - #{obj.cliente.nome} - #{textFormaterService.formatCPF(obj.cliente.cpf)}"
+                                       itemValue="#{obj}"/>
+                        <f:ajax render="cadastroSelectOneMidiaAlterar" listener="#{locacaoMB.updateValidMidias()}"/>
                     </p:selectOneMenu>
 
                     <h:outputLabel for="calendarDataLocacaoAlterar" value="Data de Locação:" />
-                    <p:calendar id="calendarDataLocacaoAlterar" pattern="dd/MM/yyyy" value="" mask="true"/>
+                    <p:calendar id="calendarDataLocacaoAlterar" 
+                                pattern="dd/MM/yyyy" 
+                                value="#{locacaoMB.locacao.dataLocacao}" 
+                                mask="true"
+                                disabled="#{locacaoMB.definirStatus(locacaoMB.locacao).equals('Corrente')}"/>
 
-                    <h:outputLabel for="calendarDataDevolucaoAlterar" value="Data de Devolução:" />
-                    <p:calendar id="calendarDataDevolucaoAlterar" pattern="dd/MM/yyyy" value="" mask="true"/>
+                    <h:outputLabel for="calendarDataDevolucaoAlterar" value="Data de Previsão de Devolução:" />
+                    <p:calendar id="calendarDataDevolucaoAlterar" pattern="dd/MM/yyyy" value="#{locacaoMB.locacao.dataPrevDevolucao}" mask="true"/>
 
                 </h:panelGrid>
 
@@ -184,59 +199,70 @@
 
                 <!-- 		INÍCIO DE MIDIAS -->
                 <h:panelGrid columns="4">
+
                     <h:outputText value="Midia: " />
-                    <p:selectOneMenu value="#"
+                    <p:selectOneMenu id="cadastroSelectOneMidiaAlterar" value="#{locacaoMB.midia}"
                                      filter="true"
-                                     filterMatchMode="startsWith">
-                        <f:selectItem itemLabel="123123 - Harry Potter - Disponibilidade" itemValue="" />
-                        <f:selectItem itemLabel="675645 - Senhor dos anéis - Disponibilidade" itemValue="" />
+                                     filterMatchMode="startsWith"
+                                     disabled="#{locacaoMB.locacao.dependente == null}"
+                                     converter="converterMidia">
+                        <f:selectItem itemLabel="Selecione uma midia" itemValue="" />
+                        <f:selectItems value="#{locacaoMB.midiasDisponiveis}" var="obj"
+                                       itemLabel="#{obj.id} - #{obj.acervo.nome} - #{obj.tipo}"
+                                       itemValue="#{obj}"/>
+                        <f:ajax listener="#{locacaoMB.definirItemLocacao()}" render="valorItemLocacaoAlterar"/>
                     </p:selectOneMenu>
 
-                    <p:inputNumber id="valorItemLocacaoAlterar" placeholder="Preço" value="" symbol="R$ " />
+                    <p:inputNumber id="valorItemLocacaoAlterar" placeholder="Preço" value="#{locacaoMB.itemLocacao.preco}" symbol="R$ " />
 
-                    <p:commandButton value="Adicionar" update=""
-                                     actionListener="#"/>
+                    <p:commandButton value="Adicionar" update="@form"
+                                     actionListener="#{locacaoMB.adicionarItemLocacao()}"/>
 
                 </h:panelGrid>
 
                 <br/>
 
-                <p:dataTable id="tabelaItensLocacaoAlterar" value="#" var="obj">
+                <p:dataTable id="tabelaItensLocacaoAlterar" value="#{locacaoMB.listItensLocacao}" var="obj">
 
                     <p:column headerText="ID">
-                        <h:outputText value="12312" />
+                        <h:outputText value="#{obj.midia.id}" />
                     </p:column>
 
                     <p:column headerText="Nome">
-                        <h:outputText value="1" />
+                        <h:outputText value="#{obj.midia.acervo.nome}" />
                     </p:column>		
 
                     <p:column headerText="Tipo">
-                        <h:outputText value="DVD" />
+                        <h:outputText value="#{obj.midia.tipo}" />
                     </p:column>		
 
                     <p:column headerText="Data de Lançamento">
-                        <h:outputText value="02/02/2002" />
+                        <h:outputText value="#{textFormaterService.formatData(obj.midia.acervo.dataLancamento)}" />
                     </p:column>
 
                     <p:column headerText="Preço">
-                        <h:outputText value="02/02/2002" />
+                        <h:outputText value="R$ #{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
 
                     <p:column headerText="Ações">
 
-                        <!--BOTÃO ALTERAR-->
-                        <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form" styleClass="ui-priority-primary" onclick="PF('dlg3').show();">
-
-                            <f:setPropertyActionListener value="#" target="#"/>
-
+                        <!--BOTÃO EDITAR-->
+                        <p:commandButton title="Editar" icon="fa fa-pencil"  
+                                         actionListener="#{locacaoMB.alterarItemLocacao(obj)}" 
+                                         update="@form" 
+                                         styleClass="ui-priority-primary">
+                        
+                            <f:setPropertyActionListener target="#{locacaoMB.itemLocacao}" value="#{obj}"/>
+                        
                         </p:commandButton>
 
+                        
                         <!--BOTÃO EXCLUIR-->
-                        <p:commandButton title="Excluir" icon="fa fa-trash"  actionListener="#" update="@form" styleClass="ui-color-red" >
-
-                            
-                        </p:commandButton>
+                        <p:commandButton title="Excluir" icon="fa fa-trash"  
+                                         actionListener="#{locacaoMB.addItensLocacaoRemovidos(obj)}" 
+                                         update="@form, formTabela"
+                                         rendered="#{locacaoMB.listItensLocacao.size() > 1}"
+                                         styleClass="ui-color-red"/>
 
                     </p:column>
 
@@ -246,10 +272,11 @@
                 <br/>
 
                 <p:commandButton value="Finalizar Alteração" 
-                                 actionListener="#" 
-                                 update=""/> 
+                                 actionListener="#{locacaoMB.cadastrar()}"
+                                 oncomplete="handleDialogAlterarSubmit(xhr, status, args)"
+                                 update="@form, topMessage, formTabela"/> 
 
-                <h:outputText value="Total: R$ 000,00" style="float:right;font-size: 16px"/>
+                <h:outputText value="Total: R$ #{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}" style="float:right;font-size: 16px"/>
 
             </h:form>
 
@@ -403,10 +430,15 @@
                     </p:commandButton>
 
                     <!--BOTÃO ALTERAR-->
-                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, " styleClass="ui-priority-primary" onclick="PF('dlgAlterarLocacao').show();">
-
-                        <f:setPropertyActionListener value="#" target="#"/>
-
+                    <p:commandButton title="Alterar" 
+                                     icon="fa fa-pencil" 
+                                     update="@form, formularioCabecalhoLocacaoAlterar" 
+                                     styleClass="ui-priority-primary" 
+                                     onclick="PF('dlgAlterarLocacao').show();"
+                                     actionListener="#{locacaoMB.carregarAlteracao(obj)}"
+                                     rendered="#{!locacaoMB.definirStatus(obj).equals('Concluído')}">
+                        
+                        
                     </p:commandButton>
 
                     <!--BOTÃO EXCLUIR-->
