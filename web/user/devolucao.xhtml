@@ -36,13 +36,17 @@
                 <!--HEADER-->
                 <div class="p-grid">
                     <div class="p-col">
-                        <div class="box"><h:outputText value="Data de Locacação: valor"/></div>
+                        <div class="box">
+                            <h:outputText value="Data de Locacação: #{textFormaterService.formatData(devolucaoMB.locacao.dataLocacao)}"/>
+                        </div>
                     </div>
                     <div class="p-col">
-                        <div class="box"><h:outputText value="Locador: aweefwaef - fawefaef - afaefaef"/></div>
+                        <div class="box"><h:outputText value="Data de Devolução Prevista: #{textFormaterService.formatData(devolucaoMB.locacao.dataPrevDevolucao)}"/></div>
                     </div>
                     <div class="p-col">
-                        <div class="box"><h:outputText value="Atendente: afawoefawefjj"/></div>
+                        <div class="box"><h:outputText value="Locador: #{devolucaoMB.locacao.dependente.nome}
+                                                       - #{devolucaoMB.locacao.dependente.cliente.nome}
+                                                       - #{textFormaterService.formatCPF(devolucaoMB.locacao.dependente.cliente.cpf)}"/></div>
                     </div>
                 </div>
 
@@ -65,18 +69,31 @@
                     <p:column headerText="Preço">
                         <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
+                    
+                    <p:column headerText="Status">
+                        <h:outputText value="Devolvido" rendered="#{obj.devolvido}"/>
+                        <h:outputText value="Alugado" rendered="#{!obj.devolvido}"/>
+                    </p:column>
+
+                    <p:column headerText="Operação">
+                        <h:outputText value="#{obj.operacao}" />
+                    </p:column>
 
                     <p:column headerText="Ações">
 
                         <!--BOTÃO INVIABILIZAR-->
                         <p:commandButton title="Inviabilizar" 
                                          update="@form" 
-                                         styleClass="ui-color-red"/>
+                                         styleClass="ui-color-red"
+                                         rendered="#{!obj.devolvido}"
+                                         actionListener="#{devolucaoMB.devolver(obj, true)}"/>
 
                         <!--BOTÃO DEVOLVER-->
                         <p:commandButton title="Devolver" 
                                          update="@form" 
-                                         styleClass="ui-priority-primary"/>
+                                         styleClass="ui-priority-primary"
+                                         rendered="#{!obj.devolvido}"
+                                         actionListener="#{devolucaoMB.devolver(obj, false)}"/>
 
                     </p:column>
 
@@ -89,31 +106,40 @@
                     <p:inputTextarea 
                         counter="display" maxlength="255" counterTemplate="{0} caracteres restantes."
                         style="width: 100%"
-                        autoResize="false" />
+                        autoResize="false"
+                        value="#{devolucaoMB.locacao.descricaoMulta}"/>
                     <h:outputText id="display" />
                     <br/>
 
                     <h:outputLabel for="valorMulta" value="Valor da multa:"/>
-                    <p:inputNumber id="valorMulta"  symbol="R$ " />
+                    <p:inputNumber id="valorMulta" symbol="R$ " value="#{devolucaoMB.locacao.valorMulta}">
+                        <f:ajax event="keyup" render="sugestaoValor"/>
+                    </p:inputNumber>
 
                 </h:panelGrid>
 
                 <h:panelGrid columns="1">
 
                     <br/>
-                    <h:outputText value="Valor a ser Pago: R$ #{textFormaterService.formatDinheiro(23.3)}" style="font-size: 16px"/>
+                    <h:outputText id="sugestaoValor" value="Valor a ser Pago: R$ #{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorMulta
+                                                                + devolucaoMB.locacao.precoLocacao)}" style="font-size: 16px"/>
                     <br/>
 
                     <h:outputLabel for="valorPago" value="Valor pago: "/>
                     <p:inputNumber id="valorPago"  symbol="R$ " 
-                                   required="true" 
+                                   value="#{devolucaoMB.locacao.valorPago}"
+                                   required="true"
                                    requiredMessage="Preencha o campo valor pago."/>
 
                 </h:panelGrid>
 
                 <br/>
 
-                <p:commandButton value="Concluir"/>
+                <p:commandButton 
+                    value="Concluir"
+                    update="@form, tabelaPrincipal, topMessage"
+                    oncomplete="handleDialogSubmit(xhr, status, args)"
+                    actionListener="#{devolucaoMB.concluirOperacao()}"/>
 
             </h:form>
 
@@ -128,27 +154,27 @@
                 <h:panelGrid columns="2">
 
                     <h:outputLabel for="detalhesID" value="ID:" />
-                    <h:outputText id="detalhesID" value="#{locacaoMB.locacao.id}"/>
+                    <h:outputText id="detalhesID" value="#{devolucaoMB.locacao.id}"/>
 
                     <h:outputLabel for="detalhesStatus" value="Status:" />
-                    <h:outputText id="detalhesStatus" value="#{locacaoMB.definirStatus(locacaoMB.locacao)}"/>
+                    <h:outputText id="detalhesStatus" value="#{devolucaoMB.definirStatus(devolucaoMB.locacao)}"/>
 
                     <h:outputLabel for="detalhesLocador" value="Locador:" />
                     <h:outputText id="detalhesLocador" 
-                                  value="#{locacaoMB.locacao.dependente.nome} - #{locacaoMB.locacao.dependente.cliente.nome} 
-                                  - #{textFormaterService.formatCPF(locacaoMB.locacao.dependente.cliente.cpf)}"/>
+                                  value="#{devolucaoMB.locacao.dependente.nome} - #{devolucaoMB.locacao.dependente.cliente.nome} 
+                                  - #{textFormaterService.formatCPF(devolucaoMB.locacao.dependente.cliente.cpf)}"/>
 
                     <h:outputLabel for="detalhesDataLocacao" value="Data de Locação:" />
-                    <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataLocacao)}"/>
+                    <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataLocacao)}"/>
 
                     <h:outputLabel for="detalhesDataPrevDevolucao" value="Data de Devolução Prevista:" />
-                    <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPrevDevolucao)}"/>
+                    <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataPrevDevolucao)}"/>
 
                     <h:outputLabel for="detalhesDataDevolucao" value="Data de Devolução:" />
-                    <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataDevolucao)}"/>
+                    <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataDevolucao)}"/>
 
                     <h:outputLabel for="detalhesDataPagamento" value="Data de Pagamento:" />
-                    <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPagamento)}"/>
+                    <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataPagamento)}"/>
 
                 </h:panelGrid>
 
@@ -184,6 +210,11 @@
                     <p:column headerText="Preço">
                         <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
+                    
+                    <p:column headerText="Status">
+                        <h:outputText value="Devolvido" rendered="#{obj.devolvido}"/>
+                        <h:outputText value="Alugado" rendered="#{!obj.devolvido}"/>
+                    </p:column>
 
                 </p:dataTable>
 
@@ -194,10 +225,10 @@
                 <h:panelGrid columns="2">
 
                     <h:outputLabel for="detalhesPrecoLocacao" value="Preço da Locação:" />
-                    <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}"/>
+                    <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.precoLocacao)}"/>
 
                     <h:outputLabel for="detalhesValorPago" value="Valor Pago:" />
-                    <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorPago)}"/>
+                    <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorPago)}"/>
 
                 </h:panelGrid>
             </h:form>
@@ -239,19 +270,19 @@
                                      icon="fa fa-envelope-o" 
                                      update="@form, formDialogDetalhes" 
                                      styleClass="ui-color-orange"
-                                     actionListener="#{locacaoMB.carregarItensLocacaoByLocacao(obj)}"
+                                     actionListener="#{devolucaoMB.carregarItensLocacaoByLocacao(obj)}"
                                      onclick="PF('dlgDetalhesLocacao').show();">
-                        <f:setPropertyActionListener value="#{obj}" target="#{locacaoMB.locacao}"/>
+                        <f:setPropertyActionListener value="#{obj}" target="#{devolucaoMB.locacao}"/>
                     </p:commandButton>
 
                     <!--BOTÃO DEVOLVER-->
                     <p:commandButton title="Devolver" 
                                      icon="fa fa-pencil" 
-                                     update="@form" 
-                                     styleClass="ui-priority-primary" 
-                                     onclick="PF('dlgDevolucao').show();"
-                                     actionListener="#{locacaoMB.carregarAlteracao(obj)}">
-
+                                     update="@form, formDevolucao" 
+                                     styleClass="ui-priority-primary"
+                                     actionListener="#{devolucaoMB.carregarItensLocacaoByLocacao(obj)}"
+                                     onclick="PF('dlgDevolucao').show();">
+                        <f:setPropertyActionListener value="#{obj}" target="#{devolucaoMB.locacao}"/>
                     </p:commandButton>
 
                 </p:column>

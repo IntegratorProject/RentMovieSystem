@@ -32,6 +32,10 @@ $(document).ready(function(){
         $('#selectMenuLocacao').addClass('is-selected');
     }
     
+    if(indice === "devolucao.xhtml"){
+        $('#selectMenuDevolucao').addClass('is-selected');
+    }
+    
 });
 
 $(function() {

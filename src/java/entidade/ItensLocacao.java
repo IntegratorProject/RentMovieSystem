@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "itensLocacao")
@@ -26,6 +27,12 @@ public class ItensLocacao {
 
     @Column(nullable = false)
     private Double preco;
+    
+    @Column(nullable = false)
+    private boolean devolvido = false;
+    
+    @Transient
+    private String operacao;
     
     public long getId() {
         return id;
@@ -59,6 +66,22 @@ public class ItensLocacao {
         this.preco = preco;
     }
 
+    public boolean isDevolvido() {
+        return devolvido;
+    }
+
+    public void setDevolvido(boolean devolvido) {
+        this.devolvido = devolvido;
+    }
+
+    public String getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(String operacao) {
+        this.operacao = operacao;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,6 +97,9 @@ public class ItensLocacao {
         if (this.id != other.id) {
             return false;
         }
+        if (this.devolvido != other.devolvido) {
+            return false;
+        }
         if (!Objects.equals(this.locacao, other.locacao)) {
             return false;
         }
@@ -85,5 +111,5 @@ public class ItensLocacao {
         }
         return true;
     }
-    
+
 }
