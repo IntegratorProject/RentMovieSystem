@@ -117,7 +117,12 @@ public class ClienteMB extends DefaultMB implements Serializable{
     private void updateList() {
 
         try {
+            fullListClientes.clear();
+            clientes.clear();
             fullListClientes = dao.buscarTodos();
+            for(Cliente c : fullListClientes){
+                clientes.add(c);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
