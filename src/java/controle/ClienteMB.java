@@ -3,6 +3,7 @@ package controle;
 import dao.GenericDao;
 import entidade.Cliente;
 import entidade.Dependente;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -12,13 +13,15 @@ import util.validadores.ValidadorCPF;
 
 @ManagedBean
 @ViewScoped
-public class ClienteMB extends DefaultMB {
+public class ClienteMB extends DefaultMB implements Serializable{
 
     private GenericDao<Cliente> dao = new GenericDao<>(Cliente.class);
     GenericDao<Dependente> daoDep = new GenericDao<>(Dependente.class);
     private Cliente cliente = new Cliente();
+    private List<Cliente> fullListClientes = new ArrayList<>();
     private List<Cliente> clientes = new ArrayList<>();
 
+    
     public ClienteMB() {
         updateList();
     }
@@ -114,7 +117,7 @@ public class ClienteMB extends DefaultMB {
     private void updateList() {
 
         try {
-            clientes = dao.buscarTodos();
+            fullListClientes = dao.buscarTodos();
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -157,4 +160,12 @@ public class ClienteMB extends DefaultMB {
         this.dao = dao;
     }
 
+    public List<Cliente> getFullListClientes() {
+        return fullListClientes;
+    }
+
+    public void setFullListClientes(List<Cliente> fullListClientes) {
+        this.fullListClientes = fullListClientes;
+    }
+    
 }

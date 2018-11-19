@@ -15,16 +15,16 @@
                     PF('dlg2').hide();
                 }
             }
-            
+
             function handleDialogSubmitDialogAlterar(xhr, status, args) {
                 if (args.validationFailed) {
                     PF('dlg3').show();
                 } else {
                     PF('dlg3').hide();
                 }
-            }       
+            }
         </script>
-        
+
         <!--BALAO DE MENSAGEM-->
         <h:form id="topMessage">
             <p:growl showDetail="true" sticky="false" />
@@ -34,11 +34,11 @@
 
         <h:form id="cadButton">
 
-            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show(); " icon="fa fa-user-plus" />
+            <p:commandButton value="Cadastrar" onclick="PF('dlg2').show();" icon="fa fa-user-plus" />
 
         </h:form>
 
-        
+
         <!--DIALOG CADASTRO-->
         <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="420" width="280"
                   resizable="false">
@@ -104,9 +104,9 @@
 
         </p:dialog>
 
-        
+
         <!--DIALOG ATUALIZAR CADASTRO-->
-         <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="280"
+        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="280"
                   resizable="false">
 
             <p:messages id="messagess" showDetail="true" closable="true">
@@ -173,39 +173,64 @@
 
         <h:form id="formTabela">
 
-            <p:dataTable value="#{clienteMB.clientes}" var="cliente">
+            <p:dataTable value="#{clienteMB.fullListClientes}" 
+                         filteredValue="#{clienteMB.clientes}"
+                         var="cliente"
+                         widgetVar="tabelaClientes"
+                         emptyMessage="Nenhum registro encontrado a partir dos critérios informados">
 
-                <p:column headerText="Nome">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar: " />
+                        <p:inputText id="globalFilter" 
+                                     onkeyup="PF('tabelaClientes').filter()"
+                                     style="width:200px;"
+                                     placeholder="Informe as palavras chave"/>
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column headerText="Nome" sortBy="#{cliente.nome}" filterBy="#{cliente.nome}" filterMatchMode="contains">
                     <h:outputText value="#{cliente.nome}"/>
                 </p:column>
 
-                <p:column headerText="CPF">
+                <p:column headerText="CPF" filterBy="#{cliente.cpf}" filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatCPF(cliente.cpf)}"/>
                 </p:column>
 
-                <p:column headerText="Email">
+                <p:column headerText="Email" sortBy="#{cliente.email}" filterBy="#{cliente.email}" filterMatchMode="contains">
                     <h:outputText value="#{cliente.email}"/>
                 </p:column>
 
-                <p:column headerText="Data de Nascimento">
+                <p:column headerText="Data de Nascimento" sortBy="#{cliente.dataNascimento}" filterBy="#{textFormaterService.formatData(cliente.dataNascimento)}" filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatData(cliente.dataNascimento)}"/>
                 </p:column>
 
-                <p:column headerText="Telefone">
+                <p:column headerText="Telefone" filterBy="#{cliente.telefone}" filterMatchMode="contains">
                     <h:outputText value="#{cliente.telefone}"/>
                 </p:column>
 
-                <p:column headerText="Endereço">
+                <p:column headerText="Endereço" filterBy="#{cliente.endereco}" filterMatchMode="contains">
                     <h:outputText value="#{cliente.endereco}"/>
                 </p:column>
-                
-                <p:column headerText="Status">
+
+                <p:column headerText="Status" sortBy="#{cliente.enable}" filterBy="#{cliente.enable}" filterMatchMode="equals">
+
+                    <f:facet name="filter">
+                        <p:selectOneButton onchange="PF('tabelaClientes').filter()" styleClass="custom-filter">
+                            <f:converter converterId="javax.faces.Boolean" />
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItem itemLabel="Ativo" itemValue="true" />
+                            <f:selectItem itemLabel="Inativo" itemValue="false" />
+                        </p:selectOneButton>
+                    </f:facet>
+
                     <h:outputText value="Ativo" rendered="#{cliente.enable}"/>
                     <h:outputText value="Inativo" rendered="#{!cliente.enable}"/>
+                    
                 </p:column>
 
                 <p:column headerText="Ações">
-                    
+
                     <!--BOTÃO ALTERAR-->
                     <p:commandButton title="Alterar" 
                                      icon="fa fa-pencil"
@@ -230,7 +255,7 @@
                                    icon="ui-icon-alert"/>
 
                     </p:commandButton>
-                    
+
                     <!--BOTÃO DESATIVAR--> 
                     <p:commandButton title="Desativar" 
                                      icon="fa fa-trash"
@@ -244,7 +269,7 @@
                                    icon="ui-icon-alert"/>
 
                     </p:commandButton>
-                    
+
                     <!--BOTÃO CADASTRAR DEPENDENTE-->
                     <p:commandButton title="Cadastrar Dedendente" 
                                      icon="fa fa-pencil"
@@ -254,7 +279,7 @@
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
 
                     </p:commandButton>
-                    
+
                 </p:column>
 
             </p:dataTable>
