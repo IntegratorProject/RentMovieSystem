@@ -3,6 +3,7 @@ package controle;
 import dao.GenericDao;
 import entidade.Cliente;
 import entidade.Dependente;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -12,11 +13,12 @@ import javax.faces.context.Flash;
 
 @ManagedBean
 @ViewScoped
-public class DependenteMB extends DefaultMB {
+public class DependenteMB extends DefaultMB implements Serializable{
 
     private Dependente dependente = new Dependente();
     private Cliente clienteAtual = new Cliente();
     private List<Dependente> listDependente = new ArrayList<>();
+    private List<Dependente> listFullDependente = new ArrayList<>();
     private List<Cliente> listClientesAtivos = new ArrayList<>();
     private GenericDao<Dependente> dao = new GenericDao<>(Dependente.class);
     private GenericDao<Cliente> daoCliente = new GenericDao<Cliente>(Cliente.class);
@@ -78,7 +80,12 @@ public class DependenteMB extends DefaultMB {
     public void updateList() {
 
         try {
-            listDependente = dao.buscarTodos();
+            listFullDependente.clear();
+            listDependente.clear();
+            listFullDependente = dao.buscarTodos();
+            for(Dependente d : listFullDependente){
+                listDependente.add(d);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -154,6 +161,14 @@ public class DependenteMB extends DefaultMB {
 
     public void setClienteAtual(Cliente clienteAtual) {
         this.clienteAtual = clienteAtual;
+    }
+
+    public List<Dependente> getListFullDependente() {
+        return listFullDependente;
+    }
+
+    public void setListFullDependente(List<Dependente> listFullDependente) {
+        this.listFullDependente = listFullDependente;
     }
 
 }

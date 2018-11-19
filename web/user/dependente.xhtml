@@ -132,21 +132,53 @@
 
         <h:form id="formTabela">
 
-            <p:dataTable value="#{dependenteMB.listDependente}" var="dependente">
+            <p:dataTable value="#{dependenteMB.listFullDependente}" 
+                         var="dependente"
+                         widgetVar="tabelaDependentes"
+                         emptyMessage="Nenhum registro encontrado a partir dos critérios informados">
 
-                <p:column headerText="Nome">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar: " />
+                        <p:inputText id="globalFilter" 
+                                     onkeyup="PF('tabelaDependentes').filter()"
+                                     style="width:200px;"
+                                     placeholder="Informe as palavras chave"/>
+                    </p:outputPanel>
+                </f:facet>
+                
+                <p:column headerText="Nome" sortBy="#{dependente.nome}"
+                          filterBy="#{dependente.nome}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{dependente.nome}"/>
                 </p:column>
 
-                <p:column headerText="Data de Nascimento">
+                <p:column headerText="Data de Nascimento"
+                          sortBy="#{dependente.dataNascimento}"
+                          filterBy="#{textFormaterService.formatData(dependente.dataNascimento)}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatData(dependente.dataNascimento)}"/>
                 </p:column>
 
-                <p:column headerText="Cliente">
+                <p:column headerText="Cliente" sortBy="#{dependente.cliente.toStringNomeCpf()}"
+                          filterBy="#{dependente.cliente.toStringNomeCpf()}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{dependente.cliente.nome} - #{textFormaterService.formatCPF(dependente.cliente.cpf)}"/>
                 </p:column>
 
-                <p:column headerText="Status">
+                <p:column headerText="Status" sortBy="#{dependente.enable}"
+                          filterBy="#{dependente.enable}"
+                          filterMatchMode="equals">
+                    
+                    <f:facet name="filter">
+                        <p:selectOneButton onchange="PF('tabelaDependentes').filter()" styleClass="custom-filter">
+                            <f:converter converterId="javax.faces.Boolean" />
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItem itemLabel="Ativo" itemValue="true" />
+                            <f:selectItem itemLabel="Inativo" itemValue="false" />
+                        </p:selectOneButton>
+                    </f:facet>
+                    
                     <h:outputText value="Ativo" rendered="#{dependente.enable}"/>
                     <h:outputText value="Inativo" rendered="#{!dependente.enable}"/>
                 </p:column>

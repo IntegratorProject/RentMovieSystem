@@ -143,4 +143,8 @@ public class Cliente implements Serializable {
         return true;
     }
     
+    public String toStringNomeCpf(){
+        return nome + " - " + cpf;
+    }
+    
 }
