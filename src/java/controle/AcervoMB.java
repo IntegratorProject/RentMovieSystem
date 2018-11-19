@@ -3,6 +3,7 @@ package controle;
 import dao.GenericDao;
 import entidade.Acervo;
 import entidade.Midia;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -10,12 +11,13 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class AcervoMB extends DefaultMB {
+public class AcervoMB extends DefaultMB implements Serializable{
 
     private Acervo acervo = new Acervo();
     private Midia midia = new Midia();
     private Midia oldMidia = new Midia();
     private List<Acervo> acervos = new ArrayList<>();
+    private List<Acervo> fullListAcervo = new ArrayList<>();
     private List<Midia> listMidia = new ArrayList<>();
     private int quantidadeMidia = 0;
 
@@ -28,7 +30,12 @@ public class AcervoMB extends DefaultMB {
 
     public void updateList() {
         try {
-            acervos = daoAcervo.buscarTodos();
+            fullListAcervo.clear();
+            acervos.clear();
+            fullListAcervo = daoAcervo.buscarTodos();
+            for(Acervo a : fullListAcervo){
+                acervos.add(a);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -93,6 +100,7 @@ public class AcervoMB extends DefaultMB {
         acervo = new Acervo();
         midia = new Midia();
         listMidia.clear();
+        fullListAcervo.clear();
         quantidadeMidia = 0;
 
     }
@@ -188,6 +196,14 @@ public class AcervoMB extends DefaultMB {
 
     public void setOldMidia(Midia oldMidia) {
         this.oldMidia = oldMidia;
+    }
+
+    public List<Acervo> getFullListAcervo() {
+        return fullListAcervo;
+    }
+
+    public void setFullListAcervo(List<Acervo> fullListAcervo) {
+        this.fullListAcervo = fullListAcervo;
     }
 
 }

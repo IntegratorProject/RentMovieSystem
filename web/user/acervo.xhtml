@@ -40,22 +40,57 @@
 
         <h:form id="formTabelaAcervo">
 
-            <p:dataTable value="#{acervoMB.acervos}" var="document">
+            <p:dataTable value="#{acervoMB.fullListAcervo}" 
+                         filteredValue="#{acervoMB.acervos}" 
+                         widgetVar="tabelaAcervo"
+                         var="document"
+                         emptyMessage="Nenhum registro encontrado a partir dos critérios informados">
 
-                <p:column headerText="Título">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar: " />
+                        <p:inputText id="globalFilter" 
+                                     onkeyup="PF('tabelaAcervo').filter()"
+                                     style="width:200px;"
+                                     placeholder="Informe as palavras chave"/>
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column headerText="Título" sortBy="#{document.nome}"
+                          filterBy="#{document.nome}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{document.nome}"/>
                 </p:column>
 
-                <p:column headerText="Data de lançamento">
+                <p:column headerText="Data de lançamento" sortBy="#{document.dataLancamento}"
+                          filterBy="#{textFormaterService.formatData(document.dataLancamento)}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatData(document.dataLancamento)}"/>
                 </p:column>
 
-                <p:column headerText="Gênero">
+                <p:column headerText="Gênero" sortBy="#{document.genero}"
+                          filterBy="#{document.genero}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{document.genero}"/>
                 </p:column>
 
-                <p:column headerText="Classificação Etária">
+                <p:column headerText="Classificação Etária" sortBy="#{document.classificacaoEtaria}"
+                          filterBy="#{document.classificacaoEtaria}"
+                          filterMatchMode="in">
+
+                    <f:facet name="filter">
+                        <p:selectCheckboxMenu label="Selecione" onchange="PF('tabelaAcervo').filter()" scrollHeight="150" styleClass="custom-filter">
+                            <f:selectItem itemLabel="Livre" itemValue="Livre" />
+                            <f:selectItem itemLabel="10" itemValue="10" />
+                            <f:selectItem itemLabel="12" itemValue="12" />
+                            <f:selectItem itemLabel="14" itemValue="14" />
+                            <f:selectItem itemLabel="16" itemValue="16" />
+                            <f:selectItem itemLabel="18" itemValue="18" />
+                        </p:selectCheckboxMenu>
+                    </f:facet>
+
                     <h:outputText value="#{document.classificacaoEtaria}"/>
+                    
                 </p:column>
 
                 <p:column headerText="Ações">
@@ -79,7 +114,6 @@
                         <f:setPropertyActionListener value="#{document}" target="#{acervoMB.acervo}"/>
 
                     </p:commandButton>
-
 
                 </p:column>
 
@@ -113,7 +147,7 @@
 
                     <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
                     <p:selectOneMenu id="genero" value="#{acervoMB.acervo.genero}">
-                        <f:selectItem itemLabel="Jogos" itemValue="1" /><!--Apenas exemplos-->
+                        <f:selectItem itemLabel="Jogos" itemValue="Jogos" /><!--Apenas exemplos-->
                         <f:selectItem itemLabel="Ação" itemValue="2" /><!--Apenas exemplos-->
                         <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
                         <f:selectItem itemLabel="Terror" itemValue="2" /><!--Apenas exemplos-->                        
