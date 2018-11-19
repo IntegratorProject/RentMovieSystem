@@ -2,6 +2,7 @@ package controle;
 
 import dao.GenericDao;
 import entidade.Funcionario;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -11,11 +12,12 @@ import util.validadores.ValidadorCPF;
 
 @ManagedBean
 @ViewScoped
-public class FuncionarioMB extends DefaultMB {
+public class FuncionarioMB extends DefaultMB implements Serializable{
 
     private GenericDao<Funcionario> dao = new GenericDao<>(Funcionario.class);
     private Funcionario funcionario = new Funcionario();
     private List<Funcionario> listFuncionario = new ArrayList<>();
+    private List<Funcionario> fullListFuncionario = new ArrayList<>();
 
     public FuncionarioMB() {
         updateList();
@@ -23,7 +25,12 @@ public class FuncionarioMB extends DefaultMB {
 
     private void updateList() {
         try {
-            listFuncionario = dao.buscarTodos();
+            fullListFuncionario.clear();
+            listFuncionario.clear();
+            fullListFuncionario = dao.buscarTodos();
+            for(Funcionario f : fullListFuncionario){
+                listFuncionario.add(f);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -110,6 +117,14 @@ public class FuncionarioMB extends DefaultMB {
 
     public void setListFuncionario(List<Funcionario> listFuncionario) {
         this.listFuncionario = listFuncionario;
+    }
+
+    public List<Funcionario> getFullListFuncionario() {
+        return fullListFuncionario;
+    }
+
+    public void setFullListFuncionario(List<Funcionario> fullListFuncionario) {
+        this.fullListFuncionario = fullListFuncionario;
     }
 
 }

@@ -133,6 +133,7 @@
         <h:form id="formTabela">
 
             <p:dataTable value="#{dependenteMB.listFullDependente}" 
+                         filteredValue="#{dependenteMB.listDependente}"
                          var="dependente"
                          widgetVar="tabelaDependentes"
                          emptyMessage="Nenhum registro encontrado a partir dos critérios informados">

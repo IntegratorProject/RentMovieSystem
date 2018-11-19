@@ -83,25 +83,68 @@
 
         <h:form id="formTabelaFuncionarios">
 
-            <p:dataTable value="#{funcionarioMB.listFuncionario}" var="funcionario">
+            <p:dataTable value="#{funcionarioMB.fullListFuncionario}"
+                         filteredValue="#{funcionarioMB.listFuncionario}"
+                         var="funcionario"
+                         widgetVar="tabelaFuncionario"
+                         emptyMessage="Nenhum registro encontrado a partir dos critérios informados">
 
-                <p:column headerText="Nome">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar: " />
+                        <p:inputText id="globalFilter" 
+                                     onkeyup="PF('tabelaFuncionario').filter()"
+                                     style="width:200px;"
+                                     placeholder="Informe as palavras chave"/>
+                    </p:outputPanel>
+                </f:facet>
+                
+                <p:column headerText="Nome" sortBy="#{funcionario.nome}"
+                          filterBy="#{funcionario.nome}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{funcionario.nome}"/>
                 </p:column>
 
-                <p:column headerText="CPF">
+                <p:column headerText="CPF"
+                          filterBy="#{funcionario.cpf}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatCPF(funcionario.cpf)}"/>
                 </p:column>
 
-                <p:column headerText="Nome de Usuário">
+                <p:column headerText="Nome de Usuário" sortBy="#{funcionario.login}"
+                          filterBy="#{funcionario.login}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{funcionario.login}"/>
                 </p:column>
 
-                <p:column headerText="Cargo">
+                <p:column headerText="Cargo" sortBy="#{funcionario.cargo}"
+                          filterBy="#{funcionario.cargo}"
+                          filterMatchMode="equals">
+                    
+                    <f:facet name="filter">
+                        <p:selectOneButton onchange="PF('tabelaFuncionario').filter()" styleClass="custom-filter">
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItem itemLabel="Atendente" itemValue="Atendente" />
+                            <f:selectItem itemLabel="Gerente" itemValue="Gerente" />
+                        </p:selectOneButton>
+                    </f:facet>
+                    
                     <h:outputText value="#{funcionario.cargo}"/>
                 </p:column>
 
-                <p:column headerText="Status">
+                <p:column headerText="Status" sortBy="#{funcionario.enable}"
+                          filterBy="#{funcionario.enable}"
+                          filterMatchMode="equals">
+                    
+                    <f:facet name="filter">
+                        <p:selectOneButton onchange="PF('tabelaFuncionario').filter()" styleClass="custom-filter">
+                            <f:converter converterId="javax.faces.Boolean" />
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItem itemLabel="Ativo" itemValue="true" />
+                            <f:selectItem itemLabel="Inativo" itemValue="false" />
+                        </p:selectOneButton>
+                    </f:facet>
+                    
                     <h:outputText value="Ativo" rendered="#{funcionario.enable}"/>
                     <h:outputText value="Inativo" rendered="#{!funcionario.enable}"/>
                 </p:column>
