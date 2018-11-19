@@ -42,6 +42,8 @@ public class FuncionarioMB extends DefaultMB {
                 dao.salvar(funcionario);
                 funcionario = new Funcionario();
                 updateList();
+                
+                showInformationMessage("Sucesso!", "Cadastro concluído.");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -49,16 +51,20 @@ public class FuncionarioMB extends DefaultMB {
             }
 
         } else {
+            
             try {
 
                 dao.editar(funcionario);
                 funcionario = new Funcionario();
                 updateList();
 
+                showInformationMessage("Sucesso!", "Alteração concluída.");
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 connetionError();
             }
+        
         }
 
     }
@@ -67,7 +73,7 @@ public class FuncionarioMB extends DefaultMB {
 
         if (funcionario.equals(UserSession.getCurrentUser())) {
 
-            showErrorMessage("Erro!", "Para alterar o status desta conta, faça login com uma conta diferente.");
+            showWarningMessage("Atenção", "Para alterar o status desta conta, faça login com uma conta diferente.");
             
         } else {
             try {
@@ -76,6 +82,12 @@ public class FuncionarioMB extends DefaultMB {
                 dao.editar(funcionario);
                 updateList();
 
+                if(status){
+                    showInformationMessage("Sucesso!", "Funcionario ativado.");
+                }else{
+                    showInformationMessage("Sucesso!", "Funcionario desativado.");
+                }
+                
             } catch (Exception e) {
                 e.printStackTrace();
                 connetionError();

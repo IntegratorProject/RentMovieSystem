@@ -24,6 +24,11 @@
                 }
             }       
         </script>
+        
+        <!--BALAO DE MENSAGEM-->
+        <h:form id="topMessage">
+            <p:growl showDetail="true" sticky="false" />
+        </h:form>
 
         <h1 class="aw-page-title">Cadastro de Clientes</h1>
 
@@ -91,7 +96,7 @@
 
                 <p:commandButton value="Cadastrar" 
                                  actionListener="#{clienteMB.cadastrar()}"
-                                 update="@form, formTabela"
+                                 update="@form, formTabela, topMessage"
                                  oncomplete="handleDialogSubmit(xhr, status, args)" 
                                  />
 
@@ -157,7 +162,7 @@
 
                 <p:commandButton value="Alterar" 
                                  actionListener="#{clienteMB.cadastrar()}"
-                                 update="@form, formTabela"
+                                 update="@form, formTabela, topMessage"
                                  oncomplete="handleDialogSubmitDialogAlterar(xhr, status, args)" styleClass="ui-color-green" 
                                  />
 
@@ -202,7 +207,11 @@
                 <p:column headerText="Ações">
                     
                     <!--BOTÃO ALTERAR-->
-                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form,formAtualizarCadastro" onclick="PF('dlg3').show();" styleClass="ui-priority-primary" >
+                    <p:commandButton title="Alterar" 
+                                     icon="fa fa-pencil"
+                                     update="@form,formAtualizarCadastro"
+                                     onclick="PF('dlg3').show();"
+                                     styleClass="ui-priority-primary" >
 
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
 
@@ -213,7 +222,7 @@
                                      icon="fa fa-trash"
                                      actionListener="#{clienteMB.changeStatus(cliente, true)}"
                                      rendered="#{!cliente.enable}"
-                                     update="@form"
+                                     update="@form, topMessage"
                                      styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
@@ -227,7 +236,7 @@
                                      icon="fa fa-trash"
                                      actionListener="#{clienteMB.changeStatus(cliente, false)}"
                                      rendered="#{cliente.enable}"
-                                     update="@form"
+                                     update="@form, topMessage"
                                      styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 

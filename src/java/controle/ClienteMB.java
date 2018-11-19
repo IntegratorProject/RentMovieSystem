@@ -3,12 +3,10 @@ package controle;
 import dao.GenericDao;
 import entidade.Cliente;
 import entidade.Dependente;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import util.validadores.ValidadorCPF;
 
@@ -42,9 +40,12 @@ public class ClienteMB extends DefaultMB {
                 daoDep.salvar(d);
                 cliente = new Cliente();
                 updateList();
+                
+                showInformationMessage("Sucesso!", "Cadastro concluído.");
 
             } catch (Exception e) {
                 connetionError();
+                e.printStackTrace();
             }
 
         } else {
@@ -71,9 +72,12 @@ public class ClienteMB extends DefaultMB {
 
                 cliente = new Cliente();
                 updateList();
+                
+                showInformationMessage("Sucesso!", "Alteração concluída.");
 
             } catch (Exception e) {
                 connetionError();
+                e.printStackTrace();
             }
 
         }
@@ -93,6 +97,12 @@ public class ClienteMB extends DefaultMB {
                 d.setEnable(status);
                 daoDep.editar(d);
             }
+            
+            if(status){
+                showInformationMessage("Sucesso!", "Cliente ativado.");
+            }else{
+                showInformationMessage("Sucesso!", "Cliente desativado.");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,6 +116,7 @@ public class ClienteMB extends DefaultMB {
         try {
             clientes = dao.buscarTodos();
         } catch (Exception e) {
+            e.printStackTrace();
             connetionError();
         }
 

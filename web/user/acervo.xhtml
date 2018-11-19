@@ -25,6 +25,11 @@
             }
         </script>
 
+        <!--BALAO DE MENSAGEM-->
+        <h:form id="topMessage">
+            <p:growl showDetail="true" sticky="false" />
+        </h:form>
+
         <h1 class="aw-page-title">Cadastro de Itens</h1>
 
         <h:form id="cadButton">
@@ -113,7 +118,7 @@
                         <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
                         <f:selectItem itemLabel="Terror" itemValue="2" /><!--Apenas exemplos-->                        
                     </p:selectOneMenu><!--Utilizar selectonemenu grouping (separar filmes e jogos) https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml-->
-                    
+
                     <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
                     <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
                         <f:selectItem itemLabel="Livre" itemValue="Livre" />
@@ -186,7 +191,7 @@
 
                 <p:commandButton value="Concluir" actionListener="#{acervoMB.cadastrar()}"
                                  oncomplete="handleDialogSubmit(xhr, status, args)"
-                                 update="@form, formTabelaAcervo"/>
+                                 update="@form, formTabelaAcervo, topMessage"/>
 
             </h:form>
 
@@ -246,7 +251,7 @@
 
             <h:form id="formAlterar">
 
-                 <h:panelGrid columns="7">
+                <h:panelGrid columns="7">
                     <p:outputLabel for="inputTitulo">Título: </p:outputLabel><br/>
                     <p:inputText id="inputTitulo" value="#{acervoMB.acervo.nome}"
                                  required="true"
@@ -268,7 +273,7 @@
                         <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
                         <f:selectItem itemLabel="Terror" itemValue="2" /><!--Apenas exemplos-->                        
                     </p:selectOneMenu><!--Utilizar selectonemenu grouping (separar filmes e jogos) https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml-->
-                    
+
                     <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
                     <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
                         <f:selectItem itemLabel="Livre" itemValue="Livre" />
@@ -351,7 +356,7 @@
 
                 <p:commandButton value="Concluir" actionListener="#{acervoMB.cadastrar()}"
                                  oncomplete="handleDialogSubmit2(xhr, status, args)"
-                                 update="@form, formTabelaAcervo"/>
+                                 update="@form, formTabelaAcervo, topMessage"/>
 
             </h:form>
 

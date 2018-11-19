@@ -56,9 +56,12 @@ public class AcervoMB extends DefaultMB {
 
                 limparCadastro();
                 updateList();
+                
+                showInformationMessage("Sucesso!", "Cadastro concluído.");
 
             } catch (Exception e) {
                 connetionError();
+                e.printStackTrace();
             }
 
         } else {
@@ -73,9 +76,12 @@ public class AcervoMB extends DefaultMB {
                 }
                 
                 updateList();
+                
+                showInformationMessage("Sucesso!", "Alteração concluída.");
 
             } catch (Exception e) {
                 connetionError();
+                e.printStackTrace();
             }
 
         }

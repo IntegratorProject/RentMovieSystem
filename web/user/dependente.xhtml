@@ -17,6 +17,11 @@
             }
         </script>
 
+        <!--BALAO DE MENSAGEM-->
+        <h:form id="topMessage">
+            <p:growl showDetail="true" sticky="false" />
+        </h:form>
+        
         <h1 class="aw-page-title">Cadastro de Dependentes</h1>
 
         <h:form id="cadButton">
@@ -71,7 +76,7 @@
 
                 <p:commandButton value="Cadastrar" 
                                  actionListener="#{dependenteMB.cadastrar()}" 
-                                 update="@form, formTabela"  
+                                 update="@form, formTabela, topMessage"  
                                  styleClass="ui-color-green"/>
 
                 <br/>
@@ -116,7 +121,7 @@
 
                 <p:commandButton value="Alterar" onclick="handleDialogSubmitAlterar(xhr, status, args)"
                                  actionListener="#{dependenteMB.cadastrar()}"
-                                 update="@form, formTabela"
+                                 update="@form, formTabela, topMessage"
                                  styleClass="ui-color-green"/>
 
                 <br/>
@@ -154,14 +159,14 @@
                     </p:commandButton>
 
                     <!--BOTÃO ATIVAR-->
-                    <p:commandButton title="Ativar" icon="fa fa-check"  actionListener="#{dependenteMB.statusChange(dependente, true)}" update="@form" styleClass="ui-color-greenButton" rendered="#{!dependente.enable}">
+                    <p:commandButton title="Ativar" icon="fa fa-check"  actionListener="#{dependenteMB.statusChange(dependente, true)}" update="@form, topMessage" styleClass="ui-color-greenButton" rendered="#{!dependente.enable}">
                         <p:confirm header="Confirmação" 
                                    message="Deseja reativar o dependente?"
                                    icon="ui-icon-alert"/>
                     </p:commandButton>
 
                     <!--BOTÃO DESATIVAR-->
-                    <p:commandButton title="Desativar" icon="fa fa-trash"  actionListener="#{dependenteMB.statusChange(dependente, false)}" update="@form" styleClass="ui-color-red" rendered="#{dependente.enable}">
+                    <p:commandButton title="Desativar" icon="fa fa-trash"  actionListener="#{dependenteMB.statusChange(dependente, false)}" update="@form, topMessage" styleClass="ui-color-red" rendered="#{dependente.enable}">
                         <p:confirm header="Confirmação" 
                                    message="Deseja desativar o dependente?"
                                    icon="ui-icon-alert"/>

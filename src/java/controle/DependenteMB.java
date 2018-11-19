@@ -48,6 +48,8 @@ public class DependenteMB extends DefaultMB {
                     dependente = new Dependente();
                     updateList();
 
+                    showInformationMessage("Sucesso!", "Cadastro concluído.");
+                    
                 } catch (Exception e) {
                     e.printStackTrace();
                     connetionError();
@@ -60,6 +62,8 @@ public class DependenteMB extends DefaultMB {
                     dao.editar(dependente);
                     dependente = new Dependente();
                     updateList();
+                    
+                    showInformationMessage("Sucesso!", "Alteração concluída.");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -106,6 +110,12 @@ public class DependenteMB extends DefaultMB {
             d.setEnable(status);
             dao.editar(d);
             updateList();
+            
+            if(status){
+                showInformationMessage("Sucesso!", "Dependente ativado.");
+            }else{
+                showInformationMessage("Sucesso!", "Dependente desativado.");
+            }
             
         } catch (Exception e) {
             e.printStackTrace();

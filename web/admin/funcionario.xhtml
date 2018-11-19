@@ -17,6 +17,11 @@
             }
         </script>
 
+        <!--BALAO DE MENSAGEM-->
+        <h:form id="topMessage">
+            <p:growl showDetail="true" sticky="false" />
+        </h:form>
+
         <h1 class="aw-page-title">Cadastro de Funcionário</h1>
 
         <h:form id="cadButton">
@@ -27,11 +32,11 @@
 
         <!--DIALOG CADASTRO-->
         <p:dialog header="Funcionários" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
-            
+
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
             </p:messages>
-            
+
             <h:form id="formCadastro">
 
                 <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
@@ -70,12 +75,12 @@
                 <p:commandButton value="Cadastrar" 
                                  actionListener="#{funcionarioMB.cadastrar()}"
                                  oncomplete="handleDialogSubmit(xhr, status, args)" 
-                                 update="@form, formTabelaFuncionarios"  styleClass="ui-color-green" /> <br/><br/>
+                                 update="@form, formTabelaFuncionarios, topMessage"  styleClass="ui-color-green" /> <br/><br/>
 
             </h:form>
-            
+
         </p:dialog>
-        
+
         <h:form id="formTabelaFuncionarios">
 
             <p:dataTable value="#{funcionarioMB.listFuncionario}" var="funcionario">
@@ -95,7 +100,7 @@
                 <p:column headerText="Cargo">
                     <h:outputText value="#{funcionario.cargo}"/>
                 </p:column>
-                
+
                 <p:column headerText="Status">
                     <h:outputText value="Ativo" rendered="#{funcionario.enable}"/>
                     <h:outputText value="Inativo" rendered="#{!funcionario.enable}"/>
@@ -104,9 +109,9 @@
                 <p:column headerText="Ações">
 
                     <!--BOTÃO ALTERAR-->
-                     <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formCadastro" styleClass="ui-priority-primary" onclick="PF('dlg2').show();">
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formCadastro" styleClass="ui-priority-primary" onclick="PF('dlg2').show();">
 
-                         <f:setPropertyActionListener value="#{funcionario}" target="#{funcionarioMB.funcionario}"/>
+                        <f:setPropertyActionListener value="#{funcionario}" target="#{funcionarioMB.funcionario}"/>
 
                     </p:commandButton>
 
@@ -115,7 +120,7 @@
                                      icon="fa fa-trash"  
                                      rendered="#{funcionario.enable}"
                                      actionListener="#{funcionarioMB.statusChange(funcionario, false)}" 
-                                     update="@form" 
+                                     update="@form, topMessage" 
                                      styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
@@ -123,13 +128,13 @@
                                    icon="ui-icon-alert" />
 
                     </p:commandButton>
-                    
+
                     <!--BOTÃO ATIVAR-->
                     <p:commandButton title="Ativar" 
                                      icon="fa fa-trash"  
                                      rendered="#{!funcionario.enable}"
                                      actionListener="#{funcionarioMB.statusChange(funcionario, true)}" 
-                                     update="@form" 
+                                     update="@form, topMessage" 
                                      styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
@@ -137,7 +142,7 @@
                                    icon="ui-icon-alert" />
 
                     </p:commandButton>
-                    
+
                 </p:column>
 
             </p:dataTable>
