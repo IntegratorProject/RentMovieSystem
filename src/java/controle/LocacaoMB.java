@@ -7,6 +7,7 @@ import entidade.Dependente;
 import entidade.ItensLocacao;
 import entidade.Locacao;
 import entidade.Midia;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,7 +18,7 @@ import util.spring.UserSession;
 
 @ManagedBean
 @ViewScoped
-public class LocacaoMB extends DefaultMB {
+public class LocacaoMB extends DefaultMB implements Serializable{
 
     private Locacao locacao = new Locacao();
     private ItensLocacao itemLocacao = new ItensLocacao();
@@ -25,6 +26,7 @@ public class LocacaoMB extends DefaultMB {
 
     private List<Midia> midiasDisponiveis = new ArrayList<>();
     private List<Locacao> listLocacao = new ArrayList<>();
+    private List<Locacao> fullListLocacao = new ArrayList<>();
     private List<ItensLocacao> listItensLocacao = new ArrayList<>();
     private List<ItensLocacao> listItensLocacaoRemovidos = new ArrayList<>();
     private List<Dependente> listDependente = new ArrayList<>();
@@ -41,7 +43,14 @@ public class LocacaoMB extends DefaultMB {
 
     private void updateList() {
         try {
-            listLocacao = daoLocacao.buscarTodos();
+            fullListLocacao.clear();
+            listLocacao.clear();
+            
+            fullListLocacao = daoLocacao.buscarTodos();
+            
+            for(Locacao l : fullListLocacao){
+                listLocacao.add(l);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
@@ -188,6 +197,7 @@ public class LocacaoMB extends DefaultMB {
         listLocacao.clear();
         listItensLocacaoRemovidos.clear();
         midiasDisponiveis.clear();
+        fullListLocacao.clear();
     }
 
     public String definirStatus(Locacao l) {
@@ -343,4 +353,12 @@ public class LocacaoMB extends DefaultMB {
         this.listDependente = listDependente;
     }
 
+    public List<Locacao> getFullListLocacao() {
+        return fullListLocacao;
+    }
+
+    public void setFullListLocacao(List<Locacao> fullListLocacao) {
+        this.fullListLocacao = fullListLocacao;
+    }
+    
 }

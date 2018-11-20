@@ -34,7 +34,6 @@ public class Dependente {
     @ManyToOne
     private Cliente cliente;
     
-    
     public long getId() {
         return id;
     }
@@ -100,6 +99,10 @@ public class Dependente {
             return false;
         }
         return true;
+    }
+    
+    public String toStringNomeClienteCpf(){
+        return nome+" - "+cliente.getNome()+" - "+cliente.getCpf();
     }
 
 }
