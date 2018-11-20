@@ -21,6 +21,7 @@
 * Spring Security
 * C3P0
 * Java Mail
+* Quartz
 
 ## Link
 * https://github.com/IntegratorProject
