@@ -490,7 +490,12 @@
                     </p:commandButton>
 
                     <!--BOTÃO EXCLUIR-->
-                    <p:commandButton title="Excluir" icon="fa fa-trash" actionListener="#{locacaoMB.solicitarExclusaoLocacao(obj)}" update="@form, topMessage" styleClass="ui-color-red" >
+                    <p:commandButton title="Excluir" 
+                                     icon="fa fa-trash"
+                                     actionListener="#{locacaoMB.solicitarExclusaoLocacao(obj)}"
+                                     rendered="#{obj.dataDevolucao == null}"
+                                     update="@form, topMessage"
+                                     styleClass="ui-color-red" >
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja excluir a locação?"
