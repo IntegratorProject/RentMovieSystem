@@ -6,13 +6,16 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
+        
 
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
                 if (args.validationFailed) {
                     PF('dlg2').show();
+                    PF('dlg4').show();
                 } else {
                     PF('dlg2').hide();
+                    PF('dlg4').hide();
                 }
             }
         </script>
@@ -31,7 +34,7 @@
         </h:form><br/>
 
         <!--DIALOG CADASTRO-->
-        <p:dialog header="Funcionários" widgetVar="dlg2" modal="true" height="420" width="350" minWidth="300">
+        <p:dialog header="Funcionários" widgetVar="dlg2" modal="true" height="350" width="300" minWidth="300" minHeight="350">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -63,7 +66,7 @@
                 <p:inputText id="inputSenha" type="password" required="true" value="#{funcionarioMB.funcionario.senha}"/><br/>
                 <br/>
 
-                <br/><br/>
+                
                 <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
                 <p:selectOneMenu id="cargo" value="#{funcionarioMB.funcionario.cargo}">
                     <f:selectItem itemLabel="Atendente" itemValue="Atendente" />
@@ -80,6 +83,60 @@
             </h:form>
 
         </p:dialog>
+        
+        
+        <!--DIALOG ALTERAR CADASTRO-->
+        <p:dialog header="Alterar Funcionario" widgetVar="dlg4" modal="true" height="350" width="300" minWidth="300" minHeight="350">
+
+            <p:messages id="messagesAlterar" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+
+            <h:form id="formAlterarCadastro">
+
+                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:inputText id="inputNome" value="#{funcionarioMB.funcionario.nome}"
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/><br/>
+                <br/>
+
+                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:inputMask id="inputCPF" value="#{funcionarioMB.funcionario.cpf}"
+                             required="true"
+                             mask="999.999.999-99"
+                             validator="custom.cpfValidator"
+                             requiredMessage="Preencha o campo CPF."/> <br/>
+
+                <br/>
+                <p:outputLabel for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
+                <p:inputText id="inputLogin" value="#{funcionarioMB.funcionario.login}"
+                             required="true"
+                             requiredMessage="Preencha o campo Nome."/> <br/>
+
+                <br/>
+                <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
+                <p:inputText id="inputSenha" type="password" required="true" value="#{funcionarioMB.funcionario.senha}"/><br/>
+                <br/>
+
+                
+                <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
+                <p:selectOneMenu id="cargo" value="#{funcionarioMB.funcionario.cargo}">
+                    <f:selectItem itemLabel="Atendente" itemValue="Atendente" />
+                    <f:selectItem itemLabel="Gerência" itemValue="Gerente" />
+                </p:selectOneMenu>
+
+                <br/><br/>
+
+                <p:commandButton value="Alterar" 
+                                 actionListener="#{funcionarioMB.cadastrar()}"
+                                 oncomplete="handleDialogSubmit(xhr, status, args)" 
+                                 update="@form, formTabelaFuncionarios, topMessage"  styleClass="ui-color-green" /> <br/><br/>
+
+            </h:form>
+
+        </p:dialog>
+        
+        <!--FIM DIALOG ALTERAR CADASTRO-->
 
         <h:form id="formTabelaFuncionarios">
 
@@ -152,7 +209,7 @@
                 <p:column headerText="Ações">
 
                     <!--BOTÃO ALTERAR-->
-                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formCadastro" styleClass="ui-priority-primary" onclick="PF('dlg2').show();">
+                    <p:commandButton title="Alterar" icon="fa fa-pencil" update="@form, formAlterarCadastro" styleClass="ui-priority-primary" onclick="PF('dlg4').show();">
 
                         <f:setPropertyActionListener value="#{funcionario}" target="#{funcionarioMB.funcionario}"/>
 
@@ -160,7 +217,7 @@
 
                     <!--BOTÃO DESATIVAR-->
                     <p:commandButton title="Desativar" 
-                                     icon="fa fa-trash"  
+                                     icon="fa fa-times"  
                                      rendered="#{funcionario.enable}"
                                      actionListener="#{funcionarioMB.statusChange(funcionario, false)}" 
                                      update="@form, topMessage" 
@@ -174,11 +231,11 @@
 
                     <!--BOTÃO ATIVAR-->
                     <p:commandButton title="Ativar" 
-                                     icon="fa fa-trash"  
+                                     icon="fa fa-check"  
                                      rendered="#{!funcionario.enable}"
                                      actionListener="#{funcionarioMB.statusChange(funcionario, true)}" 
                                      update="@form, topMessage" 
-                                     styleClass="ui-color-red" >
+                                     styleClass="ui-color-greenButton" >
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja reativar o funcionário?"

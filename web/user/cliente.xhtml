@@ -6,6 +6,7 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
+        
 
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
@@ -241,14 +242,23 @@
                         <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
 
                     </p:commandButton>
+                     <!--BOTÃO CADASTRAR DEPENDENTE-->
+                    <p:commandButton title="Cadastrar Dedendente" 
+                                     icon="fa fa-users"
+                                     styleClass="ui-color-orange"
+                                     action="#{clienteMB.redirectDependente()}">
+
+                        <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
+
+                    </p:commandButton>
 
                     <!--BOTÃO ATIVAR--> 
                     <p:commandButton title="Ativar" 
-                                     icon="fa fa-trash"
+                                     icon="fa fa-check"
                                      actionListener="#{clienteMB.changeStatus(cliente, true)}"
                                      rendered="#{!cliente.enable}"
                                      update="@form, topMessage"
-                                     styleClass="ui-color-red" >
+                                     styleClass="ui-color-greenButton" >
 
                         <p:confirm header="Confirmação" 
                                    message="Deseja reativar o cliente?"
@@ -258,7 +268,7 @@
 
                     <!--BOTÃO DESATIVAR--> 
                     <p:commandButton title="Desativar" 
-                                     icon="fa fa-trash"
+                                     icon="fa fa-times"
                                      actionListener="#{clienteMB.changeStatus(cliente, false)}"
                                      rendered="#{cliente.enable}"
                                      update="@form, topMessage"
@@ -270,15 +280,7 @@
 
                     </p:commandButton>
 
-                    <!--BOTÃO CADASTRAR DEPENDENTE-->
-                    <p:commandButton title="Cadastrar Dedendente" 
-                                     icon="fa fa-pencil"
-                                     styleClass="ui-priority-primary"
-                                     action="#{clienteMB.redirectDependente()}">
-
-                        <f:setPropertyActionListener value="#{cliente}" target="#{clienteMB.cliente}"/>
-
-                    </p:commandButton>
+                   
 
                 </p:column>
 

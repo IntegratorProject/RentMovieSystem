@@ -6,6 +6,7 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
+        
 
         <script type="text/javascript">
             function handleDialogSubmitAlterar(xhr, status, args) {
@@ -199,7 +200,7 @@
                     </p:commandButton>
 
                     <!--BOTÃO DESATIVAR-->
-                    <p:commandButton title="Desativar" icon="fa fa-trash"  actionListener="#{dependenteMB.statusChange(dependente, false)}" update="@form, topMessage" styleClass="ui-color-red" rendered="#{dependente.enable}">
+                    <p:commandButton title="Desativar" icon="fa fa-times"  actionListener="#{dependenteMB.statusChange(dependente, false)}" update="@form, topMessage" styleClass="ui-color-red" rendered="#{dependente.enable}">
                         <p:confirm header="Confirmação" 
                                    message="Deseja desativar o dependente?"
                                    icon="ui-icon-alert"/>
