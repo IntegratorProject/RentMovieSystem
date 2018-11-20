@@ -5,6 +5,8 @@ import dao.LocacaoDao;
 import dao.MidiaDao;
 import entidade.ItensLocacao;
 import entidade.Locacao;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -13,12 +15,15 @@ import javax.faces.bean.ViewScoped;
 
 @ManagedBean
 @ViewScoped
-public class DevolucaoMB extends DefaultMB {
+public class DevolucaoMB extends DefaultMB implements Serializable {
 
     private List<Locacao> listLocacao = new ArrayList<>();
+    private List<Locacao> fullListLocacao = new ArrayList<>();
     private List<ItensLocacao> listItensLocacao = new ArrayList<>();
 
     private Locacao locacao = new Locacao();
+
+    private String filtro = "";
 
     private LocacaoDao daoLocacao = new LocacaoDao();
     private GenericDao<ItensLocacao> daoItensLocacao = new GenericDao<>(ItensLocacao.class);
@@ -48,21 +53,23 @@ public class DevolucaoMB extends DefaultMB {
                         } else {
                             throw new Exception("Operação não suportada");
                         }
-                        
+
                         item = daoItensLocacao.editar(item);
 
                     }
-                    
-                    if(item.isDevolvido()) quantidadeDevolvidos++;
+
+                    if (item.isDevolvido()) {
+                        quantidadeDevolvidos++;
+                    }
 
                 }
-                
-                if(quantidadeDevolvidos == listItensLocacao.size() && locacao.getValorPago() != 0){
+
+                if (quantidadeDevolvidos == listItensLocacao.size() && locacao.getValorPago() != 0) {
                     Calendar hoje = Calendar.getInstance();
                     locacao.setDataDevolucao(hoje.getTime());
                     locacao.setDataPagamento(hoje.getTime());
                 }
-                
+
                 daoLocacao.editar(locacao);
                 fullClear();
                 updateList();
@@ -117,12 +124,57 @@ public class DevolucaoMB extends DefaultMB {
     private void updateList() {
         try {
 
-            listLocacao = daoLocacao.buscarCondicao("dataDevolucao = null and reserva = 0");
+            fullListLocacao.clear();
+            listLocacao.clear();
+            fullListLocacao = daoLocacao.buscarCondicao("dataDevolucao = null and reserva = 0");
+
+            for (Locacao l : fullListLocacao) {
+                listLocacao.add(l);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             connetionError();
         }
+    }
+
+    public void updateFiltredList() {
+
+        if (filtro == null) {
+            updateList();
+            return;
+        }
+        
+        if (filtro.isEmpty()) {
+            updateList();
+            return;
+        }
+
+        try {
+            
+            fullListLocacao.clear();
+            listLocacao.clear();
+
+            Calendar hoje = Calendar.getInstance();
+            String dataHoje = new SimpleDateFormat("yyyy-MM-dd").format(hoje.getTime());
+
+            if (filtro.equals("Hoje")) {
+                fullListLocacao = daoLocacao.buscarCondicao("dataDevolucao = null and reserva = 0 and "
+                        + "dataPrevDevolucao = '" + dataHoje + "'");
+            } else if (filtro.equals("Atrasados")) {
+                fullListLocacao = daoLocacao.buscarCondicao("dataDevolucao = null and reserva = 0 and "
+                        + "dataPrevDevolucao < '" + dataHoje + "'");
+            }
+            
+            for(Locacao l : fullListLocacao){
+                listLocacao.add(l);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            connetionError();
+        }
+
     }
 
     private int calcNumeroDevolvidosOuDanificados() {
@@ -136,10 +188,11 @@ public class DevolucaoMB extends DefaultMB {
         return count;
 
     }
-    
-    private void fullClear(){
+
+    private void fullClear() {
         listItensLocacao.clear();
         listLocacao.clear();
+        fullListLocacao.clear();
         locacao = new Locacao();
     }
 
@@ -165,6 +218,22 @@ public class DevolucaoMB extends DefaultMB {
 
     public void setLocacao(Locacao locacao) {
         this.locacao = locacao;
+    }
+
+    public List<Locacao> getFullListLocacao() {
+        return fullListLocacao;
+    }
+
+    public void setFullListLocacao(List<Locacao> fullListLocacao) {
+        this.fullListLocacao = fullListLocacao;
+    }
+
+    public String getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(String filtro) {
+        this.filtro = filtro;
     }
 
 }

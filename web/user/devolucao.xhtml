@@ -69,7 +69,7 @@
                     <p:column headerText="Preço">
                         <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
-                    
+
                     <p:column headerText="Status">
                         <h:outputText value="Devolvido" rendered="#{obj.devolvido}"/>
                         <h:outputText value="Alugado" rendered="#{!obj.devolvido}"/>
@@ -122,7 +122,7 @@
 
                     <br/>
                     <h:outputText id="sugestaoValor" value="Valor a ser Pago: R$ #{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorMulta
-                                                                + devolucaoMB.locacao.precoLocacao)}" style="font-size: 16px"/>
+                                                                                   + devolucaoMB.locacao.precoLocacao)}" style="font-size: 16px"/>
                     <br/>
 
                     <h:outputLabel for="valorPago" value="Valor pago: "/>
@@ -210,7 +210,7 @@
                     <p:column headerText="Preço">
                         <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
-                    
+
                     <p:column headerText="Status">
                         <h:outputText value="Devolvido" rendered="#{obj.devolvido}"/>
                         <h:outputText value="Alugado" rendered="#{!obj.devolvido}"/>
@@ -237,29 +237,73 @@
         <!--TABELA PRINCIPAL-->
         <h:form id="tabelaPrincipal">
 
-            <p:dataTable value="#{devolucaoMB.listLocacao}" var="obj">
+            <p:dataTable value="#{devolucaoMB.fullListLocacao}" 
+                         filteredValue="#{devolucaoMB.listLocacao}"
+                         widgetVar="tabelaLocacao"
+                         var="obj"
+                         emptyMessage="Nenhum registro encontrado a partir dos critérios informados">
 
-                <p:column headerText="ID">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar: " />
+                        <p:inputText id="globalFilter" 
+                                     onkeyup="PF('tabelaLocacao').filter()"
+                                     style="width:200px;"
+                                     placeholder="Informe as palavras chave"/>
+                        
+                         <h:outputText value=" "/>
+                        
+                         <p:selectOneMenu value="#{devolucaoMB.filtro}" styleClass="float: left">
+                            <f:selectItem itemLabel="Todos" itemValue=""/>
+                            <f:selectItem itemLabel="Atrasados" itemValue="Atrasados" />
+                            <f:selectItem itemLabel="Hoje" itemValue="Hoje" />
+                            
+                            <f:ajax listener="#{devolucaoMB.updateFiltredList()}" render="@form"/>
+                            
+                        </p:selectOneMenu>
+                        
+                    </p:outputPanel>
+                </f:facet>
+
+                <p:column headerText="ID"
+                          sortBy="#{obj.id}"
+                          filterBy="#{obj.id}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{obj.id}"/>
                 </p:column>
 
-                <p:column headerText="Data de Locação">
+                <p:column headerText="Data de Locação"
+                          sortBy="#{obj.dataLocacao}"
+                          filterBy="#{textFormaterService.formatData(obj.dataLocacao)}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatData(obj.dataLocacao)}"/>
                 </p:column>
 
-                <p:column headerText="Data de Devolução Prevista">
+                <p:column headerText="Data de Devolução Prevista"
+                          sortBy="#{obj.dataPrevDevolucao}"
+                          filterBy="#{textFormaterService.formatData(obj.dataPrevDevolucao)}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatData(obj.dataPrevDevolucao)}"/>
                 </p:column>
 
-                <p:column headerText="Locador">
+                <p:column headerText="Locador"
+                          sortBy="#{obj.dependente.toStringNomeClienteCpf()}"
+                          filterBy="#{obj.dependente.toStringNomeClienteCpf()}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{obj.dependente.nome} - #{obj.dependente.cliente.nome}"/>
                 </p:column>
 
-                <p:column headerText="Atendente">
+                <p:column headerText="Atendente"
+                          sortBy="#{obj.funcionario.nome}"
+                          filterBy="#{obj.funcionario.nome}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{obj.funcionario.nome}"/>
                 </p:column>
 
-                <p:column headerText="Preço">
+                <p:column headerText="Preço"
+                          sortBy="#{obj.precoLocacao}"
+                          filterBy="#{obj.precoLocacao}"
+                          filterMatchMode="contains">
                     <h:outputText value="#{textFormaterService.formatDinheiro(obj.precoLocacao)}"/>
                 </p:column>
 
