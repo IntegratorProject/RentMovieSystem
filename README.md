@@ -26,6 +26,6 @@
 * https://github.com/IntegratorProject
 
 ## Contato
-ramosmatheusc@gmail.com
-gustavo_santostr@hotmail.com
+ramosmatheusc@gmail.com<br/>
+gustavo_santostr@hotmail.com<br/>
 eduardo_acj
