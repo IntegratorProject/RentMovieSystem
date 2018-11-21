@@ -6,7 +6,7 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
-        
+
 
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
@@ -91,7 +91,7 @@
                     </f:facet>
 
                     <h:outputText value="#{document.classificacaoEtaria}"/>
-                    
+
                 </p:column>
 
                 <p:column headerText="Ações">
@@ -159,10 +159,11 @@
                         <f:selectItem itemLabel="Drama" itemValue="Drama" />                        
                         <f:selectItem itemLabel="Erótico" itemValue="Erótico" />
                         <f:selectItem itemLabel="Ficção Científica" itemValue="Ficção Científica" />
+                        <f:selectItem itemLabel="Guerra" itemValue="Guerra" />
                         <f:selectItem itemLabel="Musical" itemValue="Musical" />
                         <f:selectItem itemLabel="Romance" itemValue="Romance" />
                         <f:selectItem itemLabel="Suspense" itemValue="Suspense" />
-                        <f:selectItem itemLabel="Terror" itemValue="Terror" />
+                        <f:selectItem itemLabel="Terror" itemValue="Terror" />   
                     </p:selectOneMenu>
 
                     <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
@@ -185,7 +186,6 @@
                     <p:selectOneMenu id="tipo" value="#{acervoMB.midia.tipo}">
                         <f:selectItem itemLabel="DVD" itemValue="DVD" />
                         <f:selectItem itemLabel="Blu-Ray" itemValue="Blu-ray" />
-                        <f:selectItem itemLabel="CD" itemValue="CD" />
                         <f:selectItem itemLabel="Jogo" itemValue="Jogo" />
                     </p:selectOneMenu>         
 
@@ -325,6 +325,7 @@
                         <f:selectItem itemLabel="Drama" itemValue="Drama" />                        
                         <f:selectItem itemLabel="Erótico" itemValue="Erótico" />
                         <f:selectItem itemLabel="Ficção Científica" itemValue="Ficção Científica" />
+                        <f:selectItem itemLabel="Guerra" itemValue="Guerra" />
                         <f:selectItem itemLabel="Musical" itemValue="Musical" />
                         <f:selectItem itemLabel="Romance" itemValue="Romance" />
                         <f:selectItem itemLabel="Suspense" itemValue="Suspense" />
@@ -349,7 +350,6 @@
                 <p:selectOneMenu id="tipo" value="#{acervoMB.midia.tipo}" >
                     <f:selectItem itemLabel="DVD" itemValue="DVD" />
                     <f:selectItem itemLabel="Blu-Ray" itemValue="Blu-ray" />
-                    <f:selectItem itemLabel="CD" itemValue="CD" />
                     <f:selectItem itemLabel="Jogo" itemValue="Jogo" />
                 </p:selectOneMenu>         
 
