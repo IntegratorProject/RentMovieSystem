@@ -6,11 +6,13 @@
                 template="../WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
-        <h:head>
-            <link href="#{facesContext.externalContext.request.contextPath}/resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"></link>
-        </h:head>
+
+        <f:facet name="last">
+            <h:outputStylesheet library="algaworks" name="styles/bootstrap.min.css" />
+        </f:facet>
+
         <h:body>
-            <div style="padding-top: 10px">
+            <div style="padding-top: 20px">
                 <h:form>
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
@@ -108,6 +110,5 @@
             </div>
         </h:body>
     </ui:define>
-
 
 </ui:composition>
