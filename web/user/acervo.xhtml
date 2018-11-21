@@ -148,11 +148,22 @@
 
                     <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
                     <p:selectOneMenu id="genero" value="#{acervoMB.acervo.genero}">
-                        <f:selectItem itemLabel="Jogos" itemValue="Jogos" /><!--Apenas exemplos-->
-                        <f:selectItem itemLabel="Ação" itemValue="2" /><!--Apenas exemplos-->
-                        <f:selectItem itemLabel="Filmes" itemValue="2" /><!--Apenas exemplos-->
-                        <f:selectItem itemLabel="Terror" itemValue="2" /><!--Apenas exemplos-->                        
-                    </p:selectOneMenu><!--Utilizar selectonemenu grouping (separar filmes e jogos) https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml-->
+                        <f:selectItem itemLabel="Ação" itemValue="Ações" />
+                        <f:selectItem itemLabel="Animação" itemValue="Animação" />
+                        <f:selectItem itemLabel="Aventura" itemValue="Aventura" />
+                        <f:selectItem itemLabel="Arte" itemValue="Arte" />
+                        <f:selectItem itemLabel="Comédia" itemValue="Comédia" />
+                        <f:selectItem itemLabel="Comédia Romântica" itemValue="Comédia Romântica" />                        
+                        <f:selectItem itemLabel="Dança" itemValue="Dança" />                        
+                        <f:selectItem itemLabel="Documentário" itemValue="Documentário" />                        
+                        <f:selectItem itemLabel="Drama" itemValue="Drama" />                        
+                        <f:selectItem itemLabel="Erótico" itemValue="Erótico" />
+                        <f:selectItem itemLabel="Ficção Científica" itemValue="Ficção Científica" />
+                        <f:selectItem itemLabel="Musical" itemValue="Musical" />
+                        <f:selectItem itemLabel="Romance" itemValue="Romance" />
+                        <f:selectItem itemLabel="Suspense" itemValue="Suspense" />
+                        <f:selectItem itemLabel="Terror" itemValue="Terror" />
+                    </p:selectOneMenu>
 
                     <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
                     <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
@@ -164,7 +175,7 @@
                         <f:selectItem itemLabel="18" itemValue="18" />
                     </p:selectOneMenu>
 
-                </h:panelGrid>
+                </h:panelGrid> 
 
                 <div style="border: 0.5px solid black; width: 99%; margin-top: 10px"></div>
                 <br/>
