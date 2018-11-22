@@ -33,7 +33,7 @@
                                     <p:panelMenu  style="width:300px">
                                         <p:submenu  label="Locações">
                                             <p:menuitem value="Locações" onclick="Mudarestado('formLocacoes')" icon="fa fa-star" />
-                                            <p:menuitem value="Detalhes mídias locadas" onclick="MudarestadoLocacaoDetalhesMidiasLocadas('formDetalhesMidiasLocadas')"  icon="fa fa-star" />
+                                            <p:menuitem value="Detalhes mídias locadas" onclick="Mudarestado('formDetalhesMidiasLocadas')"  icon="fa fa-star" />
                                         </p:submenu>
 
                                     </p:panelMenu><br/>
@@ -42,8 +42,8 @@
                                         <p:submenu  label="Produtos">
 
                                             <p:menuitem value="Estoque mínimo" onclick="Mudarestado('formEstoqueMinimo')" icon="fa fa-star" />
-                                            <p:menuitem value="Estoque em data específica"  onclick="Mudarestado('formEstoqueEmDataEspecífica')"  icon="fa fa-star" />
-                                            <p:menuitem value="Estoque histórico por produto"   icon="fa fa-star" />
+                                            <p:menuitem value="Estoque em data específica" onclick="Mudarestado('formEstoqueEmDataEspecífica')"  icon="fa fa-star" />
+                                            <p:menuitem value="Estoque histórico por produto" icon="fa fa-star" />
                                         </p:submenu>
 
                                     </p:panelMenu><br/>
@@ -67,8 +67,8 @@
 
                                 <div class="panel-heading negrito"><i class="fa fa-cubes" aria-hidden="true"></i>  Painel de controle</div>
 
-                                <div class="panel-body" id="formLocacoes">
-                                    anel Contentaslndlasndkas<br/>
+                                <div class="panel-body, hd_div" style="display: none;" id="formLocacoes">
+                                    Locacao<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -77,8 +77,8 @@
                                     a´sdçasdasdsa<br/>
                                 </div>
 
-                                <div class="panel-body" id="formDetalhesMidiasLocadas">
-                                    anel Contentaslndlasndkas<br/>
+                                <div class="panel-body, hd_div" style="display: none;" id="formDetalhesMidiasLocadas">
+                                    Detalhes Locacao<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -88,7 +88,7 @@
                                 </div>                               
 
 
-                                <div class="panel-body" id="formEstoqueMinimo">
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoqueMinimo">
                                     anel Contentaslndlasndkas<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -97,7 +97,7 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                 </div>
-                                <div class="panel-body" id="formEstoqueEmDataEspecífica">
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoqueEmDataEspecífica">
                                     Panel Contentaslndlasndkas<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -106,7 +106,7 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                 </div> 
-                                <div class="panel-body" id="formEstoqueHistoricoPorProduto">
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoqueHistoricoPorProduto">
                                     anel Contentaslndlasndkas<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -115,7 +115,7 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                 </div>
-                                <div class="panel-body" id="formEstoquePorHistoricoDeProduto">
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoquePorHistoricoDeProduto">
                                     anel Contentaslndlasndkas<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -124,7 +124,7 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                 </div>  
-                                <div class="panel-body" id="formClientes">
+                                <div class="panel-body, hd_div" style="display: none;" id="formClientes">
                                     anel Contentaslndlasndkas<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -133,7 +133,7 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                 </div>  
-                                <div class="panel-body" id="formClientesInativos">
+                                <div class="panel-body, hd_div" style="display: none;" id="formClientesInativos">
                                     anel Contentaslndlasndkas<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -142,14 +142,10 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                 </div>  
-
 
                             </div>
                         </div>
                     </div>
-
-
-
 
                 </h:form>
             </div>
