@@ -7,7 +7,163 @@
 
     <ui:define name="content">
 
-       
+        <h:head>
+            <link href="#{facesContext.externalContext.request.contextPath}/resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"/>
+            <script type="text/javascript" src="#{facesContext.externalContext.request.contextPath}/resources/algaworks/javascripts/relatorio.js"></script>
+        </h:head> 
+        <h:body>
+
+            <div style="padding-top: 10px">
+                <h:form>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading negrito" ><i class="fa fa-star" aria-hidden="true"></i>  Favoritos</div>
+                                <div class="panel-body">
+                                    <font style="font-size: 18px">Nenhum favorito adicionado</font><br/>
+                                    Para adicionar, clique no icone <i class="fa fa-star" aria-hidden="true"></i>  ao lado do nome do relatório.
+
+
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading negrito"><i class="fa fa-cog" aria-hidden="true"></i>  Opções</div>
+                                <div class="panel-body">
+
+                                    <p:panelMenu  style="width:300px">
+                                        <p:submenu  label="Locações">
+                                            <p:menuitem value="Locações" onclick="Mudarestado('formLocacoes')" icon="fa fa-star" />
+                                            <p:menuitem value="Detalhes mídias locadas" onclick="MudarestadoLocacaoDetalhesMidiasLocadas('formDetalhesMidiasLocadas')"  icon="fa fa-star" />
+                                        </p:submenu>
+
+                                    </p:panelMenu><br/>
+                                    <p:panelMenu  style="width:300px">
+
+                                        <p:submenu  label="Produtos">
+
+                                            <p:menuitem value="Estoque mínimo" onclick="Mudarestado('formEstoqueMinimo')" icon="fa fa-star" />
+                                            <p:menuitem value="Estoque em data específica"  onclick="Mudarestado('formEstoqueEmDataEspecífica')"  icon="fa fa-star" />
+                                            <p:menuitem value="Estoque histórico por produto"   icon="fa fa-star" />
+                                        </p:submenu>
+
+                                    </p:panelMenu><br/>
+
+                                    <p:panelMenu  style="width:300px">
+                                        <p:submenu  label="Clientes">
+                                            <p:menuitem value="Clientes"  icon="fa fa-star" />
+                                            <p:menuitem value="Clientes inativos"  icon="fa fa-star" />
+
+                                        </p:submenu>
+
+                                    </p:panelMenu>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="panel panel-default">
+
+
+                                <div class="panel-heading negrito"><i class="fa fa-cubes" aria-hidden="true"></i>  Painel de controle</div>
+
+                                <div class="panel-body" id="formLocacoes">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>
+
+                                <div class="panel-body" id="formDetalhesMidiasLocadas">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>                               
+
+
+                                <div class="panel-body" id="formEstoqueMinimo">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>
+                                <div class="panel-body" id="formEstoqueEmDataEspecífica">
+                                    Panel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div> 
+                                <div class="panel-body" id="formEstoqueHistoricoPorProduto">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>
+                                <div class="panel-body" id="formEstoquePorHistoricoDeProduto">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>  
+                                <div class="panel-body" id="formClientes">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>  
+                                <div class="panel-body" id="formClientesInativos">
+                                    anel Contentaslndlasndkas<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                    a´sdçasdasdsa<br/>
+                                </div>  
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </h:form>
+            </div>
+
+
+
+
+
+
+
+
+        </h:body>
+
 
     </ui:define>
 
