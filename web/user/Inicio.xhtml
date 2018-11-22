@@ -6,10 +6,10 @@
                 template="../WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
-        <h:head>
-            <link href="#{facesContext.externalContext.request.contextPath}/resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"></link>
-        </h:head> 
-       <h:body>
+        
+        <h:outputStylesheet library="algaworks" name="styles/bootstrap.min.css" />
+        
+        <h:body>
             <div style="padding-top: 10px">
                 <h:form>
                     <div class="row">

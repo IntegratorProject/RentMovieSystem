@@ -7,10 +7,9 @@
 
     <ui:define name="content">
 
-        <h:head>
-            <link href="#{facesContext.externalContext.request.contextPath}/resources/algaworks/styles/bootstrap.min.css" rel="stylesheet"/>
-            <script type="text/javascript" src="#{facesContext.externalContext.request.contextPath}/resources/algaworks/javascripts/relatorio.js"></script>
-        </h:head> 
+        <h:outputStylesheet library="algaworks" name="styles/bootstrap.min.css" />
+        <h:outputScript target="body" library="algaworks" name="javascripts/relatorio.js" />
+
         <h:body>
 
             <div style="padding-top: 10px">
