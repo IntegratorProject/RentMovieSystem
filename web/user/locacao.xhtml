@@ -6,7 +6,7 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
-        
+
 
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
@@ -31,7 +31,7 @@
         <h:form id="topMessage">
             <p:growl showDetail="true" sticky="false" />
         </h:form>
-        
+
         <h:form id="cadButton">
 
             <p:commandButton value="Nova Locação" onclick="PF('dlgLocacao').show();" icon="fa fa-user-plus" styleClass="ui-color-green" />
@@ -252,12 +252,12 @@
                                          actionListener="#{locacaoMB.alterarItemLocacao(obj)}" 
                                          update="@form" 
                                          styleClass="ui-priority-primary">
-                        
+
                             <f:setPropertyActionListener target="#{locacaoMB.itemLocacao}" value="#{obj}"/>
-                        
+
                         </p:commandButton>
 
-                        
+
                         <!--BOTÃO EXCLUIR-->
                         <p:commandButton title="Excluir" icon="fa fa-trash"  
                                          actionListener="#{locacaoMB.addItensLocacaoRemovidos(obj)}" 
@@ -288,32 +288,49 @@
 
             <h:form id="formDialogDetalhes">
                 <!--Informações Gerais-->
-                <h:panelGrid columns="2">
 
-                    <h:outputLabel for="detalhesID" value="ID:" />
-                    <h:outputText id="detalhesID" value="#{locacaoMB.locacao.id}"/>
+                <div class="panel panel-danger">
+                    <div class="panel-heading" >
+                        <h:outputLabel for="detalhesID" class="negrito" value="ID: " />
+                        <h:outputText id="detalhesID" value="#{locacaoMB.locacao.id}"/>
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesLocador" class="negrito" value="Locador: " />
+                        <h:outputText id="detalhesLocador" 
+                                      value="#{locacaoMB.locacao.dependente.nome} - #{locacaoMB.locacao.dependente.cliente.nome} 
+                                      - #{textFormaterService.formatCPF(locacaoMB.locacao.dependente.cliente.cpf)}"/>
+                    </div>
+                </div>
+                <h:outputLabel for="detalhesStatus" class="negrito" value="Status: " />
+                <h:outputText id="detalhesStatus" value="#{locacaoMB.definirStatus(locacaoMB.locacao)}"/>
 
-                    <h:outputLabel for="detalhesStatus" value="Status:" />
-                    <h:outputText id="detalhesStatus" value="#{locacaoMB.definirStatus(locacaoMB.locacao)}"/>
+                <hr/>
 
-                    <h:outputLabel for="detalhesLocador" value="Locador:" />
-                    <h:outputText id="detalhesLocador" 
-                                  value="#{locacaoMB.locacao.dependente.nome} - #{locacaoMB.locacao.dependente.cliente.nome} 
-                                  - #{textFormaterService.formatCPF(locacaoMB.locacao.dependente.cliente.cpf)}"/>
+                <div class="panel panel-danger">
+                    <div class="panel-heading " >
+                        <h:outputLabel for="detalhesDataLocacao" class="negrito"  value="Data de Locação: " />
+                        <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataLocacao)}"/>
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesDataPrevDevolucao" class="negrito" value="Data de Devolução Prevista: " />
+                        <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPrevDevolucao)}"/>
 
-                    <h:outputLabel for="detalhesDataLocacao" value="Data de Locação:" />
-                    <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataLocacao)}"/>
 
-                    <h:outputLabel for="detalhesDataPrevDevolucao" value="Data de Devolução Prevista:" />
-                    <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPrevDevolucao)}"/>
+                    </div>
+                </div>
 
-                    <h:outputLabel for="detalhesDataDevolucao" value="Data de Devolução:" />
-                    <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataDevolucao)}"/>
+                <div class="panel panel-danger">
+                    <div class="panel-heading " >
+                        <h:outputLabel for="detalhesDataDevolucao" class="negrito" value="Data de Devolução: " />
+                        <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(locacaoMB.locacao.dataDevolucao)}"/>
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesDataPagamento"  class="negrito" value="Data de Pagamento: " />
+                        <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPagamento)}"/>
+                    </div>
+                </div>
 
-                    <h:outputLabel for="detalhesDataPagamento" value="Data de Pagamento:" />
-                    <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(locacaoMB.locacao.dataPagamento)}"/>
 
-                </h:panelGrid>
 
                 <br/>
 
@@ -369,15 +386,18 @@
 
                 <!--Informações de Preço-->
 
-                <h:panelGrid columns="2">
-
-                    <h:outputLabel for="detalhesPrecoLocacao" value="Preço da Locação:" />
-                    <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}"/>
-
-                    <h:outputLabel for="detalhesValorPago" value="Valor Pago:" />
-                    <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorPago)}"/>
-
-                </h:panelGrid>
+                <div class="panel panel-danger">
+                    <div class="panel-heading" >
+                        <h:outputLabel for="detalhesPrecoLocacao" class="negrito" value="Preço da Locação: " />
+                        <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}"/>
+                    </div>
+                    <div class="panel-body">
+                         
+                            <h:outputLabel for="detalhesValorPago" class="negrito" value="Valor Pago: " />
+                            <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorPago)}"/>
+                    </div>
+                </div>
+              
             </h:form>
         </p:dialog>
 
@@ -399,7 +419,7 @@
                                      placeholder="Informe as palavras chave"/>
                     </p:outputPanel>
                 </f:facet>
-                
+
                 <p:column headerText="ID" 
                           filterBy="#{obj.id}"
                           filterMatchMode="contains">
@@ -445,7 +465,7 @@
                           sortBy="#{locacaoMB.definirStatus(obj)}"
                           filterBy="#{locacaoMB.definirStatus(obj)}"
                           filterMatchMode="equals">
-                    
+
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('tabelaLocacao').filter()" styleClass="custom-filter">
                             <f:selectItem itemLabel="Todos" itemValue=""/>
@@ -454,7 +474,7 @@
                             <f:selectItem itemLabel="Corrente" itemValue="Corrente" />
                         </p:selectOneMenu>
                     </f:facet>
-                    
+
                     <h:outputText value="#{locacaoMB.definirStatus(obj)}"/>
                 </p:column>
 
@@ -485,8 +505,8 @@
                                      onclick="PF('dlgAlterarLocacao').show();"
                                      actionListener="#{locacaoMB.carregarAlteracao(obj)}"
                                      rendered="#{!locacaoMB.definirStatus(obj).equals('Concluído')}">
-                        
-                        
+
+
                     </p:commandButton>
 
                     <!--BOTÃO EXCLUIR-->
@@ -510,7 +530,7 @@
                                      styleClass="ui-priority-primary" 
                                      rendered="#{obj.reserva}"
                                      actionListener="#{locacaoMB.modificarStatusLocacao(obj)}"/>
-                    
+
                 </p:column>
 
             </p:dataTable>
@@ -523,6 +543,7 @@
             </p:confirmDialog>
 
         </h:form>
+
 
     </ui:define>
 

@@ -139,3 +139,33 @@ body {
 .corBotaoSair{
     color: red !important;
 }
+
+/*TEXTO*/
+
+.negrito{
+    font-weight: bold;
+}
+
+/*FOOTER
+
+#rodape{
+    position: fixed;
+    bottom:0;
+    width: 100px;
+    height: 30px;
+    margin-left: 0;
+    z-index: 100;
+    background-color: #FFFFFF;
+    
+}
+
+#footer-Left{
+    font-size: 15px;
+    line-height: 11px;
+    padding:10px 0px 10px 0px;
+    border-top: 1px solid gray;
+    height: 12px;
+}
+.footerCentralizar{
+  text-align: center;  
+}*/

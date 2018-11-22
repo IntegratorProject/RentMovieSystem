@@ -6,7 +6,7 @@
                 template="/WEB-INF/templates/Layout.xhtml">
 
     <ui:define name="content">
-        
+
 
         <script type="text/javascript">
             function handleDialogSubmit(xhr, status, args) {
@@ -152,32 +152,44 @@
 
             <h:form id="formDialogDetalhes">
                 <!--Informações Gerais-->
-                <h:panelGrid columns="2">
+                <div class="panel panel-danger">
+                    <div class="panel-heading " >
+                        <h:outputLabel for="detalhesID"  class="negrito" value="ID :" />
+                        <h:outputText id="detalhesID"  value="#{devolucaoMB.locacao.id}"/>
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesStatus" class="negrito" value="Status: " />
+                        <h:outputText id="detalhesStatus" value="#{devolucaoMB.definirStatus(devolucaoMB.locacao)}"/>
+                    </div>
+                </div>
+                <h:outputLabel for="detalhesLocador" class="negrito" value="Locador: " />
+                <h:outputText id="detalhesLocador" 
+                              value="#{devolucaoMB.locacao.dependente.nome} - #{devolucaoMB.locacao.dependente.cliente.nome} 
+                              - #{textFormaterService.formatCPF(devolucaoMB.locacao.dependente.cliente.cpf)}"/>
+                <hr/>
 
-                    <h:outputLabel for="detalhesID" value="ID:" />
-                    <h:outputText id="detalhesID" value="#{devolucaoMB.locacao.id}"/>
+                <div class="panel panel-danger">
+                    <div class="panel-heading " >
+                        <h:outputLabel for="detalhesDataLocacao"  class="negrito" value="Data de Locação: " />
+                        <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataLocacao)}"/>
 
-                    <h:outputLabel for="detalhesStatus" value="Status:" />
-                    <h:outputText id="detalhesStatus" value="#{devolucaoMB.definirStatus(devolucaoMB.locacao)}"/>
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesDataPrevDevolucao" class="negrito" value="Data de Devolução Prevista: " />
+                        <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataPrevDevolucao)}"/>
 
-                    <h:outputLabel for="detalhesLocador" value="Locador:" />
-                    <h:outputText id="detalhesLocador" 
-                                  value="#{devolucaoMB.locacao.dependente.nome} - #{devolucaoMB.locacao.dependente.cliente.nome} 
-                                  - #{textFormaterService.formatCPF(devolucaoMB.locacao.dependente.cliente.cpf)}"/>
-
-                    <h:outputLabel for="detalhesDataLocacao" value="Data de Locação:" />
-                    <h:outputText id="detalhesDataLocacao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataLocacao)}"/>
-
-                    <h:outputLabel for="detalhesDataPrevDevolucao" value="Data de Devolução Prevista:" />
-                    <h:outputText id="detalhesDataPrevDevolucao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataPrevDevolucao)}"/>
-
-                    <h:outputLabel for="detalhesDataDevolucao" value="Data de Devolução:" />
-                    <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataDevolucao)}"/>
-
-                    <h:outputLabel for="detalhesDataPagamento" value="Data de Pagamento:" />
-                    <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataPagamento)}"/>
-
-                </h:panelGrid>
+                    </div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading " >
+                        <h:outputLabel for="detalhesDataDevolucao" class="negrito" value="Data de Devolução: " />
+                        <h:outputText id="detalhesDataDevolucao" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataDevolucao)}"/>
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesDataPagamento"  class="negrito" value="Data de Pagamento: " />
+                        <h:outputText id="detalhesDataPagamento" value="#{textFormaterService.formatData(devolucaoMB.locacao.dataPagamento)}"/>
+                    </div>
+                </div>
 
                 <br/>
 
@@ -222,16 +234,19 @@
                 <br/>
 
                 <!--Informações de Preço-->
+                <div class="panel panel-danger">
+                    <div class="panel-heading" >
+                        <h:outputLabel for="detalhesPrecoLocacao" class="negrito" value="Preço da Locação: " />
+                        <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.precoLocacao)}"/>
 
-                <h:panelGrid columns="2">
+                    </div>
+                    <div class="panel-body">
+                        <h:outputLabel for="detalhesValorPago" class="negrito" value="Valor Pago: " />
+                        <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorPago)}"/>
 
-                    <h:outputLabel for="detalhesPrecoLocacao" value="Preço da Locação:" />
-                    <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.precoLocacao)}"/>
+                    </div>
+                </div>
 
-                    <h:outputLabel for="detalhesValorPago" value="Valor Pago:" />
-                    <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorPago)}"/>
-
-                </h:panelGrid>
             </h:form>
         </p:dialog>
 
@@ -251,18 +266,18 @@
                                      onkeyup="PF('tabelaLocacao').filter()"
                                      style="width:200px;"
                                      placeholder="Informe as palavras chave"/>
-                        
-                         <h:outputText value=" "/>
-                        
-                         <p:selectOneMenu value="#{devolucaoMB.filtro}" styleClass="float: left">
+
+                        <h:outputText value=" "/>
+
+                        <p:selectOneMenu value="#{devolucaoMB.filtro}" styleClass="float: left">
                             <f:selectItem itemLabel="Todos" itemValue=""/>
                             <f:selectItem itemLabel="Atrasados" itemValue="Atrasados" />
                             <f:selectItem itemLabel="Hoje" itemValue="Hoje" />
-                            
+
                             <f:ajax listener="#{devolucaoMB.updateFiltredList()}" render="@form"/>
-                            
+
                         </p:selectOneMenu>
-                        
+
                     </p:outputPanel>
                 </f:facet>
 
