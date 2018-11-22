@@ -11,16 +11,27 @@
         <title>Acesso Negado</title>
         <style type="text/css">
             #centro{
-                height: 200px;
-                width: 400px;
 
+                position: relative;
+                width:100%;
+                height:200px;
 
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                margin-top: -100px;
-                margin-left: -200px;
             }
+            #interna {
+                left:50%;
+                top:50%;
+                margin-left:-350px; /* Metade do valor da Largura */
+                margin-top:-100px; /* Metade da valor da Altura */
+                position:absolute;
+                /*                width:200px;  Valor da Largura 
+                                height:100px;  Valor da Altura */
+
+
+            }
+
+
+
+
             #imgLogo{
                 position: absolute;
                 margin-left: 100px;}
@@ -32,16 +43,19 @@
         </style>
     </head>
     <body>
-        <div id="centro"> 
 
-            <img  src="#{facesContext.externalContext.request.contextPath}//resources/algaworks/images/logo2.png" />
+        <div id="interna" > 
+
+            <img  src="#{facesContext.externalContext.request.contextPath}//resources/algaworks/images/logoNova.png" />
             <br/>
             <br/>
-            <div class="alert alert-danger" role="alert">
-                Acesso negado!
+            <div class="alert alert-danger" role="alert" style="font-size: 15pt;">
+                <p> Acesso negado!</p>
             </div>
+            <br/>
+            <a  href="#{facesContext.externalContext.request.contextPath}/user/Inicio.xhtml" class="btn btn-info right" style="font-size: 20pt;">Retornar ao Início</a>
 
-            <a  href="#{facesContext.externalContext.request.contextPath}/user/Inicio.xhtml" class="btn btn-info right">Retornar ao Início</a>
         </div>
+
     </body>
 </html>
