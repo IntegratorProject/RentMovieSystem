@@ -7,6 +7,14 @@
             <li id="selectMenuInicio" class="selectMenu">
                 <h:link outcome="/user/Inicio.xhtml"><i class="fa  fa-fw  fa-home"></i>Início</h:link>
             </li>
+            
+            <li id="selectMenuLocacao" class="selectMenu">
+                <h:link outcome="/user/locacao.xhtml"><i class="fa fa-book"></i> Locação</h:link>
+            </li>
+            <li id="selectMenuDevolucao" class="selectMenu">
+                <h:link outcome="/user/devolucao.xhtml"><i class="fa fa-history"></i> Devoluções</h:link>
+            </li>
+            
             <li id="selectMenuCliente" class="selectMenu">
                 <h:link outcome="/user/cliente.xhtml"><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
             </li>
@@ -22,12 +30,7 @@
             <li id="selectMenuRelatorios" class="selectMenu">
                 <h:link outcome="/admin/relatorio.xhtml"><i class="fa fa-bar-chart"></i> Relatórios</h:link>
             </li>
-            <li id="selectMenuLocacao" class="selectMenu">
-                <h:link outcome="/user/locacao.xhtml"><i class="fa fa-book"></i> Locação</h:link>
-            </li>
-            <li id="selectMenuDevolucao" class="selectMenu">
-                <h:link outcome="/user/devolucao.xhtml"><i class="fa fa-history"></i> Devoluções</h:link>
-            </li>
+            
             <li id="selectMenuSair" class="selectMenu">
                 <a class="corBotaoSair" href="#{facesContext.externalContext.request.contextPath}/j_spring_security_logout"><i class="fa fa-sign-out"></i> Sair</a>
             </li>
