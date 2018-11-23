@@ -34,6 +34,7 @@
                                         <p:submenu  label="Locações">
                                             <p:menuitem value="Locações" onclick="Mudarestado('formLocacoes')" icon="fa fa-star" />
                                             <p:menuitem value="Detalhes mídias locadas" onclick="Mudarestado('formDetalhesMidiasLocadas')"  icon="fa fa-star" />
+                                            <p:menuitem value="Faturamento" onclick="Mudarestado('formFaturamento')" icon="fa fa-star"/>
                                         </p:submenu>
 
                                     </p:panelMenu><br/>
@@ -90,62 +91,101 @@
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
-                                </div>                               
+                                </div>       
+
+
+                                <div class="panel-body, hd_div" style="display: none;" id="formFaturamento">
+
+                                    <div class="p-grid">
+                                        <div class="p-col">
+                                            <div class="box">
+                                                <h:outputLabel  value="De:  " />
+                                                <p:calendar id="calendarDataInicial" 
+                                                            pattern="dd/MM/yyyy" 
+                                                            value="#{locacaoMB.locacao.dataLocacao}" 
+                                                            mask="true"
+                                                            required="true"
+                                                            requiredMessage="Preencha o campo Data de Locação"/>
+                                            </div>
+                                        </div>
+                                        <div class="p-col">
+                                            <div class="box">
+                                                <h:outputLabel  value="Até: "/>
+
+                                                <p:calendar id="calendarDataFinal" 
+                                                            pattern="dd/MM/yyyy" 
+                                                            value="#{locacaoMB.locacao.dataLocacao}" 
+                                                            mask="true"
+                                                            required="true"
+                                                            requiredMessage="Preencha o campo Data de Locação"/>
+                                            </div>
+                                        </div>
+                                        <br/>
+
+                                        <div class="p-col">
+                                            <div class="box">
+                                                <p:commandButton ajax="false" value="Baixar Relatório"  />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>   
+
+
 
 
                                 <div class="panel-body, hd_div" style="display: none;" id="formEstoqueMinimo">
-                                    anel Contentaslndlasndkas<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
+
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+
                                 </div>
                                 <div class="panel-body, hd_div" style="display: none;" id="formEstoqueEmDataEspecífica">
-                                    Panel Contentaslndlasndkas<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
                                 </div> 
                                 <div class="panel-body, hd_div" style="display: none;" id="formEstoqueHistoricoPorProduto">
-                                    anel Contentaslndlasndkas<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
                                 </div>
                                 <div class="panel-body, hd_div" style="display: none;" id="formEstoquePorHistoricoDeProduto">
-                                    anel Contentaslndlasndkas<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
                                 </div>  
                                 <div class="panel-body, hd_div" style="display: none;" id="formClientes">
-                                    anel Contentaslndlasndkas<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
                                 </div>  
                                 <div class="panel-body, hd_div" style="display: none;" id="formClientesInativos">
-                                    anel Contentaslndlasndkas<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
-                                    a´sdçasdasdsa<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
                                 </div>  
 
                             </div>
