@@ -26,7 +26,7 @@
         <h1 class="aw-page-title">Devoluções</h1>
 
         <!--DIALOG DEVOLVER-->
-        <p:dialog header="Devolver locação" widgetVar="dlgDevolucao" modal="true" height="320"  width="800" >
+        <p:dialog header="Devolver locação" widgetVar="dlgDevolucao" modal="true" height="450"  width="800" minHeight="450" minWidth="800" >
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -35,21 +35,22 @@
             <h:form id="formDevolucao">
 
                 <!--HEADER-->
-                <div class="p-grid">
-                    <div class="p-col">
-                        <div class="box">
-                            <h:outputText value="Data de Locacação: #{textFormaterService.formatData(devolucaoMB.locacao.dataLocacao)}"/>
-                        </div>
+
+                <div class="panel panel-danger">
+                    <div class="panel-heading" >
+                        <h:outputLabel class="negrito" value="Data de Locacação: "></h:outputLabel>
+                        <h:outputText  value="#{textFormaterService.formatData(devolucaoMB.locacao.dataLocacao)}"/>
                     </div>
-                    <div class="p-col">
-                        <div class="box"><h:outputText value="Data de Devolução Prevista: #{textFormaterService.formatData(devolucaoMB.locacao.dataPrevDevolucao)}"/></div>
-                    </div>
-                    <div class="p-col">
-                        <div class="box"><h:outputText value="Locador: #{devolucaoMB.locacao.dependente.nome}
-                                                       - #{devolucaoMB.locacao.dependente.cliente.nome}
-                                                       - #{textFormaterService.formatCPF(devolucaoMB.locacao.dependente.cliente.cpf)}"/></div>
+                    <div class="panel-body">
+                        <h:outputLabel class="negrito" value="Data de Devolução Prevista: "></h:outputLabel>
+                        <h:outputText value=" #{textFormaterService.formatData(devolucaoMB.locacao.dataPrevDevolucao)}"/>
+
                     </div>
                 </div>
+                 <h:outputLabel class="negrito" value="Locador: "></h:outputLabel>
+                <h:outputText value="  #{devolucaoMB.locacao.dependente.nome}
+                                               - #{devolucaoMB.locacao.dependente.cliente.nome}
+                                               - #{textFormaterService.formatCPF(devolucaoMB.locacao.dependente.cliente.cpf)}"/>
 
                 <!--ITENSLOCACAO-->
                 <h3>Itens da Locacação</h3>
@@ -85,6 +86,7 @@
                         <!--BOTÃO INVIABILIZAR-->
                         <p:commandButton title="Inviabilizar" 
                                          update="@form" 
+                                         icon="fa fa-times"
                                          styleClass="ui-color-red"
                                          rendered="#{!obj.devolvido}"
                                          actionListener="#{devolucaoMB.devolver(obj, true)}"/>
@@ -92,9 +94,11 @@
                         <!--BOTÃO DEVOLVER-->
                         <p:commandButton title="Devolver" 
                                          update="@form" 
+                                         icon="fa fa-history"
                                          styleClass="ui-priority-primary"
                                          rendered="#{!obj.devolvido}"
                                          actionListener="#{devolucaoMB.devolver(obj, false)}"/>
+
 
                     </p:column>
 
@@ -112,7 +116,7 @@
                     <h:outputText id="display" />
                     <br/>
 
-                    <h:outputLabel for="valorMulta" value="Valor da multa:"/>
+                    <h:outputLabel class="negrito" for="valorMulta" value="Valor da multa:"/>
                     <p:inputNumber id="valorMulta" symbol="R$ " value="#{devolucaoMB.locacao.valorMulta}">
                         <f:ajax event="keyup" render="sugestaoValor"/>
                     </p:inputNumber>
@@ -122,11 +126,11 @@
                 <h:panelGrid columns="1">
 
                     <br/>
-                    <h:outputText id="sugestaoValor" value="Valor a ser Pago: R$ #{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorMulta
+                    <h:outputText id="sugestaoValor" class="negrito" value="Valor a ser Pago: R$ #{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorMulta
                                                                                    + devolucaoMB.locacao.precoLocacao)}" style="font-size: 16px"/>
                     <br/>
 
-                    <h:outputLabel for="valorPago" value="Valor pago: "/>
+                    <h:outputLabel class="negrito" for="valorPago" value="Valor pago: "/>
                     <p:inputNumber id="valorPago"  symbol="R$ " 
                                    value="#{devolucaoMB.locacao.valorPago}"
                                    required="true"
@@ -327,7 +331,7 @@
 
                     <!--BOTÃO DETALHES-->
                     <p:commandButton title="Detalhes" 
-                                     icon="fa fa-envelope-o" 
+                                     icon="fa fa-bars" 
                                      update="@form, formDialogDetalhes" 
                                      styleClass="ui-color-orange"
                                      actionListener="#{devolucaoMB.carregarItensLocacaoByLocacao(obj)}"

@@ -42,13 +42,13 @@
 
             <h:form id="formCadastro">
 
-                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value="#{funcionarioMB.funcionario.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/><br/>
                 <br/>
 
-                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputCPF">CPF:</p:outputLabel><br/>
                 <p:inputMask id="inputCPF" value="#{funcionarioMB.funcionario.cpf}"
                              required="true"
                              mask="999.999.999-99"
@@ -56,18 +56,18 @@
                              requiredMessage="Preencha o campo CPF."/> <br/>
 
                 <br/>
-                <p:outputLabel for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
                 <p:inputText id="inputLogin" value="#{funcionarioMB.funcionario.login}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
 
                 <br/>
-                <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputSenha">Senha: </p:outputLabel><br/>
                 <p:inputText id="inputSenha" type="password" required="true" value="#{funcionarioMB.funcionario.senha}"/><br/>
                 <br/>
 
                 
-                <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="cargo">Cargo:</p:outputLabel><br/>
                 <p:selectOneMenu id="cargo" value="#{funcionarioMB.funcionario.cargo}">
                     <f:selectItem itemLabel="Atendente" itemValue="Atendente" />
                     <f:selectItem itemLabel="Gerência" itemValue="Gerente" />
@@ -94,13 +94,13 @@
 
             <h:form id="formAlterarCadastro">
 
-                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value="#{funcionarioMB.funcionario.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/><br/>
                 <br/>
 
-                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputCPF">CPF:</p:outputLabel><br/>
                 <p:inputMask id="inputCPF" value="#{funcionarioMB.funcionario.cpf}"
                              required="true"
                              mask="999.999.999-99"
@@ -108,18 +108,18 @@
                              requiredMessage="Preencha o campo CPF."/> <br/>
 
                 <br/>
-                <p:outputLabel for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputLogin">Nome de usuário(login): </p:outputLabel><br/>
                 <p:inputText id="inputLogin" value="#{funcionarioMB.funcionario.login}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
 
                 <br/>
-                <p:outputLabel for="inputSenha">Senha: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputSenha">Senha: </p:outputLabel><br/>
                 <p:inputText id="inputSenha" type="password" required="true" value="#{funcionarioMB.funcionario.senha}"/><br/>
                 <br/>
 
                 
-                <p:outputLabel for="cargo">Cargo:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="cargo">Cargo:</p:outputLabel><br/>
                 <p:selectOneMenu id="cargo" value="#{funcionarioMB.funcionario.cargo}">
                     <f:selectItem itemLabel="Atendente" itemValue="Atendente" />
                     <f:selectItem itemLabel="Gerência" itemValue="Gerente" />

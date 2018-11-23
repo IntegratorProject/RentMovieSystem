@@ -49,7 +49,7 @@
 
                 <h:panelGrid columns="2">
 
-                    <h:outputLabel for="selectOneMenuCliente" value="Locador:" />
+                    <h:outputLabel class="negrito" for="selectOneMenuCliente" value="Locador:" />
                     <p:selectOneMenu id="selectOneMenuCliente" value="#{locacaoMB.locacao.dependente}"
                                      converter="converterDependente"
                                      filter="true"
@@ -64,7 +64,7 @@
                         <f:ajax render="cadastroSelectOneMidia" listener="#{locacaoMB.updateValidMidias()}"/>
                     </p:selectOneMenu>
 
-                    <h:outputLabel for="calendarDataLocacao" value="Data de Locação:" />
+                    <h:outputLabel class="negrito" for="calendarDataLocacao" value="Data de Locação:" />
                     <p:calendar id="calendarDataLocacao" 
                                 pattern="dd/MM/yyyy" 
                                 value="#{locacaoMB.locacao.dataLocacao}" 
@@ -72,7 +72,7 @@
                                 required="true"
                                 requiredMessage="Preencha o campo Data de Locação"/>
 
-                    <h:outputLabel for="calendarDataDevolucao" value="Data de Devolução:" />
+                    <h:outputLabel class="negrito" for="calendarDataDevolucao" value="Data de Devolução:" />
                     <p:calendar id="calendarDataDevolucao" 
                                 pattern="dd/MM/yyyy" 
                                 value="#{locacaoMB.locacao.dataPrevDevolucao}" 
@@ -88,7 +88,7 @@
                 <!-- 		INÍCIO DE MIDIAS -->
                 <h:panelGrid columns="4">
 
-                    <h:outputText value="Midia: " />
+                    <h:outputText class="negrito" value="Midia: " />
                     <p:selectOneMenu id="cadastroSelectOneMidia" value="#{locacaoMB.midia}"
                                      filter="true"
                                      filterMatchMode="startsWith"
@@ -151,16 +151,18 @@
                                  actionListener="#{locacaoMB.cadastrar()}"
                                  oncomplete="handleDialogSubmit(xhr, status, args)"
                                  update="@form, topMessage, formTabela"/> 
-
-                <h:outputText value="Total: R$ #{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}" 
-                              style="float:right;font-size: 16px"/>
+                
+                <div style="float:right;font-size: 16px">
+                    <h:outputLabel class="negrito" value="Total: " />
+                    <h:outputText value="R$ #{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}"/>
+                </div>
 
             </h:form>
 
         </p:dialog>
 
         <!--DIALOG ALTERAR-->
-        <p:dialog header="Alterar Locação" widgetVar="dlgAlterarLocacao" modal="true" height="300" width="800" >
+        <p:dialog header="Alterar Locação" widgetVar="dlgAlterarLocacao" modal="true" height="350" width="800" minHeight="350" minWidth="800">
 
             <p:messages id="messagesAlterar" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -170,7 +172,7 @@
 
                 <h:panelGrid columns="2">
 
-                    <h:outputLabel for="selectOneMenuClienteAlterar" value="Cliente:" />
+                    <h:outputLabel class="negrito" for="selectOneMenuClienteAlterar" value="Cliente:" />
                     <p:selectOneMenu id="selectOneMenuClienteAlterar" value="#{locacaoMB.locacao.dependente}"
                                      converter="converterDependente"
                                      filter="true"
@@ -183,14 +185,14 @@
                         <f:ajax render="cadastroSelectOneMidiaAlterar" listener="#{locacaoMB.updateValidMidias()}"/>
                     </p:selectOneMenu>
 
-                    <h:outputLabel for="calendarDataLocacaoAlterar" value="Data de Locação:" />
+                    <h:outputLabel  class="negrito" for="calendarDataLocacaoAlterar" value="Data de Locação:" />
                     <p:calendar id="calendarDataLocacaoAlterar" 
                                 pattern="dd/MM/yyyy" 
                                 value="#{locacaoMB.locacao.dataLocacao}" 
                                 mask="true"
                                 disabled="#{locacaoMB.definirStatus(locacaoMB.locacao).equals('Corrente')}"/>
 
-                    <h:outputLabel for="calendarDataDevolucaoAlterar" value="Data de Previsão de Devolução:" />
+                    <h:outputLabel class="negrito" for="calendarDataDevolucaoAlterar" value="Data de Previsão de Devolução:" />
                     <p:calendar id="calendarDataDevolucaoAlterar" pattern="dd/MM/yyyy" value="#{locacaoMB.locacao.dataPrevDevolucao}" mask="true"/>
 
                 </h:panelGrid>
@@ -201,7 +203,7 @@
                 <!-- 		INÍCIO DE MIDIAS -->
                 <h:panelGrid columns="4">
 
-                    <h:outputText value="Midia: " />
+                    <h:outputText class="negrito" value="Midia: " />
                     <p:selectOneMenu id="cadastroSelectOneMidiaAlterar" value="#{locacaoMB.midia}"
                                      filter="true"
                                      filterMatchMode="startsWith"
@@ -277,14 +279,16 @@
                                  oncomplete="handleDialogAlterarSubmit(xhr, status, args)"
                                  update="@form, topMessage, formTabela"/> 
 
-                <h:outputText value="Total: R$ #{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}" style="float:right;font-size: 16px"/>
-
+                <div style="float:right;font-size: 16px">
+                    <h:outputLabel class="negrito" value="Total: " />
+                    <h:outputText value="R$#{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}" />
+                </div>
             </h:form>
 
         </p:dialog>
 
         <!--DIALOG DETALHES-->
-        <p:dialog header="Detalhes Locação" widgetVar="dlgDetalhesLocacao" modal="true" height="300" width="800" >
+        <p:dialog header="Detalhes Locação" widgetVar="dlgDetalhesLocacao" modal="true" height="350" width="800" minHeight="350" minWidth="800">
 
             <h:form id="formDialogDetalhes">
                 <!--Informações Gerais-->
@@ -370,19 +374,29 @@
                 <br/>
 
                 <!--Informações de Multa-->
-                <h:panelGrid columns="2" rendered="#{!locacaoMB.locacao.descricaoMulta.isEmpty() and locacaoMB.locacao.valorMulta != 0}">
+
+                <div rendered="#{!locacaoMB.locacao.descricaoMulta.isEmpty() and locacaoMB.locacao.valorMulta != 0}">
 
                     <f:facet name="header">
                         <h:outputText value="Multa"/>
                     </f:facet>
 
-                    <h:outputLabel for="detalhesDescricaoMulta" value="Descrição:" />
-                    <h:outputText id="detalhesDescricaoMulta" value="#{locacaoMB.locacao.descricaoMulta}"/>
+                    <div class="panel panel-danger">
+                        <div class="panel-heading" >
+                            <h:outputLabel class="negrito" for="detalhesDescricaoMulta" value="Descrição:" />
+                            <h:outputText id="detalhesDescricaoMulta" value="#{locacaoMB.locacao.descricaoMulta}"/>
+                        </div>
+                        <div class="panel-body">
+                            <h:outputLabel class="negrito" for="detalhesValorMulta" value="Valor da multa:" />
+                            <h:outputText id="detalhesValorMulta" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorMulta)}"/>
+                        </div>
+                    </div>
 
-                    <h:outputLabel for="detalhesValorMulta" value="Valor da multa:" />
-                    <h:outputText id="detalhesValorMulta" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorMulta)}"/>
 
-                </h:panelGrid>
+
+
+
+                </div>
 
                 <!--Informações de Preço-->
 
@@ -392,12 +406,12 @@
                         <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.precoLocacao)}"/>
                     </div>
                     <div class="panel-body">
-                         
-                            <h:outputLabel for="detalhesValorPago" class="negrito" value="Valor Pago: " />
-                            <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorPago)}"/>
+                        <br/>
+                        <h:outputLabel for="detalhesValorPago" class="negrito" value="Valor Pago: " />
+                        <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(locacaoMB.locacao.valorPago)}"/>
                     </div>
                 </div>
-              
+
             </h:form>
         </p:dialog>
 
@@ -489,7 +503,7 @@
 
                     <!--BOTÃO DETALHES-->
                     <p:commandButton title="Detalhes" 
-                                     icon="fa fa-envelope-o" 
+                                     icon="fa fa-bars" 
                                      update="@form, formDialogDetalhes" 
                                      styleClass="ui-color-orange"
                                      actionListener="#{locacaoMB.carregarItensLocacaoByLocacao(obj)}"

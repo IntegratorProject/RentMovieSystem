@@ -27,7 +27,7 @@
 
         <h:form id="cadButton">
 
-            <p:outputLabel>Cliente:</p:outputLabel><br/>
+            <p:outputLabel class="negrito">Cliente:</p:outputLabel><br/>
             <p:selectOneMenu id="cliente" 
                              value="#{dependenteMB.clienteAtual}"
                              converter="converterCliente"
@@ -43,38 +43,42 @@
         </h:form><br/>
 
         <!--DIALOG CADASTRO-->
-        <p:dialog header="Cadastrar Dependentes" widgetVar="dlg2" modal="true" height="250" width="350" minWidth="300">
+        <p:dialog header="Cadastrar Dependentes" widgetVar="dlg2" modal="true" height="250" width="350" minWidth="350" minHeight="250">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
             </p:messages>
 
             <h:form id="formCadastro">
-
-                <p:outputLabel for="selectedClientNome">Nome: </p:outputLabel><br/>
+                
+                <div class="panel panel-danger">
+                    <div class="panel-heading" >
+                       <p:outputLabel class="negrito" for="selectedClientNome">Nome: </p:outputLabel>
                 <h:outputText id="selectedClientNome" value="#{dependenteMB.clienteAtual.nome}"/>
-                <br/>
-                <br/>
+                    </div>
+                    <div class="panel-body">
+                       <p:outputLabel class="negrito" for="selectedClientCPF">CPF: </p:outputLabel>
+                <h:outputText id="selectedClientCPF" value="#{textFormaterService.formatCPF(dependenteMB.clienteAtual.cpf)}"/><br/><br/>
+                    </div>
+                </div>
 
-                <p:outputLabel for="selectedClientCPF">CPF: </p:outputLabel><br/>
-                <h:outputText id="selectedClientCPF" value="#{textFormaterService.formatCPF(dependenteMB.clienteAtual.cpf)}"/>
-                <br/>
-                <br/>
-
-                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+               <div class="panel panel-danger">
+                    <div class="panel-heading" >
+                        <p:outputLabel class="negrito" for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value="#{dependenteMB.dependente.nome}"
                              required="true"
-                             requiredMessage="Preencha o campo Nome."/> <br/>
-                <br/>
-
-                <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                             requiredMessage="Preencha o campo Nome."/> 
+                    </div>
+                    <div class="panel-body">
+                       <p:outputLabel class="negrito" for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
                 <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
                             value="#{dependenteMB.dependente.dataNascimento}"
                             required="true"
                             requiredMessage="Preencha o campo Data de Nascimento."/> 
+                    </div>
+                </div>
+                
                 <br/>
-                <br/>
-
                 <p:commandButton value="Cadastrar" 
                                  actionListener="#{dependenteMB.cadastrar()}" 
                                  update="@form, formTabela, topMessage"  
@@ -87,7 +91,7 @@
         </p:dialog>
 
         <!--DIALOG ALTERAR-->
-        <p:dialog header="Alterar Dependentes" widgetVar="dlgAlterar" modal="true" height="250" width="350" minWidth="300">
+        <p:dialog header="Alterar Dependentes" widgetVar="dlgAlterar" modal="true" height="250" width="350" minWidth="300" minHeight="250">
 
             <p:messages id="messagesAlterar" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -95,7 +99,7 @@
 
             <h:form id="formAlterar">
 
-                <p:outputLabel>Cliente:</p:outputLabel><br/>
+                <p:outputLabel class="negrito">Cliente:</p:outputLabel><br/>
                 <p:selectOneMenu id="clienteAlterar" 
                                  value="#{dependenteMB.dependente.cliente}"
                                  converter="converterCliente"
@@ -106,13 +110,13 @@
                 </p:selectOneMenu>  
                 <br/><br/>
 
-                <p:outputLabel for="inputNomeAlterar">Nome: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputNomeAlterar">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNomeAlterar" value="#{dependenteMB.dependente.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
                 <br/>
 
-                <p:outputLabel for="inputDataNascimentoAlterar">Data de Nascimento: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputDataNascimentoAlterar">Data de Nascimento: </p:outputLabel><br/>
                 <p:calendar id="inputDataNascimentoAlterar" pattern="dd/MM/yyyy" mask="true"
                             value="#{dependenteMB.dependente.dataNascimento}"
                             required="true"

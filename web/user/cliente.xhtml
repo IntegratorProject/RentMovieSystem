@@ -41,7 +41,7 @@
 
 
         <!--DIALOG CADASTRO-->
-        <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="420" width="280"
+        <p:dialog header="Cadastro" widgetVar="dlg2" modal="true" height="420" width="280" minHeight="420" minWidth="280"
                   resizable="false">
 
             <p:messages id="messages" showDetail="true" closable="true">
@@ -50,14 +50,14 @@
 
             <h:form id="formCadastro">
 
-                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
 
                 <br/>
 
-                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputCPF">CPF:</p:outputLabel><br/>
                 <p:inputMask validator="custom.cpfValidator" id="inputCPF" value="#{clienteMB.cliente.cpf}"
                              required="true"
                              mask="999.999.999-99"
@@ -65,14 +65,14 @@
 
                 <br/>
 
-                <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputEmail">Email:</p:outputLabel><br/>
                 <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
                              required="true"
                              requiredMessage="Preencha o campo Email."/><br/>
 
                 <br/>
 
-                <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
                 <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
                             value="#{clienteMB.cliente.dataNascimento}"
                             required="true"
@@ -80,7 +80,7 @@
 
                 <br/>
 
-                <p:outputLabel for="inputTelefone">Telefone: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputTelefone">Telefone: </p:outputLabel><br/>
                 <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
                              mask="(99) 99999-9999"
                              required="true"
@@ -88,7 +88,7 @@
 
                 <br/>
 
-                <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputEndereco">Endereço: </p:outputLabel><br/>
                 <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
                              required="true"
                              requiredMessage="Preencha o campo Endereço."/><br/>
@@ -107,7 +107,7 @@
 
 
         <!--DIALOG ATUALIZAR CADASTRO-->
-        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="280"
+        <p:dialog header="Alterar Cadastro" widgetVar="dlg3" modal="true" height="420" width="280" minHeight="420" minWidth="280"
                   resizable="false">
 
             <p:messages id="messagess" showDetail="true" closable="true">
@@ -116,14 +116,14 @@
 
             <h:form id="formAtualizarCadastro">
 
-                <p:outputLabel for="inputNome">Nome: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputNome">Nome: </p:outputLabel><br/>
                 <p:inputText id="inputNome" value="#{clienteMB.cliente.nome}"
                              required="true"
                              requiredMessage="Preencha o campo Nome."/> <br/>
 
                 <br/>
 
-                <p:outputLabel for="inputCPF">CPF:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputCPF">CPF:</p:outputLabel><br/>
                 <p:inputMask validator="custom.cpfValidator" id="inputCPF" value="#{clienteMB.cliente.cpf}"
                              required="true"
                              mask="999.999.999-99"
@@ -131,14 +131,14 @@
 
                 <br/>
 
-                <p:outputLabel for="inputEmail">Email:</p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputEmail">Email:</p:outputLabel><br/>
                 <p:inputText id="inputEmail" value="#{clienteMB.cliente.email}"
                              required="true"
                              requiredMessage="Preencha o campo Email."/><br/>
 
                 <br/>
 
-                <p:outputLabel for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputDataNascimento">Data de Nascimento: </p:outputLabel><br/>
                 <p:calendar id="inputDataNascimento" pattern="dd/MM/yyyy" mask="true"
                             value="#{clienteMB.cliente.dataNascimento}"
                             required="true"
@@ -146,7 +146,7 @@
 
                 <br/>
 
-                <p:outputLabel for="inputTelefone">Telefone: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputTelefone">Telefone: </p:outputLabel><br/>
                 <p:inputMask id="inputTelefone" value="#{clienteMB.cliente.telefone}"
                              mask="(99) 99999-9999"
                              required="true"
@@ -154,7 +154,7 @@
 
                 <br/>
 
-                <p:outputLabel for="inputEndereco">Endereço: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="inputEndereco">Endereço: </p:outputLabel><br/>
                 <p:inputText id="inputEndereco" value="#{clienteMB.cliente.endereco}"
                              required="true"
                              requiredMessage="Preencha o campo Endereço."/><br/>

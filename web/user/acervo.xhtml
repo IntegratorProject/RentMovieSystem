@@ -98,7 +98,7 @@
 
                     <!--                    BOTÃO DETALHES-->
 
-                    <p:commandButton title="Detalhes" icon="fa fa-envelope-o" update="@form, contentViewAcervoMidia" styleClass="ui-color-orange" onclick="PF('dlg3').show();">
+                    <p:commandButton title="Detalhes" icon="fa fa-bars" update="@form, contentViewAcervoMidia" styleClass="ui-color-orange" onclick="PF('dlg3').show();">
 
                         <f:setPropertyActionListener value="#{document}" target="#{acervoMB.acervo}"/>
 
@@ -123,7 +123,7 @@
         </h:form>
 
         <!--DIALOG CADASTRAR-->
-        <p:dialog header="Cadastrar Acervo" widgetVar="dlg2" modal="true" height="430" width="800" minWidth="550">
+        <p:dialog header="Cadastrar Acervo" widgetVar="dlg2" modal="true" height="430" width="850" minWidth="550" minHeight="430">
 
             <p:messages id="messages" showDetail="true" closable="true">
                 <p:autoUpdate />
@@ -131,22 +131,22 @@
 
             <h:form id="formCadastro">
 
-                <h:panelGrid columns="7">
-                    <p:outputLabel for="inputTitulo">Título: </p:outputLabel><br/>
+                <h:panelGrid columns="4" >
+                    <p:outputLabel class="negrito" for="inputTitulo">Título: </p:outputLabel>
                     <p:inputText id="inputTitulo" value="#{acervoMB.acervo.nome}"
                                  required="true"
-                                 requiredMessage="Preencha o campo Título"/> <br/>
+                                 requiredMessage="Preencha o campo Título"/> 
 
 
 
-                    <p:outputLabel for="inputDataLancamento">Data de Lançamento</p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="inputDataLancamento">Data de Lançamento</p:outputLabel>
                     <p:calendar id="inputDataLancamento" pattern="dd/MM/yyyy" mask="true"
                                 value="#{acervoMB.acervo.dataLancamento}"
                                 required="true"
                                 requiredMessage="Preencha o campo Data de Lançamento."/> 
 
 
-                    <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="genero">Gênero:</p:outputLabel>
                     <p:selectOneMenu id="genero" value="#{acervoMB.acervo.genero}">
                         <f:selectItem itemLabel="Ação" itemValue="Ação" />
                         <f:selectItem itemLabel="Animação" itemValue="Animação" />
@@ -166,7 +166,7 @@
                         <f:selectItem itemLabel="Terror" itemValue="Terror" />   
                     </p:selectOneMenu>
 
-                    <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="classificacao" > Classificação Etária:</p:outputLabel>
                     <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
                         <f:selectItem itemLabel="Livre" itemValue="Livre" />
                         <f:selectItem itemLabel="10" itemValue="10" />
@@ -182,7 +182,7 @@
                 <br/>
 
                 <h:panelGrid columns="4">
-                    <p:outputLabel for="tipo" >Tipo: </p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="tipo" >Tipo: </p:outputLabel><br/>
                     <p:selectOneMenu id="tipo" value="#{acervoMB.midia.tipo}">
                         <f:selectItem itemLabel="DVD" itemValue="DVD" />
                         <f:selectItem itemLabel="Blu-Ray" itemValue="Blu-ray" />
@@ -190,11 +190,11 @@
                     </p:selectOneMenu>         
 
                     <br/><br/>
-                    <p:outputLabel for="valorLocacao" value="Valor Locação: "/><br/>
+                    <p:outputLabel class="negrito" for="valorLocacao" value="Valor Locação: "/><br/>
                     <p:inputNumber id="valorLocacao" value="#{acervoMB.midia.precoLocacao}"  symbol="R$ " />
                     <br/>
                     <br/>
-                    <p:outputLabel for="quantidadeMidia" value="Quantidade: "/><br/>
+                    <p:outputLabel class="negrito"  for="quantidadeMidia" value="Quantidade: "/><br/>
                     <p:spinner id="quantidadeMidia" value="#{acervoMB.quantidadeMidia}" min="1"/>
                 </h:panelGrid>
 
@@ -247,22 +247,22 @@
         <p:dialog header="Detalhes Acervo" widgetVar="dlg3" modal="true" height="500" width="500" minWidth="300">
 
             <h:form id="contentViewAcervoMidia">
-                <p:outputLabel for="titulo">Título: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="titulo">Título: </p:outputLabel><br/>
                 <h:outputText id="titulo" value="#{acervoMB.acervo.nome}"/><br/>
 
                 <br/>
 
-                <p:outputLabel for="dataLancamento">Data de Lançamento: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="dataLancamento">Data de Lançamento: </p:outputLabel><br/>
                 <h:outputText id="dataLancamento" value="#{textFormaterService.formatData(acervoMB.acervo.dataLancamento)}"/><br/>
 
                 <br/>
 
-                <p:outputLabel for="genero">Gênero: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="genero">Gênero: </p:outputLabel><br/>
                 <h:outputText id="genero" value="#{acervoMB.acervo.genero}"/><br/>
 
                 <br/>
 
-                <p:outputLabel for="classificacaoEtaria">Classificação Etária: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="classificacaoEtaria">Classificação Etária: </p:outputLabel><br/>
                 <h:outputText id="classificacaoEtaria" value="#{acervoMB.acervo.classificacaoEtaria}"/><br/>
 
                 <br/>
@@ -297,22 +297,22 @@
 
             <h:form id="formAlterar">
 
-                <h:panelGrid columns="7">
-                    <p:outputLabel for="inputTitulo">Título: </p:outputLabel><br/>
+                <h:panelGrid columns="4">
+                    <p:outputLabel class="negrito" for="inputTitulo">Título: </p:outputLabel>
                     <p:inputText id="inputTitulo" value="#{acervoMB.acervo.nome}"
                                  required="true"
-                                 requiredMessage="Preencha o campo Título"/> <br/>
+                                 requiredMessage="Preencha o campo Título"/> 
 
 
 
-                    <p:outputLabel for="inputDataLancamento">Data de Lançamento</p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="inputDataLancamento">Data de Lançamento</p:outputLabel>
                     <p:calendar id="inputDataLancamento" pattern="dd/MM/yyyy" mask="true"
                                 value="#{acervoMB.acervo.dataLancamento}"
                                 required="true"
                                 requiredMessage="Preencha o campo Data de Lançamento."/> 
 
 
-                    <p:outputLabel for="genero">Gênero:</p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="genero">Gênero:</p:outputLabel>
                     <p:selectOneMenu id="genero" value="#{acervoMB.acervo.genero}">
                         <f:selectItem itemLabel="Ação" itemValue="Ação" />
                         <f:selectItem itemLabel="Animação" itemValue="Animação" />
@@ -332,7 +332,7 @@
                         <f:selectItem itemLabel="Terror" itemValue="Terror" />                  
                     </p:selectOneMenu>
 
-                    <p:outputLabel for="classificacao" > Classificação Etária:</p:outputLabel><br/>
+                    <p:outputLabel class="negrito" for="classificacao" > Classificação Etária:</p:outputLabel>
                     <p:selectOneMenu id="classificacao" value="#{acervoMB.acervo.classificacaoEtaria}">
                         <f:selectItem itemLabel="Livre" itemValue="Livre" />
                         <f:selectItem itemLabel="10" itemValue="10" />
@@ -346,7 +346,7 @@
                 <div style="border: 0.5px solid black; width: 99%; margin-top: 10px"></div>
                 <br/>
 
-                <p:outputLabel for="tipo"  >Tipo: </p:outputLabel><br/>
+                <p:outputLabel class="negrito" for="tipo"  >Tipo: </p:outputLabel><br/>
                 <p:selectOneMenu id="tipo" value="#{acervoMB.midia.tipo}" >
                     <f:selectItem itemLabel="DVD" itemValue="DVD" />
                     <f:selectItem itemLabel="Blu-Ray" itemValue="Blu-ray" />
@@ -354,12 +354,12 @@
                 </p:selectOneMenu>         
 
                 <br/><br/>
-                <p:outputLabel for="valorLocacao" value="Valor Locação: "/><br/>
+                <p:outputLabel class="negrito" for="valorLocacao" value="Valor Locação: "/><br/>
                 <p:inputNumber id="valorLocacao" value="#{acervoMB.midia.precoLocacao}"  symbol="R$ "/>
                 <br/>
                 <br/>
 
-                <p:outputLabel for="disponibilidade" rendered="#{!acervoMB.midia.disponibilidade.equals('alugado')}"
+                <p:outputLabel class="negrito" for="disponibilidade" rendered="#{!acervoMB.midia.disponibilidade.equals('alugado')}"
                                value="Disponibilidade:"/><br/>
                 <p:selectOneMenu id="disponibilidade" 
                                  value="#{acervoMB.midia.disponibilidade}"
