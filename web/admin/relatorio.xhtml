@@ -20,8 +20,13 @@
                             <div class="panel panel-danger">
                                 <div class="panel-heading negrito" ><i class="fa fa-star" aria-hidden="true"></i>  Favoritos</div>
                                 <div class="panel-body">
-                                    <font style="font-size: 18px">Nenhum favorito adicionado</font><br/>
-                                    Para adicionar, clique no icone <i class="fa fa-star" aria-hidden="true"></i>  ao lado do nome do relatório.
+                                    <p:panelMenu  style="width:300px">
+                                        <p:submenu  label="Locações">
+                                            <p:menuitem value="Faturamento" onclick="Mudarestado('formFaturamento')" icon="fa fa-star"/>
+                                            <p:menuitem value="Locações Atrasadas" onclick="Mudarestado('formLocacoesAtrasadas')"  icon="fa fa-star" />
+                                        </p:submenu>
+
+                                    </p:panelMenu><br/>
 
 
                                 </div>
@@ -33,7 +38,7 @@
                                     <p:panelMenu  style="width:300px">
                                         <p:submenu  label="Locações">
                                             <p:menuitem value="Locações" onclick="Mudarestado('formLocacoes')" icon="fa fa-star" />
-                                            <p:menuitem value="Detalhes mídias locadas" onclick="Mudarestado('formDetalhesMidiasLocadas')"  icon="fa fa-star" />
+                                            <p:menuitem value="Locações Atrasadas" onclick="Mudarestado('formLocacoesAtrasadas')"  icon="fa fa-star" />
                                             <p:menuitem value="Faturamento" onclick="Mudarestado('formFaturamento')" icon="fa fa-star"/>
                                         </p:submenu>
 
@@ -83,7 +88,7 @@
                                     a´sdçasdasdsa<br/>
                                 </div>
 
-                                <div class="panel-body, hd_div" style="display: none;" id="formDetalhesMidiasLocadas">
+                                <div class="panel-body, hd_div" style="display: none;" id="formLocacoesAtrasadas">
                                     Detalhes Locacao<br/>
                                     a´sdçasdasdsa<br/>
                                     a´sdçasdasdsa<br/>
@@ -98,104 +103,106 @@
 
                                     <div class="p-grid p-dir-col">
                                         <div class="p-col">
-                                            <div class="box" style="text-align: center">Teste</div>
+                                            <div class="box negrito" style="font-size: 18px;text-align: center">Faturamento</div>
                                         </div>
                                     </div>
 
-                                        <div class="p-grid centralizaDiv" >
-                                            <div class="p-col">
-                                                <div class="box">
-                                                    <h:outputLabel  value="De:  " />
-                                                    <p:calendar id="calendarDataInicial" 
-                                                                pattern="dd/MM/yyyy" 
-                                                                value="#{locacaoMB.locacao.dataLocacao}" 
-                                                                mask="true"
-                                                                required="true"
-                                                                requiredMessage="Preencha o campo Data de Locação"/>
-                                                </div>
+                                    <div style="padding-left: 5%" class="p-grid centralizaDiv" >
+                                        <div class="p-col">
+                                            <div class="box">
+                                                <h:outputLabel  value="De:  " />
+                                                <p:calendar id="calendarDataInicial" 
+                                                            pattern="dd/MM/yyyy" 
+                                                            value="#{locacaoMB.locacao.dataLocacao}" 
+                                                            mask="true"
+                                                            required="true"
+                                                            requiredMessage="Preencha o campo Data de Locação"/>
                                             </div>
-                                            <div class="p-col" >
-                                                <div class="box">
-                                                    <h:outputLabel  value="Até: "/>
+                                        </div>
+                                        <div class="p-col" >
+                                            <div class="box">
+                                                <h:outputLabel  value="Até: "/>
 
-                                                    <p:calendar id="calendarDataFinal" 
-                                                                pattern="dd/MM/yyyy" 
-                                                                value="#{locacaoMB.locacao.dataLocacao}" 
-                                                                mask="true"
-                                                                required="true"
-                                                                requiredMessage="Preencha o campo Data de Locação"/>
-                                                    
-                                                </div>
+                                                <p:calendar id="calendarDataFinal" 
+                                                            pattern="dd/MM/yyyy" 
+                                                            value="#{locacaoMB.locacao.dataLocacao}" 
+                                                            mask="true"
+                                                            required="true"
+                                                            requiredMessage="Preencha o campo Data de Locação"/>
+
                                             </div>
-
-                                           <p:commandButton value="Baixar Relatório"/>
-
-
-
-
                                         </div>
 
 
 
-                                    </div>   
-
-
-
-
-                                    <div class="panel-body, hd_div" style="display: none;" id="formEstoqueMinimo">
-
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
 
                                     </div>
-                                    <div class="panel-body, hd_div" style="display: none;" id="formEstoqueEmDataEspecífica">
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                    </div> 
-                                    <div class="panel-body, hd_div" style="display: none;" id="formEstoqueHistoricoPorProduto">
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
+                                    <br/>
+                                    <div id="cadButton" style="padding-bottom: 5px; text-align: center !important">
+                                        <p:commandButton value="Gerar Relatório"  icon="fa fa-user-plus" styleClass="ui-color-green" />
                                     </div>
-                                    <div class="panel-body, hd_div" style="display: none;" id="formEstoquePorHistoricoDeProduto">
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                    </div>  
-                                    <div class="panel-body, hd_div" style="display: none;" id="formClientes">
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                    </div>  
-                                    <div class="panel-body, hd_div" style="display: none;" id="formClientesInativos">
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                        Lorem Ipsum<br/>
-                                    </div>  
+                                    
+
+
+                                </div>   
+
+
+
+
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoqueMinimo">
+
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
 
                                 </div>
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoqueEmDataEspecífica">
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                </div> 
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoqueHistoricoPorProduto">
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                </div>
+                                <div class="panel-body, hd_div" style="display: none;" id="formEstoquePorHistoricoDeProduto">
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                </div>  
+                                <div class="panel-body, hd_div" style="display: none;" id="formClientes">
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                </div>  
+                                <div class="panel-body, hd_div" style="display: none;" id="formClientesInativos">
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                    Lorem Ipsum<br/>
+                                </div>  
+
                             </div>
                         </div>
+                    </div>
 
                 </h:form>
             </div>
