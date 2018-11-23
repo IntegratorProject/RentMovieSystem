@@ -94,15 +94,11 @@
                                         </div>
                                     </div>
 
-
-
-
-
-
-
                                     <br/>
                                     <div id="cadButton" style="padding-bottom: 5px; text-align: center !important">
-                                        <p:commandButton value="Gerar Relatório"  icon="fa fa-user-plus" styleClass="ui-color-green" />
+                                        <p:commandButton value="Gerar Relatório"
+                                                         actionListener="#{relatorioMB.imprimirRelatorioLocacoesAtrasadas()}"
+                                                         icon="fa fa-user-plus" styleClass="ui-color-green" />
                                     </div>
                                 </div>       
 
@@ -121,7 +117,7 @@
                                                 <h:outputLabel  value="De:  " />
                                                 <p:calendar id="calendarDataInicial" 
                                                             pattern="dd/MM/yyyy" 
-                                                            value="#{locacaoMB.locacao.dataLocacao}" 
+                                                            value="#{relatorioMB.relFaturamentoPeriodoInicio}" 
                                                             mask="true"
                                                             required="true"
                                                             requiredMessage="Preencha o campo Data de Locação"/>
@@ -133,7 +129,7 @@
 
                                                 <p:calendar id="calendarDataFinal" 
                                                             pattern="dd/MM/yyyy" 
-                                                            value="#{locacaoMB.locacao.dataLocacao}" 
+                                                            value="#{relatorioMB.relFaturamentoPeriodoFinal}" 
                                                             mask="true"
                                                             required="true"
                                                             requiredMessage="Preencha o campo Data de Locação"/>
@@ -147,10 +143,11 @@
                                     </div>
                                     <br/>
                                     <div id="cadButton" style="padding-bottom: 5px; text-align: center !important">
-                                        <p:commandButton value="Gerar Relatório"  icon="fa fa-user-plus" styleClass="ui-color-green" />
+                                        <p:commandButton value="Gerar Relatório"
+                                                         actionListener="#{relatorioMB.imprimirRelatorioFaturamentoPerido()}" 
+                                                         icon="fa fa-user-plus" 
+                                                         styleClass="ui-color-green" />
                                     </div>
-
-
 
                                 </div>   
 
