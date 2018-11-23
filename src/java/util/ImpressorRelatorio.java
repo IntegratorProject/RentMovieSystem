@@ -32,7 +32,7 @@ public class ImpressorRelatorio {
         ResultSet rs = con.createStatement().executeQuery(consulta);
         JRResultSetDataSource rjjr = new JRResultSetDataSource(rs);
 
-        JasperReport js = JasperCompileManager.compileReport(context.getRealPath(""));
+        JasperReport js = JasperCompileManager.compileReport(context.getRealPath("/WEB-INF/relatorios/"+nomeArquivoJrxml+".jrxml"));
 
         JasperPrint jp = JasperFillManager.fillReport(js, parametros, rjjr);
 
