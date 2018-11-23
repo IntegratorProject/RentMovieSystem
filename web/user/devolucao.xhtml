@@ -69,7 +69,7 @@
                     </p:column>		
 
                     <p:column headerText="Preço">
-                        <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
+                        <h:outputText value="R$#{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
 
                     <p:column headerText="Status">
@@ -126,7 +126,7 @@
                 <h:panelGrid columns="1">
 
                     <br/>
-                    <h:outputText id="sugestaoValor" class="negrito" value="Valor a ser Pago: R$ #{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorMulta
+                    <h:outputText id="sugestaoValor" class="negrito" value="Valor a ser Pago: R$#{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorMulta
                                                                                    + devolucaoMB.locacao.precoLocacao)}" style="font-size: 16px"/>
                     <br/>
 
@@ -225,7 +225,7 @@
                     </p:column>
 
                     <p:column headerText="Preço">
-                        <h:outputText value="#{textFormaterService.formatDinheiro(obj.preco)}" />
+                        <h:outputText value="R$#{textFormaterService.formatDinheiro(obj.preco)}" />
                     </p:column>
 
                     <p:column headerText="Status">
@@ -241,12 +241,12 @@
                 <div class="panel panel-danger">
                     <div class="panel-heading" >
                         <h:outputLabel for="detalhesPrecoLocacao" class="negrito" value="Preço da Locação: " />
-                        <h:outputText id="detalhesPrecoLocacao" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.precoLocacao)}"/>
+                        <h:outputText id="detalhesPrecoLocacao" value="R$#{textFormaterService.formatDinheiro(devolucaoMB.locacao.precoLocacao)}"/>
 
                     </div>
                     <div class="panel-body">
                         <h:outputLabel for="detalhesValorPago" class="negrito" value="Valor Pago: " />
-                        <h:outputText id="detalhesValorPago" value="#{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorPago)}"/>
+                        <h:outputText id="detalhesValorPago" value="R$#{textFormaterService.formatDinheiro(devolucaoMB.locacao.valorPago)}"/>
 
                     </div>
                 </div>
@@ -324,7 +324,7 @@
                           sortBy="#{obj.precoLocacao}"
                           filterBy="#{obj.precoLocacao}"
                           filterMatchMode="contains">
-                    <h:outputText value="#{textFormaterService.formatDinheiro(obj.precoLocacao)}"/>
+                    <h:outputText value="R$#{textFormaterService.formatDinheiro(obj.precoLocacao)}"/>
                 </p:column>
 
                 <p:column headerText="Ações">
