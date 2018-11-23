@@ -36,7 +36,8 @@ public class DevolucaoMB extends DefaultMB implements Serializable {
     public void concluirOperacao() {
         if (calcNumeroDevolvidosOuDanificados() != 0
                 || !locacao.getDescricaoMulta().isEmpty()
-                || locacao.getValorMulta() != 0) {
+                || locacao.getValorMulta() != 0
+                || locacao.getValorPago() != 0) {
 
             try {
 
