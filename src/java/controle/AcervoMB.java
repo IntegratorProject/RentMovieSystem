@@ -75,13 +75,13 @@ public class AcervoMB extends DefaultMB implements Serializable{
 
             try {
 
-                daoAcervo.editar(acervo);
-                acervo = new Acervo();
-                
+                acervo = daoAcervo.editar(acervo);
                 for(Midia m : listMidia){
+                    m.setAcervo(acervo);
                     daoMidia.editar(m);
                 }
                 
+                acervo = new Acervo();
                 updateList();
                 
                 showInformationMessage("Sucesso!", "Alteração concluída.");
