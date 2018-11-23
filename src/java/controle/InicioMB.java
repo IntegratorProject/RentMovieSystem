@@ -48,7 +48,7 @@ public class InicioMB implements Serializable {
     private void updateLocacoesCorrentes() {
         try {
             GenericDao<Locacao> dao = new GenericDao<>(Locacao.class);
-            List<Locacao> list = dao.buscarCondicao("dataDevolucao = null and dataLocacao >= '" + queryAbleTodayDate + "'");
+            List<Locacao> list = dao.buscarCondicao("dataDevolucao = null and reserva = 0");
             locacoesCorrentes = list.size();
         } catch (Exception e) {
             e.printStackTrace();
