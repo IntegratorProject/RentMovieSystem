@@ -170,3 +170,11 @@ body {
 .footerCentralizar{
   text-align: center;  
 }*/
+
+.centralizaDiv{
+    margin: 0 auto !important;
+    float: none !important;
+    
+    
+    
+}
