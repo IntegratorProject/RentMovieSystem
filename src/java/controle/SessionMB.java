@@ -2,13 +2,14 @@
 package controle;
 
 import entidade.Funcionario;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import util.spring.UserSession;
 
 @ManagedBean
 @SessionScoped
-public class SessionMB {
+public class SessionMB implements Serializable{
     
     private Funcionario funcionario;
 
