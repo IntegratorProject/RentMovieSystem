@@ -10,8 +10,8 @@ public class Conexao {
    //editavel
    private static final String local = "localhost";
    private static final String user = "root";
-   private static final String pwd = "rentmoviesdb";
-   private static final String database = "12345";
+   private static final String pwd = "12345";
+   private static final String database = "rentmoviesdb";
    
    public static Connection get(){
        
