@@ -52,11 +52,12 @@ body {
 
     background: #00d600 !important;
     color:white !important;
-
+    font-weight: bold !important;
 
 }
 .ui-color-greenButton:hover{
     background:#00b700 !important;
+
 }
 
 /*TELA LOGIN*/
@@ -127,8 +128,8 @@ body {
     grid-template-columns: 25% 25% 25% 25%;
     padding: 10px;
     border-radius: 10px;
-    
-   
+
+
 }
 .grid-container-estilo{
     background-color: #f6f6f6;
