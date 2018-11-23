@@ -136,8 +136,8 @@ public class LocacaoMB extends DefaultMB implements Serializable{
                 Calendar dataPrevDev = Calendar.getInstance();
                 dataPrevDev.setTime(locacao.getDataPrevDevolucao());
 
-                if (dataPrevDev.equals(dataLocacao)) {
-                    showErrorMessage("Erro!", "A data de previsão de locação não pode ser a mesma da de locação");
+                if (dataPrevDev.equals(dataLocacao) || dataPrevDev.before(dataLocacao)) {
+                    showErrorMessage("Erro!", "A data de previsão de locação não pode ser igual ou anterior a data de locação");
                     return;
                 }
 
