@@ -30,3 +30,4 @@
 ramosmatheusc@gmail.com<br/>
 gustavo_santostr@hotmail.com<br/>
 eduardo_acj2@hotmail.com
+gabi_goncalves99@hotmail.com
