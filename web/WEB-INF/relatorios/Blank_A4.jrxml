@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f769e1f8-f7b8-4feb-923c-bdb86b46f377">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AdapterRentMovies.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cmVudG1vdmllc2RiLmNsaWVudGUgQVMgLDExMyw3NCwyNmVlMzdlYy1lZjI0LTQxZjAtOTkwMy0z
+YWVhYzdkZDNjNDI7]]>
+	</property>
+	<queryString>
+		<![CDATA[SELECT rentmoviesdb.cliente.id,
+	rentmoviesdb.cliente.nome
+FROM rentmoviesdb.cliente]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="0" width="100" height="30" uuid="61b785c2-083b-4b01-9c65-a0c6512ccb96"/>
+				<text><![CDATA[nome]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="119" y="64" width="100" height="30" uuid="a78b197d-55b3-491b-baad-cda6a4d7dba7"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
